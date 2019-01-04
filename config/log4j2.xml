@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Loggers>
+    <Root level="warn">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="File"/>
+    </Root>
+	<Logger name="io.netty.channel.DefaultChannelPipeline" level="error" />
+	<Logger name="TEMP" level="info" />
+    <Logger name="CORE" level="info" />
+    <Logger name="CORE_STATIS" level="info" />
+    <Logger name="CORE_MSG" level="info" />
+	<Logger name="CORE_CONN" level="debug" />
+	<Logger name="CORE_DB" level="info" />
+	<Logger name="CORE_REMOTE" level="info" />
+	<Logger name="CROSS" level="info" />
+	<Logger name="PLATFORM" level="info" />
+	<Logger name="SDK" level="info" />
+    <Logger name="GAME" level="info" />
+    <Logger name="STAGE_COMMON" level="info" />
+    <Logger name="STAGE_MOVE" level="info" />
+	<Logger name="HUMAN" level="info" />
+	<Logger name="AI" level="info" />
+    <Logger name="FIGHT" level="info" />
+	<Logger name="SKILL" level="info" />
+	<Logger name="ITEM" level="info" />
+	<Logger name="CHAT" level="info" />
+	<Logger name="TABLE" level="info" />
+	<Logger name="RANDOM" level="info" />
+	<Logger name="CHARGE" level="info" />
+	<Logger name="GLOBAL_CONF" level="info" />
+	<Logger name="BATTLE" level="info" />
+	<Logger name="LOOTMAP" level="info" />
+	<Logger name="TOWER" level="info" />
+	<Logger name="PARTNER" level="info" />
+	<Logger name="ACTIVITY" level="info" />
+  </Loggers>
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <!-- <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/> -->
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} (%F:%L) [%p][%c] %m%n"/>
+    </Console>
+    <RollingRandomAccessFile name="File" fileName="log4j2/${sys:logFileName}/${sys:logFileName}.log"
+                 filePattern="log4j2/${sys:logFileName}/${sys:logFileName}.log-%d{MM-dd-yyyy}-%i.log" >
+      <PatternLayout>
+		<charset>UTF-8</charset>
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} (%F:%L) [%p][%c] %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+		<SizeBasedTriggeringPolicy size="100 M"/>
+      </Policies>
+	  <DefaultRolloverStrategy max="20" fileIndex="max"/>
+    </RollingRandomAccessFile>
+  </Appenders>
+</Configuration>
