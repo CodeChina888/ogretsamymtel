@@ -1,0 +1,150 @@
+#!/bin/bash 
+
+base_dir=$(cd $(dirname $BASH_SOURCE) && pwd)
+project_name=`echo ${base_dir} | awk -F'/' '{print $NF}'`
+gcDir=${base_dir}/log4j2/gc
+errDir=${base_dir}/log4j2/error
+dbName=${project_name}_DB
+worldName=${project_name}_srvWorld0
+
+updb() {
+	read -p "Are you sure up db? (Y/N):" R
+	if [ "$R" != "Y" ]; then
+		echo nothing
+		exit 1
+	fi
+	sh genDB.sh
+}
+
+_statusServer() {
+	name=${1}
+	Pid=`ps -ef |grep ${base_dir} |grep java |grep ${name} |awk '{print $2}'`
+	for p in ${Pid}; do
+		echo "status $name[${p}] on"
+	done
+}
+
+_closeServer() {
+	name=${1}
+	Pid=$(ps -ef |grep ${base_dir} |grep java |grep ${name} |awk '{print $2}')
+	if [ ${#Pid} -eq 0 ]; then
+		return
+	fi
+	for p in ${Pid}; do
+		echo -ne "stop $name[${p}] ... "
+		kill -15 ${p}
+		while [[ -x /proc/$p ]]; do
+			sleep 0.5
+		done
+		echo "ok"
+		break
+	done
+}
+
+_checkConnPort() {
+	connPort=$(grep "conn.port=" config/config.properties |awk -F '=' '{print $2}')
+	while true; do
+		if [ "$(netstat -nlt |grep ${connPort})" != "" ]; then
+			break
+		else
+			sleep 0.5
+		fi
+	done
+}
+
+_startDB() {
+	srvName=${1}
+	runParam1=
+
+	# 设置加载类的环境变量 运行主类名
+	CPATH="./assets:./config/:./libs/*"
+	MAIN="core.dbsrv.main.DBStartup"
+
+	# 设置运行参数
+	javaParam="-server -Xms1024m -Xmx1024m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:MaxDirectMemorySize=1024m"
+	javaParam="${javaParam} -XX:+UseParallelGC -XX:+UseParallelOldGC"
+	javaParam="${javaParam} -XX:+DisableExplicitGC"
+	javaParam="${javaParam} -XX:+PrintGCDateStamps -XX:+PrintGCDetails -verbose:gc -Xloggc:${gcDir}/${srvName}_gc.log"
+	javaParam="${javaParam} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${errDir}/${srvName}_heapDump_%p.hprof"
+	javaParam="${javaParam} -XX:ErrorFile=${errDir}/${srvName}_error_%p.log" 
+
+	echo "========================================================================="
+	echo ""
+	echo "  ${srvName} Environment"
+	echo ""
+	echo "  javaParam: ${runParam1} ${MAIN} ${CPATH} ${javaParam}"
+	echo ""
+	echo "========================================================================="
+
+	eval \"java\" ${javaParam} \
+			-cp \"${CPATH}\" \"${MAIN}\" \"${runParam1}\"
+}
+
+_startWorld() {
+	srvName=${1}
+	runParam1=0
+	# 设置加载类的环境变量 运行主类名
+	CPATH="./assets/:./config/:./libs/:./libs/*"
+	MAIN="game.seam.main.WorldStartup"
+
+	# 设置运行参数
+	#javaParam="-server -Xms10g -Xmx10g -Xmn4g -XX:MaxDirectMemorySize=1024m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m"
+	javaParam="-server -Xms5632m -Xmx5632m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -XX:MaxDirectMemorySize=512m"
+	javaParam="${javaParam} -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:+AlwaysLockClassLoader"
+	javaParam="${javaParam} -XX:+DisableExplicitGC"
+	javaParam="${javaParam} -XX:+PrintGCDateStamps -XX:+PrintGCDetails -verbose:gc -Xloggc:${gcDir}/${srvName}_gc.log"
+	javaParam="${javaParam} -XX:ErrorFile=${errDir}/${srvName}_error_%p.log -XX:HeapDumpPath=${errDir}/${srvName}_heapDump_%p.hprof"
+	javaParam="${javaParam} -Dsun.zip.disableMemoryMapping=true"
+	javaParam="${javaParam} -javaagent:libs/classReloader.jar" 
+	echo "========================================================================="
+	echo ""
+	echo "  ${srvName} Environment"
+	echo ""
+	echo "  javaParam: ${runParam1} ${MAIN} ${CPATH} ${javaParam}"
+	echo ""
+	echo "========================================================================="
+
+	eval \"java\" ${javaParam} \
+			-cp \"${CPATH}\" \"${MAIN}\" \"${runParam1}\"	
+}
+
+statusServer() {
+	_statusServer ${worldName}
+	_statusServer ${dbName}
+}
+
+closeServer() {
+	_closeServer ${worldName}
+	_closeServer ${dbName}
+}
+
+startServer() {
+	echo -ne "start ${dbName} ... "
+	_startDB ${dbName} >/dev/null 2>&1 &
+	echo "ok"
+
+	echo -ne "start ${worldName} ... "
+	_startWorld ${worldName} >/dev/null 2>&1 &
+	_checkConnPort
+	echo "ok"
+}
+
+gm() {
+	c=$1
+	httpPort=$(grep "http.port1=" config/distrPF.properties |awk -F '=' '{print $2}')
+	url="http://127.0.0.1:${httpPort}/GM"
+	curl -d "cmd=inputCommand&command=$c" ${url}
+}
+
+cmd=$1
+shift
+case $cmd in
+	start) startServer;;
+	stop) closeServer;;
+	restart) closeServer && startServer;;
+	status) statusServer;;
+	updb) updb;;
+	reloadres) gm "reloadres";;
+	reloadclass) gm "reloadclass";;
+	*) echo "unkown command";;
+esac

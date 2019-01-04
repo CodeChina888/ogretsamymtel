@@ -1,0 +1,46 @@
+#!/bin/bash -e
+
+usage() {
+    echo "Usage: $0 res|bin|all comment"
+    exit 1
+}
+
+if [ $# -lt 2 ]; then
+	usage
+fi
+
+srcSvnDir=http://10.163.254.253/svn/viking/trunk/release/server
+libs="game-core.jar game-msg.jar game-world.jar game-platform.jar"
+
+distDir=svn://10.163.254.240/vk/server/android
+localDist=__viki_out_dist_an
+
+coDist() {
+	if [ ! -d "$localDist" ]; then
+		svn co $distDir $localDist --username vk_dev
+	else
+		svn up $localDist
+	fi
+}
+
+distRes() {
+	svn export $srcSvnDir/assets $localDist/assets --force
+	svn add $localDist/assets --force
+	svn ci $localDist/assets -m "$1"
+}
+
+distBin() {
+	for f in $libs; do
+		svn export $srcSvnDir/libs/$f $localDist/libs/$f --force
+	done
+	svn ci $localDist/libs -m "$1"
+}
+
+cmd=$1
+shift
+case $cmd in
+	res) coDist && distRes "$1";;
+	bin) coDist && distBin "$1";;
+	all) coDist && distRes "$1" && distBin "$1";;
+	*) usage;;
+esac
