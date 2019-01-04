@@ -1,0 +1,112 @@
+
+Ï
+msg.cave.protogame.msgoptions.protodefine.proto"L
+
+CSCaveInfo%
+caveType (2.game.msg.ECaveType
+pageList (:ˆÃ­4"9
+
+SCCaveInfo$
+baseMsg (2.game.msg.DCaveBase:ˆÃ®4"n
+CSCaveOccupyInfo%
+caveType (2.game.msg.ECaveType
+page (
+index (
+humanId (:ˆÃ¯4"ç
+SCCaveOccupyInfo%
+caveType (2.game.msg.ECaveType
+page (
+index (
+	isCorrect (
+humanId (
+	humanName (	
+level (
+combat (
+roleSn	 (
+isOwn
+ (
+guildAdd (
+useTime (
+cdTimeCount (
+lootEarnings (
+isLoot (
+	isMaxLoot (
+	guildName (	
+guildID (:ˆÃ°4"Y
+CSCaveGiveUp%
+caveType (2.game.msg.ECaveType
+page (
+index (:ˆÃ±4"Y
+SCCaveGiveUp%
+caveType (2.game.msg.ECaveType
+page (
+index (:ˆÃ²4"\
+CSCaveCDTimeAdd%
+caveType (2.game.msg.ECaveType
+page (
+index (:ˆÃ³4"‚
+SCCaveCDTimeAdd%
+caveType (2.game.msg.ECaveType
+page (
+index (
+humanID (
+cdTimeCount (:ˆÃ´4"
+CSOccupyBattle%
+caveType (2.game.msg.ECaveType
+page (
+index ("
+type (2.game.msg.ETokenType:ˆÃµ4"
+CSCaveFightLeave:ˆÃ¶4"
+CSCaveFightEnd%
+caveType (2.game.msg.ECaveType
+page (
+index ("
+type (2.game.msg.ETokenType:ˆÃ·4"Í
+SCCaveFightEnd%
+caveType (2.game.msg.ECaveType
+page (
+index (
+	humanName (	
+isWin ((
+
+battleType (2.game.msg.ETokenType$
+itemList (2.game.msg.DProduce:ˆÃ¸4"
+CSCaveMoneyInfo:ˆÃ¹4"F
+SCCaveMoneyInfo
+OccupyBuyCount (
+LootBuyCount (:ˆÃº4";
+CSCaveBuyToken"
+type (2.game.msg.ETokenType:ˆÃ»4"
+CSMyCaveInfo:ˆÃ¼4"<
+SCMyCaveInfo%
+caveList (2.game.msg.DCaveBase:ˆÃ½4"Y
+SCMyCaveLost%
+caveType (2.game.msg.ECaveType
+page (
+index (:ˆÃ¾4"I
+CSGetFreeCave%
+caveType (2.game.msg.ECaveType
+
+sn (:ˆÃ¿4"f
+SCGetFreeCave%
+caveType (2.game.msg.ECaveType
+page (
+index (
+
+sn (:ˆÃÀ4"
+CSCaveDefense:ˆÃÁ4"B
+SCCaveDefense*
+
+recordList (2.game.msg.DCaveDefense:ˆÃÂ4"
+CSCaveEnemy:ˆÃÃ4"@
+SCCaveEnemy*
+
+recordList (2.game.msg.DCaveDefense:ˆÃÄ4".
+CSCaveEnemyInfo
+enemyHumanID (:ˆÃÅ4"U
+SCCaveEnemyInfo
+enemyHumanID (%
+caveList (2.game.msg.DCaveBase:ˆÃÆ4"
+CSCaveGuildMemberInfo:ˆÃÇ4"P
+SCCaveGuildMemberInfo0
+caveList (2.game.msg.DCaveGuildMemberInfo:ˆÃÈ4

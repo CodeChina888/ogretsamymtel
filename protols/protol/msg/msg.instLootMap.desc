@@ -1,0 +1,190 @@
+
+å%
+msg.instLootMap.protogame.msgoptions.protodefine.proto".
+CSPVPLootMapSignUp
+	actInstSn (:à√·+"\
+SCPVPLootMapSignUp(
+	humanList (2.game.msg.DMemberInfo
+countdownTime (:à√‚+" 
+CSLeavePVPLootMapSignUp:à√„+"F
+SCLootMapIntoSignUpRoom$
+human (2.game.msg.DMemberInfo:à√‰+"2
+SCLootMapLeaveSignUpRoom
+humanId (:à√Â+"$
+SCLootMapSingUpRoomTimeOut:à√∂≤".
+CSPVELootMapSignUp
+	actInstSn (:à√Á+"X
+SCLootMapReadyEnter'
+mapType (2.game.msg.ELootMapType
+	actInstSn (:à√Í+"S
+CSLootMapEnter'
+mapType (2.game.msg.ELootMapType
+	actInstSn (:à√Î+"
+CSLootMapGameEnter:à√Ï+"¸
+SCLootMapGameEnterLevel
+level (
+mapSn (
+	lootMapSn ('
+mapType (2.game.msg.ELootMapType,
+eventSnList (2.game.msg.DLootMapEvent+
+
+huamanList (2.game.msg.DLootMapHuman%
+	floorList (2.game.msg.DVector2:à√Ì+"=
+SCHumanEnter&
+human (2.game.msg.DLootMapHuman:à√Ó+"F
+SCLootMapEventEnable'
+dEvent (2.game.msg.DLootMapEvent:à√Ù+"R
+SCLootMapEventDisenable
+eventId (
+pos (2.game.msg.DVector2:à√ı+"I
+CSTriggerEvent
+eventId (
+pos (2.game.msg.DVector2:à√˘+"s
+SCLootMapTriggerEvent
+eventId (
+pos (2.game.msg.DVector2!
+itemList (2.game.msg.DItem:à√˙+"1
+CSLootMapReadyEnterDoor
+eventId (:à√˚+"c
+SCLootMapReadyEnterDoor
+eventId (
+pos (2.game.msg.DVector2
+humanId (:à√¸+"M
+CSLootMapEnterDoor
+eventId (
+pos (2.game.msg.DVector2:à√˝+":
+SCLootMapAddBuff
+humanId (
+buffSn (:à√˛+">
+SCLootMapRmvBuff
+humanId (
+
+buffSnList (:à√ˇ+">
+SCLootMapHumanAttack
+humanId (
+attack (:à√Ä,"D
+SCLootMapMonsterAttack
+eventIdList (
+attack (:à√Å,"<
+CSLootMapOpenFloor
+pos (2.game.msg.DVector2:à√É,"<
+SCLootMapOpenFloor
+pos (2.game.msg.DVector2:à√Ñ,"*
+CSLootMapPlayMove
+isPlay (:à√ä,";
+SCLootMapPlayMove
+humanId (
+isPlay (:à√ã,"7
+CSLootMapMove
+pos (2.game.msg.DVector2:à√å,"H
+SCLootMapMove
+humanId (
+pos (2.game.msg.DVector2:à√ç,"J
+SCLootMapSetPos
+humanId (
+pos (2.game.msg.DVector2:à√é,"Q
+CSLootMapAttackMonster
+eventId (
+pos (2.game.msg.DVector2:à√í,"b
+SCLootMapAttackMonster
+eventId (
+pos (2.game.msg.DVector2
+humanId (:à√ì,"Q
+SCLootMapMonsterHP
+eventIdList (
+hpList (
+humanId (:à√î,"6
+SCLootMapHumanHP
+humanId (
+
+hp (:à√ï,"
+CSDailyLootMapRevival:à√ó,"0
+SCDailyLootMapRevival
+numBuyed (:à√ò,"K
+SCLootMapHumanRevival
+humanId (
+
+hp (
+attack (:à√ô,"t
+SCLootMapGetSkill
+humanId (&
+skill (2.game.msg.DLootMapSkill
+pos (2.game.msg.DVector2:à√¶,"
+CSLootMapUseSkill:à√ß,"S
+SCLootMapUseSkill
+humanId (&
+skill (2.game.msg.DLootMapSkill:à√®,"<
+SCLootMapPkState
+humanIdList (
+isPk (:à√≤,"B
+SCLootMapProtectState
+humanId (
+	isProtect (:à√≥,"j
+SCLootMapPkItemChange$
+addItemList (2.game.msg.DItem$
+rmvItemList (2.game.msg.DItem:à√¥,"∏
+SCLootMapKill)
+
+killerInfo (2.game.msg.DMemberInfo+
+beKillerInfo (2.game.msg.DMemberInfo
+
+killNumber (
+hornorSn (
+score (
+rewardScore (:à√µ,"+
+SCLootMapCanclePk
+humanId (:à√∑,"(
+CSLootMapBackMap
+isWin (:à√∏,"q
+SCLootMapMission
+	missionSn (
+progress (1
+state (2".game.msg.ELootMapMissionStateType:à√ƒ,"D
+SCLootMapMissionComplete!
+itemList (2.game.msg.DItem:à√≈,"A
+SCLootMapScoreChange
+score (
+isBattleEnd (:à√Œ,"@
+SCLootMapScoreReward!
+itemList (2.game.msg.DItem:à√ÿ,"G
+SCLootMapTimeMod,
+modetype (2.game.msg.ELootMapTimeMode:à√Ÿ,",
+CSLootMapGameTime
+gameTime (:à√⁄,",
+SCLootMapGameTime
+gameTime (:à√€,"=
+SCLootMapScoreRank
+humanId (
+oneRank (:à√‚,"
+CSLootMapOut:à√ˆ,"&
+SCLootMapOut
+humanId (:à√˜,"
+CSLootMapSingleEnd:à√¯,">
+SCLootMapSingleEnd!
+itemList (2.game.msg.DItem:à√˘,"∫
+SCLootMapMultipleEnd)
+
+firstHuman (2.game.msg.DMemberInfo
+firstHumanScore (
+rank (
+score (
+todayTop1Score (
+addScore (
+allScore (:à√˙,"F
+CSLootMapGMTest,
+gmType (2.game.msg.ELootMapGMTestType:à√®-",
+CSLootMapPkFight
+	beFightId (:à√ï-"\
+SCLootMapPkFight
+
+resultCode (
+triggerHumanId (
+targetHumanId (:à√ñ-"
+CSLootMapPkLeave:à√ó-"
+CSLootMapPkEnd:à√ô-"|
+SCLootMapPkEnd
+
+winHumanId (
+loseHumanId (
+	triggerId ('
+produceList (2.game.msg.DProduce:à√ö-

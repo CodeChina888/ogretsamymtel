@@ -1,0 +1,9 @@
+import "google/protobuf/descriptor.proto";
+
+option java_package = "game.msg";
+option java_outer_classname = "Options";
+
+extend google.protobuf.MessageOptions {
+  optional int32 msgid = 54321;
+}
+

@@ -1,0 +1,37 @@
+
+ç
+msg.compete.protogame.msgoptions.protodefine.proto"
+CSCompeteOpen:à√Õ!"\
+SCCompeteOpen
+competeToken (.
+dCompeteHuman (2.game.msg.DCompeteHuman:à√Œ!"n
+SCCompeteRank4
+dCompeteRankInfo (2.game.msg.DCompeteRankInfo
+status (
+selfrank (:à√–!"M
+CSCompeteFight
+beChallengerRoleId (
+beChallengerRank (:à√—!"·
+SCCompeteFightResult
+isFail (
+rank (
+topRank (
+beChallengerName (	
+todayWinNums (
+lastBattleTime ('
+breakReward (2.game.msg.DProduce"
+reward (2.game.msg.DProduce:à√“!"
+CSCompeteLeave:à√”!"
+CSCompeteEnd:à√’!"
+CSCompeteFightRecord:à√◊!"O
+SCCompeteFightRecord0
+dCompeteRecord (2.game.msg.DCompeteRecord:à√ÿ!"
+CSCompeteBuyNum:à√Ÿ!"Q
+SCCompeteBuyNumResult
+
+resultCode (
+num (
+needGold (:à√⁄!"+
+SCCompeteLogin
+
+surplusNum (:à√€!

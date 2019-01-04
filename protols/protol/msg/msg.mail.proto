@@ -1,0 +1,59 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 03101_03200_mail.proto-----
+
+//	required int32 type = 1;		//1是接受的邮件，2是发送的邮件
+message CSOpenMailList {
+	option (msgid) = 3101;
+//	required int32 type = 1;		//1是接受的邮件，2是发送的邮件
+}
+
+//应答，返回邮件信息
+message SCMailList {
+	option (msgid) = 3102;
+	repeated DMail mails = 1;
+}
+
+//请求，将邮件设置为已读
+message CSReadMail {
+	option (msgid) = 3103;
+	required int64 id = 1;			//阅读邮件后，将邮件设置为已读
+}
+
+//请求，将邮件设置为已读
+message SCReadMail {
+	option (msgid) = 3108;
+	required int64 id = 1;			//邮件ID
+	optional bool success = 2;			//是否成功
+}
+
+//通知，有新的邮件
+message SCMailNewRemind {
+	option (msgid) = 3104;
+	required DMail mail = 1;			//邮件,放在第一个
+}
+
+//返回的接口是：SCMailList
+message CSPickupMailItem {
+	option (msgid) = 3105;
+	required int64 id = 1;				//邮件ID，（如果是-1，代表领取全部邮件）
+}
+
+//领取物品结果
+message SCPickupItemMailResult {
+	option (msgid) = 3106;
+	//optional DMail mail = 1;		//邮件状态的变更
+	repeated int64 id = 1;				//成功领取邮件ID
+	required bool result = 2; // 成功 TRUE 失败 FALSE
+}
+
+//请求，发送邮件接口
+message CSSendMail {
+	option (msgid) = 3107;
+	optional string title = 1;
+	optional string detail = 2;
+	optional int64 humanId = 3; 
+}
+
+

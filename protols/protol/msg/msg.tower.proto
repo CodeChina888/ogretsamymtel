@@ -1,0 +1,204 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 05401_05500_tower.proto-----
+
+// 请求，初始化爬塔数据
+message CSTowerModUnlock {
+	option (msgid) = 5401;
+}
+
+// 通知，登录/解锁 下发爬塔数据（SC_NTF_TowerUserLoadMsg）
+message SCTowerInfo {
+	option (msgid) = 5402;
+	optional int32 matchLv = 1; // 玩家匹配时的等级
+	optional int32 matchCombat = 2; // 匹配时的战斗力
+	optional int32 yestodayMaxLayer = 3; // 昨日的最高层数
+	optional int32 score = 4; // 玩家赛季积分
+	optional int64 seasonEndTime = 5; // 赛季结束时间
+	optional int32 towerRank = 6; //  爬塔排行
+
+	optional int32 stayLayer = 11; // 当前停留的层数
+	optional int32 willFightLayer = 12; // 将要挑战的层数（最大层+1，则为通关）
+	optional int32 haveLifeNum = 13; // 拥有的生命数
+	optional int32 buyLifeNum = 14; // 今日购买生命次数
+	optional int32 multiple = 15; // 奖励倍数，默认为1
+	repeated DTowerRewardBox rewardBoxList = 16; // 宝箱信息
+
+	// index: 0挑战第一层，1通过第一层，2通过第二层....9通过第九层
+	repeated int32 layerCountList = 21; // 爬塔所有层的list
+	
+	optional DTowerLayerEnemy matchEnemy = 31; // 当前挑战层的匹配对象和类型
+}
+
+// 通知，赛季重置 下发新赛季信息和奖励
+message SCTowerSeasonInfo {
+	option (msgid) = 5403;
+	optional int32 score = 1;  // 玩家赛季积分
+	optional int64 seasonEndTime = 2; // 赛季结束时间
+	repeated DProduce produceList = 3; // 赛季结束奖励（为null则是没有获得赛季奖励）
+	optional int32 towerRank = 4; //  爬塔排行
+}
+
+// 通知，每日爬塔挑战情况
+message SCTowerIsFight{ 
+	option (msgid) = 5404;
+	optional bool todayIsFight = 1; 	// 今天是否挑战
+}
+
+// 请求，进入爬塔挑战（CS_TowerBattleMsg 请求切换场景）
+message CSTowerEnter {
+	option (msgid) = 5410;
+	optional int32 fightLayer = 1; // 挑战的层数
+	optional int32 selDifficulty = 2; // 选择的难度
+}
+
+// 应答，进入爬塔挑战
+message SCTowerEnter {
+	option (msgid) = 5411;
+	optional int32 haveLifeNum = 3; // 先扣一条命（如果赢了结算会加回来）
+}
+
+// 请求，离开爬塔挑战
+message CSTowerLeave {
+	option (msgid) = 5412;
+}
+
+// 请求，爬塔正常结算（逃跑也用这个，逃跑为失败）
+message CSTowerEnd {
+	option (msgid) = 5413;
+	optional DStarCondition starCondition = 1;	// 爬塔胜利条件
+	optional bool isFail = 2;					// 是否失败：true失败，false胜利
+}
+
+// 应答，爬塔正常结算（SC_TowerBattleEndMsg）
+message SCTowerEnd {
+	option (msgid) = 5414;
+	optional bool isFail = 1; // 是否失败：true失败，false胜利
+	// 以下失败不发送
+	optional bool isSpanDay = 11; // 是否跨天
+	repeated DProduce items = 12; // 奖励物品
+	optional int32 score = 13; // 当前赛季积分
+	optional int32 towerRank = 14; // 爬塔排行
+	// 以下跨天不发送
+	optional int32 haveLifeNum = 21; // 当前拥有的生命【跨天不发送】
+	optional int32 stayLayer = 22; // 当前停留的层数【跨天不发送】
+	optional int32 willFightLayer = 23; // 将要挑战的层数（最大层+1是通关）【跨天不发送】
+	// 过关的层数没有宝箱信息，则不发送
+	optional DTowerRewardBox rewardBox = 31; // 宝箱状态
+	// index: 0挑战第一层，1通过第一层，2通过第二层....9通过第九层
+	repeated int32 layerCountList = 41; // 爬塔所有层的list
+}
+
+// 请求，进入下一层（CS_TowerGoAheadMsg）
+message CSTowerGoAhead {
+	option (msgid) = 5415;
+	optional int32 stayLayer = 1; // 当前层数
+}
+
+// 应答，进入下一层
+message SCTowerGoAhead {
+	option (msgid) = 5416;
+	optional int32 stayLayer = 1; // 当前层数
+	optional int32 fightLayer = 2; // 挑战层数
+
+	optional DTowerLayerEnemy matchEnemy = 21; // 当前挑战层的匹配对象和类型
+}
+
+// 请求，开启爬塔宝箱(CS_TowerRewardBoxMsg)
+message CSTowerOpenRewardBox {
+	option (msgid) = 5417;
+	optional int32 boxLayer = 1; // 宝箱所在的层数
+}
+
+// 应答，开启爬塔宝箱
+message SCTowerOpenRewardBox {
+	option (msgid) = 5418;
+}
+
+// 请求，翻开宝箱的卡牌（CS_TowerOpenCardMsg）
+message CSTowerOpenCard {
+	option (msgid) = 5419;
+	optional int32 boxLayer = 1; // 宝箱所在的层数
+	optional int32 openIndex = 2; // 翻开的卡牌位置（0，1，2）
+	optional bool isCost = 3; // 是否是翻开元宝类型的牌
+}
+
+// 应答，翻开宝箱的卡牌
+message SCTowerOpenCard {
+	option (msgid) = 5420;
+	optional DTowerRewardBox rewardBox = 1; // 宝箱详情
+	optional int32 openIndex = 2; // 翻开的卡牌位置（0，1，2）
+	// 如果翻第二张开拍，则取的的道具就是list.get(1);
+	repeated DProduce rewardItemList = 3; // 奖励的道具（对应卡牌位置）
+	optional bool isCost = 4; // 是否是翻开元宝类型的牌
+}
+
+// 请求，购买生命（CS_TowerBuyLifeMsg）
+message CSTowerBuyLife {
+	option (msgid) = 5421;
+}
+
+// 应答，购买生命
+message SCTowerBuyLife {
+	option (msgid) = 5422;
+	optional int32 haveLifeNum = 1; // 当前拥有的生命数
+	optional int32 buyLifeNum = 2; // 今日购买生命的次数
+}
+
+//请求，结算多倍奖励（CS_TowerMultipleAward）
+message CSTowerMultipleAward {
+	option (msgid) = 5423;
+}
+
+//应答，结算多倍奖励
+message SCTowerMultipleAward {
+	option (msgid) = 5424;
+	optional int32 multiple = 1;  //奖励倍数
+}
+
+// 请求，人数数量显示（CS_TowerSameLevelAmountMsg）
+message CSTowerLayerCount {
+	option (msgid) = 5425;
+}
+
+// 应答，人数数量显示
+message SCTowerLayerCount {
+	option (msgid) = 5426;
+	repeated int32 layerCountList = 1; // 人数显示
+}
+
+// 请求，显示的玩家信息列表（CS_TowerShowPlayersMsg）
+message CSTowerShowHumanInfo {
+	option (msgid) = 5427;
+}
+
+// 应答，显示的玩家信息列表
+message SCTowerShowHumanInfo {
+	option (msgid) = 5428;
+	repeated DTowerHuman ShowList = 1;	//玩家信息列表
+}
+
+// 请求，重置爬塔过关条件
+message CSTowerResetConditon {
+	option (msgid) = 5429;
+}
+
+// 应答，重置爬塔过关条件
+message SCTowerResetConditon {
+	option (msgid) = 5430;
+	optional DTowerLayerEnemy matchEnemy = 1; // 过关条件snList
+}
+
+// 请求，人数数量显示（CS_TowerSameLevelAmountMsg）
+message CSTowerSameLayerHuamnAmount {
+	option (msgid) = 5451;
+}
+
+// 应答，人数数量显示
+message SCTowerSameLayerHuamnAmount {
+	option (msgid) = 5452;
+	repeated int32 humanAmount = 1; // 人数显示
+}
+
+

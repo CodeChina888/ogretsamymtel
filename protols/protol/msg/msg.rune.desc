@@ -1,0 +1,100 @@
+
+¥
+msg.rune.protogame.msgoptions.protodefine.proto"u
+SCLoadRuneInfo!
+wearList (2.game.msg.DRune#
+
+noWearList (2.game.msg.DRune
+runeSummonSn (:ˆÃ¥"8
+SCRuneCreate!
+runeList (2.game.msg.DRune:ˆÃ¦"+
+CSRuneSummon
+runeSummonSn (:ˆÃ¯"i
+SCRuneSummon
+rune (2.game.msg.DRune#
+produce (2.game.msg.DProduce
+nextSn (:ˆÃ°"E
+CSRuneUpgrade
+upgradeRuneId (
+consumeRuneIds (:ˆÃ±"M
+SCRuneUpgrade
+rune (2.game.msg.DRune
+consumeRuneIds (:ˆÃ²"F
+
+CSRuneWear
+unitId (
+runeId (
+	slotIndex (:ˆÃ³"f
+
+SCRuneWear
+unitId (
+wearRuneIds (
+wearSuccessId (
+replaceRuneId (:ˆÃ´"9
+CSRuneTakeOff
+unitId (
+	slotIndex (:ˆÃµ"R
+SCRuneTakeOff
+unitId (
+takeOffRuneId (
+wearRuneIds (:ˆÃ¶"'
+CSRuneExchange
+itemSn (:ˆÃ·"6
+SCRuneExchange
+rune (2.game.msg.DRune:ˆÃ¸":
+CSRuneWearOneKey
+unitId (
+runeIds (:ˆÃ¹"V
+SCRuneWearOneKey
+unitId (
+wearRuneIds (
+wearSuccessIds (:ˆÃº",
+CSRuneTakeOffOneKey
+unitId (:ˆÃ»",
+SCRuneTakeOffOneKey
+unitId (:ˆÃ¼"J
+SCLoadRuneMsg2
+dRuneRefiningList (2.game.msg.DRuneRefining:ˆÃê"9
+SCRuneAddMsg"
+	dRuneList (2.game.msg.DRune:ˆÃë"r
+CSDevourRuneMsg*
+dDevourRune (2.game.msg.DDevourRune,
+beDDevourRune (2.game.msg.DDevourRune:ˆÃì"7
+SCDevourRuneMsg
+rune (2.game.msg.DRune:ˆÃí"C
+CSEquipRuneMsg
+
+id (
+	equipSlot (
+set (:ˆÃî"F
+SCEquipRuneMsg
+
+id (
+result (
+	equipSlot (:ˆÃï";
+CSCallImmortalMsg
+type (
+	qualityId (:ˆÃð"™
+SCCallImmortalMsg"
+	dItemList (2.game.msg.DItem"
+	dRuneList (2.game.msg.DRune
+
+lightItems (	
+result (
+	qualityId (:ˆÃñ">
+CSBeckonsImmortalMsg
+type (
+	qualityId (:ˆÃò"1
+SCBackonsImmortalMsg
+
+lightItems (	:ˆÃó"%
+CSBuyRuneMsg
+runeId (:ˆÃô"E
+SCBuyRuneMsg
+result (
+dRune (2.game.msg.DRune:ˆÃõ"C
+CSDevourRuneOneKeyMsg
+	qualityId (
+remainId (:ˆÃö"=
+SCDevourRuneOneKeyMsg
+rune (2.game.msg.DRune:ˆÃ÷

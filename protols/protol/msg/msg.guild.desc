@@ -1,0 +1,187 @@
+
+¾
+msg.guild.protogame.msgoptions.protodefine.proto""
+CSGuildInfo
+page (:ˆÃå2"y
+SCGuildInfoResult'
+	guildInfo (2.game.msg.DGuildInfo
+size (
+	myApplyId (
+currentPage (:ˆÃæ2"+
+CSGuildMemberInfo
+guildId (:ˆÃç2"z
+SCGuildMemberResult'
+	guildInfo (2.game.msg.DGuildInfo3
+guildMemberInfo (2.game.msg.DGuildMemberInfo:ˆÃè2"H
+CSGuildCreate
+	guildName (	
+content (	
+icon (:ˆÃé2"=
+SCGuildCreateResult
+result (
+guildId (:ˆÃê2"]
+
+CSGuildSet
+guildId (
+isApply (
+
+QQ (
+initiationMinLevel (:ˆÃë2":
+CSGuildRename
+guildId (
+	guildName (	:ˆÃì2"9
+	CSDeclare
+guildId (
+guildDeclare (	:ˆÃí2"7
+CSNotice
+guildId (
+guildNotice (	:ˆÃî2"3
+CSGuildIcon
+guildId (
+icon (:ˆÃï2"0
+
+SCGuildSet
+result (
+pos (:ˆÃð2"'
+CSGuildSeek
+	guildName (	:ˆÃñ2"C
+SCGuildSeekResult'
+	guildInfo (2.game.msg.DGuildInfo:ˆÃò2"7
+CSGuildJoin
+addGuild (
+guildId (:ˆÃó2"L
+SCGuildJoinResult
+result (
+guildId (
+isApply (:ˆÃô2"
+CSGuildLeave:ˆÃõ2"T
+SCGuildLeaveResult
+result (
+pertainGuild (
+	isKickOut (:ˆÃö2"#
+CSGuildKickOut
+
+id (:ˆÃ÷2"'
+SCGuildKickOut
+result (:ˆÃø2"
+CSApplyInfo:ˆÃù2"M
+SCApplyInfoResult1
+	applyInfo (2.game.msg.DGuildApplyHumanInfo:ˆÃú2"5
+CSApplyReply
+reply (
+humanId (:ˆÃû2"<
+SCApplyReplyResult
+result (
+humanId (:ˆÃü2"
+CSApplyClear:ˆÃý2"6
+CSGuildPostSet
+humanId (
+post (:ˆÃþ2"L
+SCGuildPostSetResult
+result (
+humanId (
+post (:ˆÃÿ2"
+CSGuildImmoInfo:ˆÃ€3"G
+SCGuildImmoInfoResult
+isGuildImmo (
+
+immoSnList (:ˆÃ3"<
+CSGuildImmo&
+type (2.game.msg.EGuildImmoType:ˆÃ‚3"Œ
+SCGuildImmoResult
+result (
+num (
+guildLiveness (
+currentPersion (
+
+guildLevel (
+guildExp (:ˆÃƒ3"z
+SCGuildLvExp
+guildId (
+
+guildLevel (
+guildExp (
+guildActive (
+guildContribute (:ˆÃˆ3"
+CSGuildDrawReset:ˆÃ–3"
+CSGuildPrize:ˆÃ—3"%
+SCGuildPrize
+result (:ˆÃ˜3"
+CSGuildImmoLog:ˆÃ™3":
+SCGuildImmoLog!
+log (2.game.msg.DGuildImmo:ˆÃš3"'
+CSGuildImmoGiftBag
+
+sn (:ˆÃ›3"'
+SCGuildImmoGiftBag
+
+sn (:ˆÃœ3"+
+CSGuildCancleJoin
+guildId (:ˆÃ3"0
+SCGuildCancleJoinResult
+result (:ˆÃž3"
+CSGuildSkillList:ˆÃŸ3"@
+SCGuildSkillList%
+skills (2.game.msg.DGuildSkill:ˆÃ 3"(
+CSGuildSkillUpgrade
+
+sn (:ˆÃ¡3"J
+SCGuildSkillUpgrade
+result (
+oldSn (
+newSn (:ˆÃ¢3"
+CSGuildInstInfo:ˆÃ£3"‘
+SCGuildInstInfo
+isOpen (
+chapter (.
+stageHp (2.game.msg.DGuildInstStageInfo
+	resetType (
+	resetTime (
+chapterAwardGot (
+stageAwardGot (
+challengeTimes (
+challengeTimesAddTime	 (
+challengeBuyTimes
+ (:ˆÃ¤3",
+CSGuildInstChallenge
+stage (:ˆÃ¥3"2
+CSGuildInstChapterReward
+chapter (:ˆÃ§3"B
+SCGuildInstChapterReward
+result (
+chapter (:ˆÃ¨3"<
+CSGuildInstStageReward
+stage (
+slot (:ˆÃ©3"m
+SCGuildInstStageReward
+result (
+stage (
+slot (
+itemSn (
+itemNum (:ˆÃª3"O
+CSGuildInstResetType0
+	resetType (2.game.msg.EGuildInstResetType:ˆÃ«3"_
+SCGuildInstResetType
+result (0
+	resetType (2.game.msg.EGuildInstResetType:ˆÃ¬3"'
+CSGuildInstHarm
+leave (:ˆÃ­3"^
+SCGuildInstHarm
+stage (
+	harmTotal (
+
+contribute (
+killer (	:ˆÃ®3",
+CSGuildInstStageInfo
+stage (:ˆÃ¯3"K
+SCGuildInstStageInfo,
+stage (2.game.msg.DGuildInstStageInfo:ˆÃ°3"2
+CSGuildInstStageRewardInfo
+stage (:ˆÃ±3"X
+SCGuildInstStageRewardInfo$
+list (2.game.msg.DStageReward
+stage (:ˆÃ²3"%
+CSGuildInstBuyChallengeTimes:ˆÃ³3"L
+SCGuildInstBuyChallengeTimes
+times (
+challengeTimes (:ˆÃ´3

@@ -1,0 +1,118 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 10000_10199_cross.proto-----
+
+//请求登录验证(client->crossSrv)
+message CSTokenLogin{
+	option (msgid) = 10005;	
+	optional string token = 1;			//登录验证串
+	optional int64 humanId = 2;			//角色ID
+}
+
+//返回登录验证结果(crossSrv->client)
+message SCTokenLoginResult {
+	option (msgid) = 10006;
+	optional int32 resultCode = 1;		//错误编号
+	optional string resultReason = 2;	//错误原因
+	optional bool isServerFull = 3;		//是否是服务器人满了
+}
+
+//返回登录排队信息
+message SCTokenLoginQueue{
+	option (msgid) = 10007;
+	optional int32 num = 1;
+	optional int32 sec = 2;
+	optional bool full = 3;
+}
+
+//删除玩家游戏设置
+message SCCombatantKick {
+	option (msgid) = 10008;
+	optional string reason = 1;		//被踢原因
+}
+
+//上传玩家操作指令(client->crossSrv)
+message CSUploadOperate{
+	option (msgid) = 10010;
+	optional DCrossOperate operate= 1;
+}
+
+//同步通知玩家操作指令(crossSrv->client)
+message SCNotifyOperate{
+	option (msgid) = 10011;
+	optional int32 index = 1;		//帧编号
+	repeated DCrossOperate operate= 2;
+}
+
+//玩家进入房间
+message CSCrossStageEnter{
+	option (msgid) =  10012;
+}
+
+//开始战斗
+message CSStartFight{
+	option (msgid) =  10013;
+	optional int64 playerId = 1;		//角色ID
+}
+
+//开始战斗结果
+message SCStartFightResult{
+	option (msgid) =  10014;
+	optional int32 seed = 1;		//随机种子
+	optional float frameLength = 2;		//帧长度
+}
+
+//结束战斗
+message CSFinishFight{
+	option (msgid) =  10015;
+	optional int64 playerId = 1;		//角色ID
+}
+
+//结束战斗返回
+message SCFinishFightResult{
+	option (msgid) =  10016;
+}
+
+//对方掉线
+message SCEnemyDisconnect{
+	option (msgid) = 10017;
+	repeated int64 playerId = 1;	//角色ID
+}
+
+//所有玩家都加载完毕(在所有玩家都发送进入房间后分发给所有玩家)
+message SCCrossStageLoadOK{
+	option (msgid) =  10018;
+}
+
+//ping
+message CSCrossPing{
+	option (msgid) =  10019;
+	optional int64 timestamp = 1;
+}
+
+//ping
+message SCCrossPing{
+	option (msgid) =  10020;
+	optional int64 timestamp = 1;
+}
+
+//udp 身份绑定
+message CSCrossUdpLogin{
+	option (msgid) = 10021;
+	optional int64 humanId = 1; //角色ID
+}
+
+//战斗房间数据
+message SCCrossFightInfo {
+	option (msgid) = 10022;
+	required string areaSwitchKey = 1;		//游戏服副本切地图参数(mapSn:stageId)
+	required int32 mapSn = 2;				//地图sn
+	optional ECrossFightType fightType = 3;	//战斗类型
+	optional string token = 4;				//验证码
+	optional string ip = 5;					//ip
+	optional int32 port = 6;				//port
+	optional ETeamType team = 7;			//战队
+}
+
+

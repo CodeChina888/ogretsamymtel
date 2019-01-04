@@ -1,0 +1,189 @@
+// -----------------------------------------
+// 通用全局
+// -----------------------------------------
+
+//返回客户端调试状态
+message SCDebugClient {
+	option (msgid) = 1200;
+	optional bool openSRDebug = 1;		// 是否开启了调试：1开启，0关闭
+	optional int32 logType = 2;			// 调试日志级别：0-ERROR，1-Assert，2-Warning，3-Log，4-Exception
+}
+
+//返回登录时玩家的数据
+message SCHumanData {
+	option (msgid) = 1101;
+	required DHuman human = 1;			//玩家基础信息
+}
+
+//返回登录时应该获取的数据
+message SCInitData {
+	option (msgid) = 1102;
+	required DStage stage = 1;			//地图信息
+}
+
+//主动请求要一个初始化信息
+message CSInitData {
+	option(msgid) = 1103;
+}
+
+//ping消息，为了保持判断链接通畅
+message CSPing {
+	option(msgid) = 1104;
+}
+
+//ping消息，为了保持判断链接通畅
+message SCPing {
+	option(msgid) = 1105;
+}
+
+//通知玩家被踢下线
+message SCHumanKick {
+	option (msgid) = 1106;
+	optional int32 reason = 1;		//被踢原因：sysmsg表中sn
+}
+
+//地图单元属性变化（发送给其他玩家）
+message SCStageObjectInfoChange {
+	option (msgid) = 1109;
+	optional DStageObject obj = 1; 
+}
+
+message CSHumanInfo {
+	option (msgid) = 1110;
+}
+
+message SCHumanInfo {
+	option (msgid) = 1111;
+	optional int32 generalColCount = 1;	//武将收集数量
+	optional int32 combat = 2;			//战斗力
+	optional int32 competeTopRank = 3;	//竞技场最高排名
+	optional string guildName = 4;		//所属公会名字
+}
+
+// 玩家的货币变化通知
+message SCMoneyInfoChange {
+	option (msgid) = 1112;
+	optional DMoney money	= 1;			//货币信息
+}
+
+// 玩家的属性变化通知
+message SCPropInfoChange {
+	option (msgid) = 1113;
+	optional EPropChangeType type = 1;			//影响属性变化的类型
+	optional DProp prop		= 2;			//属性信息
+	optional int32 combat 	= 3;			//战斗力
+}
+
+//用户Status属性变化（只限发送给本人）
+message SCCombatChange {
+	option (msgid) = 1114;
+	optional int32 combat							= 1;			//战斗力
+}
+
+//等级变化
+message SCLevelChange {
+	option (msgid) = 1115;
+	optional int32 level							= 1;			//人物等级
+	optional int32 actMax							= 2;			//最大体力
+}
+
+//用户Status属性变化（只限发送给本人）
+message SCStateCurChange {
+	option (msgid) = 1116;
+	optional int32 hpCur							= 1;			//当前生命 
+	optional int32 mpCur							= 2;			//当前法力 
+}
+
+//敌我标识改变
+message SCTeamBundleIDChange {
+	option (msgid) = 1118; 
+	optional int64 teamBundleID =1;			//敌我标志：-1敌方，0中立，1友方
+}
+
+//恢复满体力的时间变化
+message SCActFullTimeChange {
+	option (msgid) = 1119; 
+	optional int64 actFullTime = 1;	// 恢复满体力的时间点
+}
+
+// 玩家每日零点重置通知-消耗元宝购买次数
+message SCDailyCostBuyChange {
+	option (msgid) = 1120;
+	optional DDailyCostBuy dDailyCostBuy = 1;	//玩家每日零点重置的信息-消耗元宝购买次数
+}
+
+// 玩家每日零点重置通知-其他零碎信息
+message SCDailyResetChange {
+	option (msgid) = 1121;
+	optional DDailyReset dDailyReset = 1;		//玩家每日零点重置的信息-其他零碎信息
+}
+
+// 玩家每周零点重置通知
+message SCWeeklyResetChange {
+	option (msgid) = 1122;
+	optional DWeeklyReset dWeeklyReset = 1;		//玩家每周零点重置的信息
+}
+
+//功能解锁 激活的sn集合
+message SCModUnlock {
+	option (msgid) = 1123;
+	repeated int32 snList = 1; // 当前刚激活的功能sn集合
+}
+
+
+//玩家每日购买体力
+message CSDailyActBuy {
+	option (msgid) = 1150;
+}
+message SCDailyActBuy {
+	option (msgid) = 1151;
+	optional int32 goldCost = 1;	//花费元宝数
+	optional int32 actGain = 2;		//获得体力数
+	optional int32 numBuyed = 3;	//今日已购买次数
+}
+//玩家每日购买铜币
+message CSDailyCoinBuy {
+	option (msgid) = 1152;
+	optional int32 num = 1;	//次数
+}
+message SCDailyCoinBuy {
+	option (msgid) = 1153;
+	optional int32 goldCost = 1;	//花费元宝数
+	optional int32 coinGain = 2;	//获得铜钱数
+	optional int32 numBuyed = 3;	//今日已购买次数
+}
+
+//请求，功能开放预告
+message CSModUnlockView {
+	option (msgid) = 1154;
+	optional EModeType modeType = 1;
+}
+//应答，功能开放预告
+message SCModUnlockView {
+	option (msgid) = 1155;
+	optional EModeType modeType = 1;
+	repeated DProduce produceList = 2;
+}
+
+//给前端发送消费日志
+message SCLogCost {
+	option (msgid) = 1190;
+	optional int32 sn = 1;			//消耗的SN
+	optional int64 cost = 2;		//消耗的数量
+	optional string reason = 3;		//消耗的理由
+}
+
+//伙伴属性变化通知
+message SCPartnerPropInfoChange {
+	option (msgid) = 1125;
+	optional EPropChangeType type = 1;	//影响属性变化的类型
+	optional DProp prop	= 2;			//属性信息
+	optional int64 id = 3; 				//伙伴ID
+	optional int32 combat = 4;			//战斗力
+}
+
+//发送后台日志
+message SCLogOp {
+	option (msgid) = 1131;
+	optional string log = 1; // 后台拼接日志
+}

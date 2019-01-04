@@ -1,0 +1,258 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 01301_01400_fight.proto-----
+
+//查看录像
+message CSReplayRecord {
+	option (msgid) = 1351;
+	optional int64 recordId = 1;	//录像Id
+}
+
+//战斗房间数据
+message SCRecordFightInfo {
+	option (msgid) = 1352;
+	optional int32 result = 1;					//结果
+	optional string switchKey = 2;				//切换地图
+	optional int32 mapSn = 3;					//地图sn
+	optional ECrossFightType fightType = 4;		//战斗类型
+	optional string token = 5;					//验证码
+	optional string ip = 6;						//ip
+	optional int32 port = 7;					//port
+	optional DRecordFightRoleInfo leftInfo=8;	//对战角色
+	optional DRecordFightRoleInfo rightInfo=9;	//对战角色
+}
+
+//离开录像地图
+message CSReplayLeave {
+	option (msgid) = 1353;
+}
+
+//新手战斗
+message CSNewbieFight {
+	option (msgid) = 1361;
+}
+
+//新手战斗
+message SCNewbieFight {
+	option (msgid) = 1362;
+	required string areaSwitchKey = 1;		//游戏服副本切地图参数
+	required int32 instSn = 2;				//副本sn
+	optional ECrossFightType fightType = 3;	//战斗类型
+	optional string token = 4;				//验证码
+	optional string ip = 5;					//ip
+	optional int32 port = 6;				//port
+	optional int32 camp = 7;				//阵营
+	optional int64 tempId = 8;				//临时用户ID
+	optional int32 result = 9;				//结果
+}
+
+//请求施放技能
+message CSFightAtk {
+	option (msgid) = 1301;
+	required int64 casterId = 1;
+	required int32 skillId = 2;		//技能id
+	optional int64 tarId  = 3;			//目标id
+	optional DVector2 pos = 4;			//目标位置
+	optional int32 atkerType = 5;		//1是主角，2是魂将
+	optional bool final = 6;		//请求连点或者连击技能最后次伤害
+}
+
+//返回请求技能是否成功
+message SCFightAtkResult {
+	option (msgid) = 1302;
+	required int32 resultCode = 1;		//执行结果编码
+	required int64 sendId = 2;		//谁放的技能
+}
+
+//技能包，群发
+message SCFightSkill {
+	option (msgid) = 1303;
+	optional int64 castId = 1;			//攻击者id
+	optional int32 skillId = 2;			//技能id
+	optional int64 tarId = 3;			//技能攻击的目标id
+	optional DVector2 pos = 4;			//技能攻击的目标位置
+	optional int32 atkerType = 5;		//1是主角，2是魂将
+	repeated int64 defId = 6;			//受攻击目标集合
+	optional SCFightHpChg hpChg = 7;	//技能造成的血量变化集合
+	optional int32 period = 8;			//战斗阶段
+	optional bool final = 9;			//是否是连点最后一击
+	repeated DBackPos backPos = 10; 	//被攻击以后的位置
+	optional DVector2 attPos = 11;		//玩家是否有攻击位移
+	optional int32 rage = 12;			//怒气值
+	repeated DRageAdd rageAdd = 13;		//被攻击放增加怒气
+	optional double skillShakePct = 14;	//这个技能前摇的百分比
+	repeated int64 skillTeamGenId = 15; //正在释放连携技武将
+	optional int32 mutilMagic = 16;		//多重施法
+	optional int32 comboCount = 17;		//连击数量
+	repeated int64 missId = 18;			//miss闪避队列
+	optional int64 disMoveTime = 19;	//技能产生位移时，所需要的时间
+}
+
+//血量变化包
+message SCFightHpChg {
+	option (msgid) = 1304;
+	repeated DHpChgTar dhpChgTar = 1;		//血量掉血list
+	optional int32 skillSn = 2;//技能id
+}
+
+//破甲值变化包
+message SCFightAddArmorChg {
+    option (msgid) = 1305;
+	optional int64 tarId = 1;			//变化者id
+	optional int32 addArmorCur = 2;			//当前破甲值
+}
+
+//连击数改变
+message SCFightComboIldexChg {
+    option (msgid) = 1306;
+	optional int64 tarId = 1;			//变化者id
+	optional int32 comboIldex = 2;			//当前连击数
+}
+
+//MP变化包
+message SCFightMpChg {
+	option (msgid) = 1307;
+	optional int64 id = 1;				//目标id
+	optional int32 mpCur = 2;			//当前MP
+}
+
+//复活
+message CSFightRevive {
+	option (msgid) = 1310;
+	optional EReviveType type = 1;	//复活类型：EReviveType
+	optional int32 stageSn = 2;		//关卡Sn
+	optional int32 actInstSn = 3;	//活动副本sn
+}
+
+//返回复活结果
+message SCFightRevive {
+	option (msgid) = 1311;
+	optional int32 result = 1;	//复活结果：0成功，非0失败（即sysMsg中的sn）
+	optional int64 id = 2;		//复活的玩家ID（广播复活成功需要的参数）
+}
+
+//广播战斗状态改变
+message SCFightStageChange {
+	option (msgid) = 1312;
+	optional int64 humanId = 1;		//玩家id
+	optional bool inFighting = 2;		//是否正在战斗
+	
+}
+
+//怒气变化包
+message DRageAdd {
+	option (msgid) =1314;
+	optional int64 id = 1;			//目标id
+	optional int32 rageAdd = 2;		//目标怒气增加 
+}
+
+//dot耗血信息
+message SCFightDotHpChg {
+	option (msgid) = 1315;
+	optional int32 dotSn = 1;
+	optional SCFightHpChg hpChg = 2;
+	optional int64 castId = 3;	//施法者ID
+	optional int32 intervalIndex = 4;//技能效果段索引
+}
+
+//bullet耗血信息
+message SCFightBulletHpChg {
+	option (msgid) = 1316;
+	optional int64 bulletID = 1;    //子弹的ID
+	optional SCFightHpChg hpChg = 2;
+	optional int64 castId = 3;	//施法者ID
+	//optional int32 intervalIndex = 4;//技能效果段索引
+}
+
+//bullet 切换
+message SCFightBulletMove {
+	option (msgid) = 1317;
+	optional int64 bulletID = 1;				//id
+	optional int32 bulletSN = 2;				//sn
+	optional int64 unitOriginId = 3;				//启动目标
+	optional int64 unitTarId = 4;				//发射目标
+}
+
+message CSSkillInterrupt {
+	option (msgid) = 1318;
+	optional int64 unitObjID = 1;				//打断unitObj 的id
+}
+
+message SCSkillInterrupt {
+	option (msgid) = 1319;
+	optional int64 unitObjID = 1;				//打断unitObj 的id
+	optional int32 skillSn = 2;				//打断unitObj 的具体技能
+}
+
+message CSSkillAddGeneral {
+	option (msgid) = 1320;
+	optional int32 generalSn = 1;				//添加的generalSn
+	optional DVector2 pos = 2;		//地图坐标
+	optional DVector2 dir = 3;		//朝向
+}
+
+message CSSkillRemoveGeneral {
+	option (msgid) = 1321;
+	optional int64 unitObjID = 1;				//消失unitObj 的id
+}
+
+message CSSkillAddGeneralToUnion {
+	option (msgid) = 1322;
+	optional int64 unitObjID = 1;				//添加的generalSn
+	optional DVector2 pos = 2;		//地图坐标
+}
+
+//团体战斗开始
+message CSUnionFightStart {
+	option (msgid) = 1323;
+}
+
+message CSUnionFightAIPause {
+	option (msgid) = 1324;
+}
+
+message CSUnionFightAIUnpause {
+	option (msgid) = 1325;
+}
+
+message CSUnionFightSpecial {
+	option (msgid) = 1326;
+	optional int64 castId = 1;
+}
+
+message CSUnionFightAuto {
+	option (msgid) = 1327;
+	optional bool auto = 1; //是否是自动战斗
+}
+
+message SCFightSkillTeamCancel {
+	option (msgid) = 1328;
+}
+
+message SCSkillAddCooldown {
+	option (msgid) = 1329;
+	optional int64 unitObjID = 1;	//对象ID
+	optional int32 skillSn = 2;		//技能sn
+	optional int32 coolTime = 3;	//冷却时间
+}
+
+message SCSkillRemoveCooldown {
+	option (msgid) = 1330;
+	optional int64 unitObjID = 1;	//对象ID
+	optional int32 skillSn = 2;		//技能sn
+}
+
+message SCSkillShapeShiftingStart {
+	option (msgid) = 1331;
+	optional DStageObject obj = 1; 
+	optional int32 shapeShiftingID = 2;		//变身ID
+}
+
+message SCSkillShapeShiftingEnd {
+	option (msgid) = 1332;
+	optional DStageObject obj = 1; 
+	optional int32 shapeShiftingID = 2;		//变身ID
+}
+
+

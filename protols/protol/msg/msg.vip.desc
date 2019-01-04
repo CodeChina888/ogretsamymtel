@@ -1,0 +1,34 @@
+
+œ
+msg.vip.protogame.msgoptions.protodefine.proto"#
+CSVIPBuyInfo
+type (:à√‹$"i
+SCVIPBuyInfo
+info (2.game.msg.DVipBuy
+	vIPBuyLvs (
+firstChargeRewardState (:à√›$"'
+CSVIPBuyGift
+vipLevel (:à√ﬁ$"'
+SCVIPBuyGift
+vipLevel (:à√ﬂ$",
+SCVIPBuy
+type (
+num (:à√‡$""
+CSVIPGetGift
+lvl (:à√·$""
+SCVIPGetGift
+lvl (:à√‚$"
+CSVIPBuy
+type (:à√„$"
+CSVIPFirstChargeReward:à√‰$"?
+SCVIPFirstChargeReward
+firstChargeRewardState (:à√Â$")
+CSTimeLimitRecharge
+aid (:à√Ê$"ê
+SCTimeLimitRecharge
+aid (
+lvl (
+money (
+	leaveTime (
+rewardSn ($
+status (2.game.msg.EAwardType:à√Á$

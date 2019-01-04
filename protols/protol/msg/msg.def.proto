@@ -1,0 +1,6 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 00000_00000_def.proto-----
+
+

@@ -1,0 +1,216 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 01701_01800_rune.proto-----
+
+// 通知，登录下发符文信息
+message SCLoadRuneInfo {
+	option (msgid) = 1701;
+	repeated DRune wearList = 1; // 穿戴了的符文
+	repeated DRune noWearList = 2; // 没有穿戴的符文 
+	required int32 runeSummonSn = 3; // 当前可以召唤的位置
+}
+
+// 通知，获得新的符文
+message SCRuneCreate {
+	option (msgid) = 1702;
+	repeated DRune runeList = 1; // 新获得的符文
+}
+
+// 请求，符文召唤
+message CSRuneSummon {
+	option (msgid) = 1711;
+	required int32 runeSummonSn = 1; // 召唤的sn
+}
+
+// 应答，符文召唤
+message SCRuneSummon {
+	option (msgid) = 1712;
+	repeated DRune rune = 1; // 召唤到的纹石
+	repeated DProduce produce = 2; // 召唤到的物品
+	required int32 nextSn = 3; // 下次招募的sn
+}
+
+// 请求，符文合成升级
+message CSRuneUpgrade {
+	option (msgid) = 1713;
+	required int64 upgradeRuneId = 1; // 养成的符文id
+	repeated int64 consumeRuneIds = 2; // 消耗的符文idList  
+}
+
+// 应答，符文合成升级
+message SCRuneUpgrade {
+	option (msgid) = 1714;
+	required DRune rune = 1; // 养成后的符文信息
+	repeated int64 consumeRuneIds = 2; // 消耗的符文idList
+}
+
+// 请求，符文穿戴
+message CSRuneWear {
+	option (msgid) = 1715;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+	required int64 runeId = 2; // 穿戴的符文id
+	required int32 slotIndex = 3; // 穿戴的槽位*（从0开始）
+}
+
+// 应答，符文穿戴
+message SCRuneWear {
+	option (msgid) = 1716;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+	repeated int64 wearRuneIds = 2; // 该对象穿戴的符文idList，槽位为空填0
+	optional int64 wearSuccessId = 3; // 穿戴成功的符文id
+	optional int64 replaceRuneId = 4; // 替换下来的符文，没有则填0
+}
+
+// 请求，符文脱下
+message CSRuneTakeOff {
+	option (msgid) = 1717;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+	required int32 slotIndex = 2; // 脱下的槽位（从0开始）
+}
+
+// 应答，符文脱下
+message SCRuneTakeOff {
+	option (msgid) = 1718;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+	optional int64 takeOffRuneId = 2; // 脱下来的符文
+	repeated int64 wearRuneIds = 3; // 该对象穿戴的符文idList，槽位为空填0
+}
+
+// 请求，符文兑换
+message CSRuneExchange {
+	option (msgid) = 1719;
+	required int32 itemSn = 1; // 要兑换的符文道具
+}
+
+// 应答，符文兑换
+message SCRuneExchange {
+	option (msgid) = 1720;
+	required DRune rune = 1; // 兑换到的符文信息
+}
+
+// 请求，一键穿戴
+message CSRuneWearOneKey {
+	option (msgid) = 1721;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+	repeated int64 runeIds = 2; // 一键穿戴的符文
+}
+
+// 应答，一键穿戴
+message SCRuneWearOneKey {
+	option (msgid) = 1722;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+	repeated int64 wearRuneIds = 2; // 该对象穿戴的符文idList，槽位为空填0
+	repeated int64 wearSuccessIds = 3; // 穿戴成功的符文id
+}
+
+// 请求，一键脱下
+message CSRuneTakeOffOneKey {
+	option (msgid) = 1723;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+}
+
+// 应答，一键脱下
+message SCRuneTakeOffOneKey {
+	option (msgid) = 1724;
+	required int64 unitId = 1; // 穿戴的对象id，主角填-1
+}
+
+//下发命格点亮情况
+message SCLoadRuneMsg{
+	option (msgid) = 1770;
+	repeated DRuneRefining dRuneRefiningList = 1;//普通练石与高级练石的点亮情况
+}
+
+//下发，纹石列表
+message SCRuneAddMsg{	
+	option (msgid) = 1771;
+	repeated DRune dRuneList = 1;   //获得的符文列表
+}
+
+//请求，吞噬纹石
+message CSDevourRuneMsg{
+	option (msgid) = 1772;
+	optional DDevourRune dDevourRune = 1;        //吞噬者命格信息
+	optional DDevourRune beDDevourRune = 2;      //被吞噬者命格信息
+}
+
+//应答，吞噬纹石
+message SCDevourRuneMsg{
+	option (msgid) = 1773;
+	optional DRune rune = 1;        	  //留下的纹石信息
+}
+
+//请求，装备纹石
+message CSEquipRuneMsg{
+	option (msgid) = 1774;
+	required int64 id = 1;                //纹石ID
+	optional int32 equipSlot = 2;         //槽位ID  位置从1开始，传0表示脱装备
+	optional int32 set = 3;               //套ID 
+}
+
+//应答，装备纹石
+message SCEquipRuneMsg{
+	option (msgid) = 1775;
+	optional int64 id = 1;                //纹石ID
+	optional int32 result = 2;            //1成功，0失败
+	optional int32 equipSlot = 3;         //槽位ID 位置从1开始，传0表示脱装备
+}
+
+//请求，拜访神仙
+message CSCallImmortalMsg{                   
+	option (msgid) = 1776;
+	optional int32 type = 1;              //普通炼石或者高级炼石
+	optional int32 qualityId = 2;         //神仙的品质
+}
+
+//应答，拜访神仙
+message SCCallImmortalMsg{                   
+	option (msgid) = 1777;
+	repeated DItem dItemList = 1;			//获得的物品纹石碎片等，不包含纹石道具
+	repeated DRune dRuneList = 2;			//获得的纹石列表
+	optional string lightItems = 3;			//拜访后点亮的神仙列表 
+	optional int32 result = 4;				//0失败 1成功
+	optional int32 qualityId = 5;			//自身品质
+}
+
+//请求，召唤紫色神仙
+message CSBeckonsImmortalMsg{                
+	option (msgid) = 1778;
+	optional int32 type = 1;            //普通炼石或者高级炼石
+	optional int32 qualityId = 2;       //召唤的神仙的品质
+}
+
+//应答，召唤紫色神仙
+message SCBackonsImmortalMsg{
+	option (msgid) = 1779;
+	optional string lightItems = 1;     //点亮的神仙列表，不做成功与失败处理，如果失败，则点亮列表与之前相同
+}
+
+//请求，兑换纹石
+message CSBuyRuneMsg{                        
+	option (msgid) = 1780;
+	optional int32 runeId = 1;
+}
+
+//应答，兑换纹石
+message SCBuyRuneMsg{
+	option (msgid) = 1781;
+	optional int32 result = 1;           //兑换结果，0失败，1成功
+	optional DRune dRune = 2;
+}
+
+//请求，一键吞噬
+message CSDevourRuneOneKeyMsg{            
+	option (msgid) = 1782;
+	optional int32 qualityId = 1;         //玩家选择的合成品质
+	optional int64 remainId = 2;          //要留下的纹石ID
+}
+
+//应答，一键吞噬
+message SCDevourRuneOneKeyMsg{
+	option (msgid) = 1783;
+	optional DRune rune = 1;				  //符文信息
+}
+
+

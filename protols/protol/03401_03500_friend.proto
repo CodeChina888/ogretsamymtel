@@ -1,0 +1,221 @@
+// -----------------------------------------
+// 好友
+// -----------------------------------------
+//好友类型
+enum EFriendType {
+	Friend = 0;		//好友
+	Apply = 1;		//申请
+	Recommend = 2;	//推荐
+	Black = 3; 		//拉黑
+}
+
+//请求几个列表
+message DFriendInfo{
+	optional int64 humanId = 1;		//玩家ID
+	optional string name = 2;       //姓名
+	optional int32 level = 3;		//等级
+	optional int32 combat = 4;		//战斗力
+    optional bool online = 5;		//是否在线
+    optional int32 vip = 6;			//vip等级
+    optional string sign = 7;		//签名
+    optional int32 camp = 8;		//势力
+    optional int32 actStage = 9;	//个位表示获取状态 0:没体力可领 1未领取 2:已领取;十位表示赠送状态  0:可赠送 1:已赠送
+	optional int32 headSn = 10;		//头像
+	optional int32 mountSn = 11;		//坐骑
+	optional int32 modelSn = 12;		//模型
+}
+
+// 好友信息
+message CSFriendList {
+	option (msgid) = 3401;
+}
+
+//返回几个列表
+message SCFriendList {
+	option (msgid) = 3402;
+    repeated DFriendInfo friendList = 1;   	//好友信息
+	repeated DFriendInfo applyList = 2;   	//申请人列表
+	repeated DFriendInfo blackList = 3;   	//黑名单
+	optional int32 yetGetNum = 4;			//玩家已经领取的次数
+	optional int32 yetGiveNum = 5;			//玩家已经赠送的次数
+}
+
+//推荐好友
+message CSRecommendFriend {
+	option (msgid) = 3409;
+}
+
+//返回推荐好友
+message SCRecommendFriend {
+	option (msgid) = 3410;
+    repeated DFriendInfo infos = 1;   	//好友信息
+}
+
+//好友申请
+message CSRequestFriend {
+	option (msgid) = 3403;
+    repeated int64 humanIds = 1;		//玩家ID
+}
+
+//返回好友申请
+message SCRequestFriend {
+	option (msgid) = 3404;
+    optional bool result = 1;		//是否成功
+	repeated int64 humanIds = 2;		//玩家ID
+}
+
+//接受好友
+message CSAcceptFriend {
+	option (msgid) = 3405;
+    repeated int64 humanIds = 1;		//申请人ID
+}
+
+//返回接受好友
+message SCAcceptFriend {
+	option (msgid) = 3406;
+    optional bool result = 1;		//是否成功
+	repeated int64 humanIds = 2;		//玩家ID
+}
+
+//拒绝好友请求
+message CSRefuseFriend {
+	option (msgid) = 3407;
+    	repeated int64 humanIds = 1;		//玩家ID
+}
+
+//返回拒绝好友请求
+message SCRefuseFriend {
+	option (msgid) = 3408;
+	optional bool result = 1;		//是否成功
+	repeated int64 humanIds = 2;		//玩家ID
+}
+
+//搜索好友
+message CSSearchFriend {
+	option (msgid) = 3411;
+	optional string name = 1;		//玩家ID
+}
+
+//返回搜索好友
+message SCSearchFriend {
+	option (msgid) = 3412;
+    repeated DFriendInfo infos = 1;   	//好友信息
+}
+
+//删除好友
+message CSRemoveFriend {
+	option (msgid) = 3413;
+	optional int64 humanId = 1;		//好友ID
+}
+
+//返回删除好友
+message SCRemoveFriend {
+	option (msgid) = 3414;
+    optional bool result = 1;		//是否成功
+	optional int64 humanId = 2;		//玩家ID
+}
+
+//拉黑好友
+message CSToBlackList {
+	option (msgid) = 3417;
+    optional int64 humanId = 1;		//好友ID
+}
+
+//返回拉黑好友
+message SCToBlackList {
+	option (msgid) = 3418;
+    optional bool result = 1;		//是否成功
+	optional int64 humanId = 2;		//玩家ID
+}
+
+//删除黑名单玩家
+message CSRemoveBlackList {
+	option (msgid) = 3419;
+	optional int64 humanId = 1;		//好友ID
+}
+
+//返回删除黑名单玩家
+message SCRemoveBlackList {
+	option (msgid) = 3420;
+    optional bool result = 1;		//是否成功
+	optional int64 humanId = 2;		//玩家ID
+}
+
+//好友信息发生变化
+message SCFriendInfo {
+	option (msgid) = 3421;
+    optional int32 option = 1;		//操作  1.增加 2.删除 3.更新
+	optional EFriendType type = 2;	
+    optional DFriendInfo info = 3;		//好友info
+}
+
+//赠送好友体力
+message CSGiveFriendAc{
+	option (msgid) = 3422;	
+	repeated int64 toHumanIds =1;		//赠送体力玩家ID
+}
+
+//返回赠送好友体力
+message SCGiveFriendAc {
+	option (msgid) = 3423;
+    optional bool result = 1;		//是否成功
+	repeated int64 humanIds = 2;		//赠送体力玩家ID
+	optional int32 yetGiveNum = 3;		//玩家已经赠送的次数
+}
+
+//领取好友体力
+message CSReceFriendAc{
+	option (msgid) = 3424;
+	repeated int64 toHumanIds =1;		//赠送体力玩家ID
+}
+
+//返回领取好友体力
+message SCReceFriendAc {
+	option (msgid) = 3425;
+    optional bool result = 1;		//是否成功
+	repeated int64 humanIds = 2;		//赠送体力玩家ID
+	optional int32 yetGetNum = 3;		//玩家已经领取的次数
+}
+
+// 好友分享
+message CSFriendShare{
+	option (msgid) = 3426;
+}
+
+// 请求，玩家详情
+message CSQueryCharacter{
+	option (msgid) = 3427;
+	optional int64 queryId = 1;//要查看角色ID
+}
+// 应答,玩家详情
+message SCQueryCharacter{
+	option (msgid) = 3428;
+	optional int64 humanId  = 1;	// 角色ID
+	optional int32 humanDigit = 2;	// 角色标识ID
+	optional int32 level = 3;		// 角色等级
+	optional string name = 4;		// 名字
+	optional int32 modelSn = 5;		// 模型sn
+	optional int32 titleSn = 6;		// 称号sn
+	optional int32 combat = 7;		// 战斗力
+	optional int32 vip = 8;			// vip等级
+	optional int32 profession = 9;			// 职业
+	// 玩法数据
+	optional int32 competeRank = 21; 	// 竞技场排行
+	optional int32 instStar = 22;	// 副本星星总数
+
+	// 技能相关31-40
+	repeated DSkill skillList = 31;	// 角色上阵技能详情
+	repeated DSkillGods skillGodsList = 32;	// 角色爆点详情
+	optional int32 skillGodsSn = 33;	// 角色上阵的爆点sn
+
+	// 装备相关41-50
+	repeated DEquip equipList = 41;	// 角色装备详细
+
+	// 伙伴相关51-60
+	repeated DPartnerBriefInfo info =  42;
+
+	// 废弃暂时不删除（调整结束后删除）
+	repeated int32 skill = 101;//技能列表
+	optional int32 gods = 102;//爆点技能sn
+	
+}

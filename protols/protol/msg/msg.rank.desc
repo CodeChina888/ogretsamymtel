@@ -1,0 +1,63 @@
+
+‚
+msg.rank.protogame.msgoptions.protodefine.proto"9
+CSRequestRank!
+type (2.game.msg.ERankType:ˆÃ¿"i
+SCLevelRank
+ranks (2.game.msg.DRank
+status (
+selfRank (
+	selfLevel (:ˆÃ®"k
+SCCombatRank
+ranks (2.game.msg.DRank
+status (
+selfRank (
+
+selfCombat (:ˆÃ°"!
+CSSelectInfo
+
+id (:ˆÃ±"ô
+SCSelectInfo+
+seeProperty (2.game.msg.DSeeProperty!
+itemBody (2.game.msg.DItem$
+fashionBody (2.game.msg.DItem
+fashionShow (
+equipWeaponSn (
+equipUnusedWeaponSn (
+trench (
+result (:ˆÃ²"8
+	CSWorship$
+type (2.game.msg.EWorshipType:ˆÃ³""
+	SCWorship
+result (:ˆÃ´"n
+SCGuildRank#
+ranks (2.game.msg.DRankGuild
+status (
+selfRank (
+	selfLevel (:ˆÃ¶"^
+SCSumCombatRank
+ranks (2.game.msg.DRank
+selfRank (
+
+selfCombat (:ˆÃ¸"\
+SCInstanceRank
+ranks (2.game.msg.DRank
+selfRank (
+	selfStars (:ˆÃº"a
+SCGetPVETowerRank 
+rank (2.game.msg.DPVERank
+selfRank (
+	selfGrade (:ˆÃ¼"f
+SCFairylandRank'
+ranks (2.game.msg.DFairylandRank
+selfRank (
+	selfGrade (:ˆÃ¾"R
+SCCompeteRankNew%
+ranks (2.game.msg.DCompeteRank
+selfRank (:ˆÃÁ"
+SCNodata:ˆÃÂ"^
+SCActCombatRank
+ranks (2.game.msg.DRank
+selfRank (
+
+selfCombat (:ˆÃÃ

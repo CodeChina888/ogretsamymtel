@@ -1,0 +1,219 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 06701_06800_cave.proto-----
+
+//玩家获取相关信息
+message CSCaveInfo{
+	option (msgid) = 6701;
+	optional ECaveType caveType = 1; //TODO 类型
+	repeated int32 pageList = 2;//页数
+}
+
+//人物基础信息
+message SCCaveInfo{
+	option (msgid) = 6702;
+	repeated DCaveBase baseMsg = 1;//洞穴信息
+}
+
+//获取被占领情况 
+message CSCaveOccupyInfo{
+	option (msgid) = 6703;
+	optional ECaveType caveType = 1; //类型
+	optional int32 page = 2;//页数
+	optional int32 index = 3;//索引
+	optional int64 humanId = 4;//玩家id 验证
+}
+
+//回执被占领情况
+message SCCaveOccupyInfo{
+	option (msgid) = 6704;
+	required ECaveType caveType = 1; // 类型
+	required int32 page = 2; // 页数
+	required int32 index = 3; // 索引
+	required bool isCorrect = 4; // 刚才上行的humanId与服务器的是否一致
+	required int64 humanId = 5; // 玩家ID
+	required string humanName = 6; // 玩家姓名
+	required int32 level = 7; // 等级
+	required int64 combat = 8; // 战斗力
+	required int32 roleSn = 9; // 形象
+	required bool isOwn = 10;	// 是否被人占领
+	optional int32 guildAdd = 11; // 仙盟增加
+	optional int32 useTime = 12; // 当前已经被占领时间 秒
+	optional int32 cdTimeCount = 13; // 玩家增加的时间 0 为无增加 1增加1次 2为增加2次对应 ConfCave.cdTime 的索引时间
+	optional int32 lootEarnings = 14; // 抢夺收益
+	optional bool isLoot = 15; // 我是否抢夺过该仙府
+	optional bool isMaxLoot = 16; // 该仙府被抢夺次数是否到上限
+	optional string guildName = 17; // 公会名称
+	optional int64 guildID = 18; // 公会ID
+}
+
+// 放弃
+message CSCaveGiveUp{
+	option (msgid) = 6705;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+}
+
+// 放弃回执
+message SCCaveGiveUp{
+	option (msgid) = 6706;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+}
+
+// 延迟
+message CSCaveCDTimeAdd{
+	option (msgid) = 6707;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+}
+
+//延迟回执
+message SCCaveCDTimeAdd{
+	option (msgid) = 6708;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+	optional int64 humanID = 4;
+	optional int32 cdTimeCount = 5;
+}
+
+//占领战斗发起
+message CSOccupyBattle{
+	option (msgid) = 6709;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+	optional ETokenType type = 4; // 战斗类型
+}
+
+//用户请求离开仙府
+message CSCaveFightLeave {
+	option (msgid) = 6710;//离开竞技场地图，回到主城
+}
+
+//仙府战斗结束
+message CSCaveFightEnd {
+	option (msgid) = 6711;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+	optional ETokenType type = 4; // 战斗类型
+}
+
+//战斗回执
+message SCCaveFightEnd{
+	option (msgid) = 6712;	
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+	optional string humanName = 4; // 玩家姓名
+	optional bool isWin = 5; // 我是否胜利
+	optional ETokenType battleType = 6; // 战斗类型
+	repeated DProduce itemList = 7;// 获得物品内容
+}
+
+//请求购买次数
+message CSCaveMoneyInfo{
+	option (msgid) = 6713;
+}
+
+//请求购买次数回执
+message SCCaveMoneyInfo{
+	option (msgid) = 6714;
+	optional int32 OccupyBuyCount = 1; // 开采购买次数
+	optional int32 LootBuyCount = 2; // 抢夺购买次数
+}
+
+// 购买开采令/强夺令
+message CSCaveBuyToken{
+	option (msgid) = 6715;
+	optional ETokenType type = 1;
+}
+
+// 请求我的仙府
+message CSMyCaveInfo{
+	option (msgid) = 6716;
+}
+
+// 回执我的仙府
+message SCMyCaveInfo{
+	option (msgid) = 6717;
+	repeated DCaveBase caveList = 3;
+}
+
+// 我的仙府被人占领了
+message SCMyCaveLost{
+	option (msgid) = 6718;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+}
+
+// 获取空闲页(快速寻府)
+message CSGetFreeCave{
+	option (msgid) = 6719;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 sn = 2; // sn
+}
+
+// 返回所在位置 当page == 0 则没有空闲
+message SCGetFreeCave{
+	option (msgid) = 6720;
+	optional ECaveType caveType = 1; // 类型
+	optional int32 page = 2; // 页数
+	optional int32 index = 3; // 索引
+	optional int32 sn = 4; // sn
+}
+
+// 请求防守记录
+message CSCaveDefense{
+	option (msgid) = 6721;
+}
+
+// 回执防守记录
+message SCCaveDefense{
+	option (msgid) = 6722;
+	repeated DCaveDefense recordList = 1;
+}
+
+// 请求仇人
+message CSCaveEnemy{
+	option (msgid) = 6723;
+}
+
+// 回执仇人
+message SCCaveEnemy{
+	option (msgid) = 6724;
+	repeated DCaveDefense recordList = 1;
+}
+
+// 获取仇人仙府内容
+message CSCaveEnemyInfo{
+	option (msgid) = 6725;
+	optional int64 enemyHumanID = 1; // 仇人ID
+}
+
+// 回执仇人仙府内容
+message SCCaveEnemyInfo{
+	option (msgid) = 6726;
+	optional int64 enemyHumanID = 1; // 仇人ID
+	repeated DCaveBase caveList = 2; // 他的仙府
+}
+
+//获取我的盟友的仙府信息
+message CSCaveGuildMemberInfo{
+	option (msgid) = 6727;
+}
+
+// 回执获取我的盟友的仙府信息
+message SCCaveGuildMemberInfo{
+	option (msgid) = 6728;
+	repeated DCaveGuildMemberInfo caveList = 2; // 他的仙府
+}
+
+

@@ -1,0 +1,98 @@
+
+î
+msg.item.protogame.msgoptions.protodefine.proto"=
+SCBodyItemInfo$
+
+dEquipList (2.game.msg.DEquip:à√õ":
+SCBagItemInfo"
+	dItemList (2.game.msg.DItem:à√ú"^
+SCItemChange
+add (2.game.msg.DItem
+mod (2.game.msg.DItem
+del (:à√ù"H
+SCLoadSoulEquipMsg+
+SoulEquipList (2.game.msg.DSoulEquip:à√ü"Z
+SCBagUpdate
+type (%
+updates (2.game.msg.DBagUpdate
+arrange (:à√†"6
+
+SCDropItem!
+item (2.game.msg.DDropItem:à√¢"+
+	CSItemUse
+
+id (
+num (:à√¡"G
+	SCItemUse$
+produces (2.game.msg.DProduce
+isTip (:à√¬"5
+CSItemsBagSell
+pro (2.game.msg.DItem:à√≈"9
+SCItemsBagSell
+result (
+getMoney (:à√∆"I
+CSCompoundItemMsg
+compoundCount (
+compoundItemSn (:à√«"*
+SCCompoundItemMsg
+result (:à√»"K
+CSSelectPackageItem
+num (
+	packageSn (
+index (:à√…"A
+SCSelectPackageItem#
+produce (2.game.msg.DProduce:à√ "I
+CSItemEquipPutOn
+unitId (
+itemId (
+posion (:à√’";
+CSItemEquipTakeOff
+unitId (
+itemId (:à√÷",
+CSReinforceEquipMsg
+itemID (:à√◊"@
+SCReinforceEquipMsg
+ReinforceLevel (
+
+sn (:à√ÿ"%
+CSUpEquipMsg
+itemID (:à√Ÿ"4
+SCUpEquipMsg
+Result (
+Level (:à√⁄"E
+CSReinforceAllEquip2Msg
+itemID (
+TargetLevel (:à√€"E
+SCReinforceAllEquip2Msg
+itemID (
+TargetLevel (:à√‹"?
+CSEquipRefineSlotUp
+itemID (
+	isPerfect (:à√›"@
+SCEquipRefineSlotUp
+itemID (
+
+resultList (:à√ﬁ"0
+CSEquipRefineSaveSlotUp
+itemID (:à√ﬂ"D
+SCEquipRefineSaveSlotUp
+itemID (
+
+slotLvList (:à√‡"3
+CSEquipRefineAbandonSlotUp
+itemID (:à√·"3
+SCEquipRefineAbandonSlotUp
+itemID (:à√‚"(
+CSEquipRefineUp
+itemID (:à√„"N
+SCEquipRefineUp
+itemID (
+refineLv (
+
+slotLvList (:à√‰"F
+CSEquipEvolution
+unitId (
+itemid (
+pos (:à√Ê")
+SCEquipEvolution
+result (:à√Á

@@ -1,0 +1,30 @@
+
+∫
+msg.mail.protogame.msgoptions.protodefine.proto"
+CSOpenMailList:à√ù"3
+
+SCMailList
+mails (2.game.msg.DMail:à√û"
+
+CSReadMail
+
+id (:à√ü"0
+
+SCReadMail
+
+id (
+success (:à√§"7
+SCMailNewRemind
+mail (2.game.msg.DMail:à√†"%
+CSPickupMailItem
+
+id (:à√°";
+SCPickupItemMailResult
+
+id (
+result (:à√¢"C
+
+CSSendMail
+title (	
+detail (	
+humanId (:à√£

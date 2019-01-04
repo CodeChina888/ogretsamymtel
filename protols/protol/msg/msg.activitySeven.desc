@@ -1,0 +1,25 @@
+
+¡
+msg.activitySeven.protogame.msgoptions.protodefine.proto"l
+SCOpenNoviceActivity
+
+createTime (
+	createDay (&
+dna (2.game.msg.DNoviceActivity:ˆÃ¸0"+
+CSCommitNoviceActivity
+
+sn (:ˆÃ¹0"+
+SCCommitNoviceActivity
+
+sn (:ˆÃº0"S
+SCTypeNoviceActivity
+type (&
+dna (2.game.msg.DNoviceActivity:ˆÃ»0"–
+SCSevenLogin
+loginDayNum (1
+	condition (2.game.msg.DSevenLoginAwardType
+	isSuccess ($
+itemList (2.game.msg.DProduce:ˆÃ¼0")
+CSGetSevenLoginAward
+
+sn (:ˆÃ½0

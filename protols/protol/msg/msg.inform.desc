@@ -1,0 +1,43 @@
+
+÷
+msg.inform.protogame.msgoptions.protodefine.proto"­
+SCInformMsg#
+type (2.game.msg.EInformType
+content (	
+sendHumanId (
+sendHumanName (	
+snedVip (
+snedLv (
+receiveHumanId (
+receiveHumanName (	
+
+receiveVip	 (
+	receiveLv
+ (
+time (
+headId (
+num (
+interval (:ˆÃÝ"‰
+CSInformChat#
+type (2.game.msg.EInformType
+content (	
+	targetKey (
+isVoice (
+receiveHumanName (	:ˆÃÞ"-
+SCInformFuncPrompt
+funcName (	:ˆÃß"A
+SCInformMsgAll(
+	informMsg (2.game.msg.SCInformMsg:ˆÃà"“
+SCSysMsg
+sysMsgId (
+paramA (
+paramB (
+paramC (
+paramD (
+paramE (
+paramF (
+paramG (:ˆÃá"+
+CSInformCrossChat
+content (	:ˆÃâ"K
+SCInformCrossMsgAll-
+	informMsg (2.game.msg.DInformCrossChat:ˆÃã

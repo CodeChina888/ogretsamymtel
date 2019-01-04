@@ -1,0 +1,36 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 03801_03900_raffle.proto-----
+
+// 通知，打开幸运转盘
+message SCOpenLuckTurntable {
+	option (msgid) = 3891;
+	optional EModeType modeType = 1; // 玩法类型 (废弃)
+	optional int32 lv = 2;	// 转盘级别（洞天福地层级..等）（废弃）
+	optional int32 sn = 3;  // 转盘sn = LuckTurnTable.sn
+}
+
+// 请求，摇奖幸运转盘
+message CSLuckTurntable {
+	option (msgid) = 3801;
+}
+
+// 应答，摇奖幸运转盘
+message SCLuckTurntable {
+	option (msgid) = 3802;
+	optional int32 resultIndex = 1; // 中奖结果
+	optional int32 count = 2; // 本次累计抽奖次数
+}
+
+// 请求，离开通用玩法幸运转盘
+message CSLeaveLuckTurntable {
+	option (msgid) = 3803;
+}
+
+// 应答，离开通用玩法幸运转盘
+message SCLeaveLuckTurntable {
+	option (msgid) = 3804;
+}
+
+

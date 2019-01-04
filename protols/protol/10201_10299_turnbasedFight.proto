@@ -1,0 +1,283 @@
+// -----------------------------------------
+// 回合战斗协议
+// -----------------------------------------
+//战斗者类型
+enum ETurnbasedObjectType {
+	FightHuman = 0;		//主角
+	FightPartner = 1;	//伙伴
+	FightMonster = 2;	//怪物
+}
+
+//战斗者属性信息
+message DTurnbasedObjectProp {
+	optional int32 hpCur = 1;		//当前血量
+	optional int32 hpMax = 2;		//最大血量
+	optional int32 rageCur = 3;		//当前怒气
+	optional int32 rageMax = 4;		//最大怒气
+}
+
+//技能信息
+message DTurnbasedObjectSkill {
+	optional int32 sn = 1;		//技能配置sn
+	optional int32 lv = 2;		//技能等级
+}
+
+//buff信息
+message DTurnbasedBuff {
+	optional int32 id = 1;			//buff fightId
+	optional int32 sn = 2;			//buff配置sn
+	optional int32 ownerId = 3;		//拥有该buff的战斗者id
+	optional int32 roundLeft = 4;	//buff剩余回合数
+	optional int32 triggleSkillSn = 5;//触发buff的技能sn
+}
+
+// 站位类型
+enum EStanceType {
+	StanceW = 0;	// 0-W型"前3后2"
+	StanceM = 1;	// 1-M型"前2后3"
+}
+// 战队类型
+enum ETeamType {
+	Team0 = 0;		// 0即无战队，用于战后结算平局
+	Team1 = 1;		// 1号战队即左下方
+	Team2 = 2;		// 2号战队即右上方
+}
+// 位置类型
+// 01234
+// 56789
+enum EPosType {
+	Pos0 = 0;		// 0号位
+	Pos1 = 1;		// 1号位
+	Pos2 = 2;		// 2号位
+	Pos3 = 3;		// 3号位
+	Pos4 = 4;		// 4号位
+	Pos5 = 5;		// 5号位
+	Pos6 = 6;		// 6号位
+	Pos7 = 7;		// 7号位
+	Pos8 = 8;		// 8号位
+	Pos9 = 9;		// 9号位
+	PosMax = 10;	// 位置总数
+}
+
+//战斗者信息
+message DTurnbasedObject {
+	required int32 id = 1;							//战斗者Id
+	required int32 sn = 2;							//战斗者配置sn
+	required EPosType pos = 3;						//战斗者位置
+	optional ETurnbasedObjectType type = 4;			//战斗者类型
+	optional DTurnbasedObjectProp prop = 5;			//战斗者属性信息
+	repeated DTurnbasedObjectSkill skillList = 6;	//战斗者技能列表
+	repeated DTurnbasedBuff buffList = 7; 			//buff列表
+}
+
+//战队成员信息
+message DTurnbasedTeamObjs {
+	repeated DTurnbasedObject fightObjList = 1;		//成员列表
+	required ETeamType team = 2;					//战斗者战队
+	optional EStanceType stance = 3;				//战斗者站位
+	optional int32 snInstMonster = 4;				//怪物表InstMonster.sn
+}
+
+//战斗技能目标信息
+message DTurnbasedSkillTarget {
+	optional int32 id = 1;					//目标战斗者id
+	optional int32 damage = 2;				//伤害值
+	optional int32 rage = 3;				//怒气值
+	repeated DTurnbasedBuff buffList = 4; 	//buff列表
+	optional bool isCrit = 5;				//是否暴击
+	optional bool isBlock = 6;				//是否格挡
+	optional bool isDodge = 7;				//是否闪避
+	optional bool isImmune = 8;				//是否免疫
+	optional int32 showRage = 9;			//显示怒气变化
+	optional int32 shield = 10;				//护盾吸收值
+	optional int32 hpMax = 11;				//最大血量
+}
+
+//战斗结果战斗者数据
+message DTurnbasedFinishObject {
+	optional int32 id = 1;				//战斗者Id
+	optional int32 hpCur = 2;			//当前血量
+	optional int32 rageCur = 3;			//当前怒气
+}
+//战斗类型
+enum ECrossFightType {
+	FIGHT_INSTANCE = 1;				//副本
+	FIGHT_DAILYREP = 2;				//每日副本
+	FIGHT_COMPETE = 3;				//竞技场
+	FIGHT_FRIEND_BOSS = 4;			//强敌来袭
+	FIGHT_WORLD_BOSS = 5;			//世界BOSS
+	FIGHT_COMMON = 6;				//普通PVE
+	FIGHT_TOWER = 7;				//炼妖塔战斗
+	FIGHT_FENGMO = 8;				//封魔
+	FIGHT_GUILD_REP = 9;			//公会副本
+	FIGHT_NEWBIE = 10;				//新手战斗
+	FIGHT_INST_RES = 11;			//资源本
+	FIGHT_INST_CAVE= 12;			//仙府
+	FIGHT_PK_MIRROR = 13;			//切磋镜像玩家
+	FIGHT_PK_HUMAN = 14;			//切磋真人玩家
+	FIGHT_LOOTMAP_SINGLE = 15;		//单人抢夺本
+	FIGHT_LOOTMAP_MULTIPLE = 16;	//多人抢夺本
+	FIGHT_GUILD_INST = 17;	        //仙盟副本
+}
+
+//战斗每波信息
+message SCTurnbasedStageStep {
+	option (msgid) = 10201;	
+	optional int32 step = 1;					//当前波数
+	optional int32 stepAll = 2;					//总波数
+	optional DTurnbasedTeamObjs team1 = 3;		//战队1成员列表
+	optional DTurnbasedTeamObjs team2 = 4;		//战队2成员列表
+	optional ETeamType selfTeam = 5;			//己方所在战队
+	optional ETeamType priorTeam = 6;			//优先出手的战队
+	optional int32 bossId = 7;					//boss详情,小于0不考虑
+	optional bool canQuickFight = 8;			//是否可以跳过战斗
+	optional int32 multiple = 9;				//属性倍数（万分比）
+}
+
+//新战斗者入场
+message SCTurnbasedObjectEnter {
+	option (msgid) = 10202;			
+	repeated DTurnbasedObject fightObjList = 1;		//战斗者列表
+}
+
+//战斗者离场
+message SCTurnbasedObjectLeave {
+	option (msgid) = 10203;			
+	repeated DTurnbasedObject fightObjList = 1;		//战斗者列表
+}
+
+//回合信息改变
+message SCTurnbasedRoundChange {
+	option (msgid) = 10204;			
+	optional int32 round = 1;		//回合数
+	optional int32 maxRound = 2;	//最大回合数
+	repeated DTurnbasedBuff buff = 3;	//移除的buff
+}
+
+//施放技能
+message SCTurnbasedCastSkill{
+	option (msgid) = 10205;
+	optional int32 casterId = 1;					//施放的战斗者Id
+	optional int32 sn = 2;							//技能配置sn
+	repeated DTurnbasedSkillTarget targetList = 3;	//技能目标列表的战斗数据变化
+	optional DTurnbasedSkillTarget caster = 4;		//施法者的战斗数据变化
+}
+
+//出手结束
+message SCTurnbasedRoundOrderEnd{
+	option (msgid) = 10206;			
+	repeated DTurnbasedBuff buff = 1;	//移除的buff
+}
+
+//buff生效
+message SCTurnbasedBuff {
+	option (msgid) = 10207;
+	optional int32 casterId = 1;			//buff所在的战斗者Id
+	optional DTurnbasedBuff buff = 2;		//buff信息
+	optional bool isRemove = 3;				//生效后是否移除
+	optional int32 damage = 4;				//造成的伤害
+	optional int32 rage = 5;				//改变的怒气
+}
+
+//使用技能
+message CSTurnbasedCastSkill {
+	option (msgid) = 10208;
+	required int32 sn = 1;		//技能配置sn
+	required int32 casterId = 2;//战斗者Id
+}
+
+
+//修改变速倍率
+message CSTurnbasedSpeed {
+	option (msgid) = 10221;
+	optional float speed = 1;	//速率
+}
+
+//修改变速倍率
+message SCTurnbasedSpeed {
+	option (msgid) = 10222;
+	optional float speed = 1;	//速率
+}
+
+//自动战斗
+message CSTurnbasedAutoFight {
+	option (msgid) = 10223;
+	optional bool auto = 1;		//是否自动
+}
+//自动战斗
+message SCTurnbasedAutoFight {
+	option (msgid) = 10224;
+	optional bool auto = 1;		//是否自动
+}
+//开始战斗
+message CSTurnbasedStartFight {
+	option (msgid) = 10225;	
+}
+//跳过战斗
+message CSTurnbasedQuickFight {
+	option (msgid) = 10226;	
+}
+//战斗结束
+message SCTurnbasedFinish {
+	option (msgid) = 10227;
+	optional ETeamType winTeam = 1;					//胜利战队
+	repeated DTurnbasedFinishObject objList = 2;	//结束时的战斗者数据列表
+	optional ECrossFightType fightType = 3;			//战斗类型(不同的战斗类型，以下的数据不一样)
+	repeated int32 star = 4;						//得星数
+	repeated int32 harm = 5;						//本次战斗对每个位置造成的伤害(如：0,111,0...)
+	repeated int32 param32 = 6;						//int参数值
+	repeated int64 param64 = 7;						//long参数值
+	optional bool isCombatEnd = 8;					//是否完整的战斗结束（false即中途结束）
+}
+//回合结束
+message SCTurnbasedRoundEnd {
+	option (msgid) = 10228;
+	optional int32 round = 1;	//回合
+}
+//回合播放结束
+message CSTurnbasedRoundEnd {
+	option (msgid) = 10229;
+	optional int32 round = 1;	//回合
+}
+//暂停
+message CSTurnbasedStopFight {
+	option (msgid) = 10230;
+	optional bool stop = 1;		//是否暂停
+}
+//暂停
+message SCTurnbasedStopFight {
+	option (msgid) = 10231;
+	optional bool stop = 1;		//是否暂停
+}
+//剧情结束
+message CSTurnbasedActionEnd {
+	option (msgid) = 10232;
+	optional int32 select = 1;		//选项
+}
+//剧情开始
+message SCTurnbasedActionStart {
+	option (msgid) = 10233;
+	optional int32 actionId = 1;		//剧情编号
+}
+//退出战斗
+message CSTurnbasedLeaveFight {
+	option (msgid) = 10234;
+}
+//怒气技能等待列表变更
+message SCTurnbasedRageSkillWaitList {
+	option (msgid) = 10235;
+	repeated int32 fighterId = 1;	//战斗者ID列表
+	repeated int32 removeId = 2;	//移除列表
+}
+//战斗者出入场表现结束
+message CSTurnbasedMonsterChangeEnd {
+	option (msgid) = 10236;
+}
+
+
+//通知客户端轮到主角选择技能
+message SCTurnbasedHumanSelSkill {
+	option (msgid) = 10501;
+	required int32 fighterId = 1;	//战斗者ID
+	optional int64 timeout = 2;		//选择时间到的时间戳
+}

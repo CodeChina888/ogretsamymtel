@@ -1,0 +1,43 @@
+
+Õ
+msg.Fashion.protogame.msgoptions.protodefine.proto"ò
+SCLoginFashionHenshin/
+dFashionList (2.game.msg.DFashionHenshin6
+dFashionHenshinList (2.game.msg.DFashionHenshin
+modelSn (:à√”"+
+SCAddFashionMsg
+	fashionSn (:à√‘"
+CSFashionOpen:à√˘
+"=
+SCFashionTimeOut
+	fashionSn (
+modelSn (:à√˙
+"+
+CSFashionUnlock
+	fashionSn (:à√˚
+"+
+SCFashionUnlock
+	fashionSn (:à√¸
+")
+CSFashionWear
+	fashionSn (:à√˝
+"[
+SCFashionWear2
+dFashionHenshin (2.game.msg.DFashionHenshin
+modelSn (:à√˛
+"
+CSFashionHenshinOpen:à√ç"D
+SCFashionHenshinTimeOut
+	fashionSn (
+modelSn (:à√é"e
+SCItemUseFashionHenshin2
+dFashionHenshin (2.game.msg.DFashionHenshin
+modelSn (:à√è"/
+CSFashionBuyHenshin
+	fashionSn (:à√ê"/
+SCFashionBuyHenshin
+	fashionSn (:à√ë"0
+CSFashionHenshinWear
+	fashionSn (:à√í"0
+SCFashionHenshinWear
+	fashionSn (:à√ì

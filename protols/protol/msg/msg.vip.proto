@@ -1,0 +1,85 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 04700_04799_vip.proto-----
+
+// VIP购买次数
+message CSVIPBuyInfo {
+	option(msgid) = 4700;
+	optional int32 type = 1;//购买类型(参照VIP表中VipBuy的sn字段)
+}
+
+// VIP购买次数
+message SCVIPBuyInfo {
+	option(msgid) = 4701;
+	repeated DVipBuy info = 1;
+	//optional int32 awardid=2;
+	repeated int32 vIPBuyLvs=3; // 已购买过vip等级礼包
+	optional int32 firstChargeRewardState = 4;		// // 是否领取首充 0 不可领取，1 可领取，2 已领取
+}
+
+// 购买VIP礼包
+message CSVIPBuyGift {
+	option(msgid) = 4702;
+	optional int32 vipLevel = 1;//vip等级
+}
+
+// 购买VIP礼包
+message SCVIPBuyGift {
+	option(msgid) = 4703;
+	optional int32 vipLevel = 1; //vip等级	
+}
+
+//VIP购买成功
+message SCVIPBuy {
+	option(msgid) = 4704;
+	optional int32 type = 1; //购买类型
+	optional int32 num=2;   //购买成功后的增量
+}
+
+//领取vip礼品
+message CSVIPGetGift{
+	option(msgid) = 4705;
+	optional int32 lvl = 1; //vip等级
+}
+
+message SCVIPGetGift{
+	option(msgid) = 4706;
+	optional int32 lvl = 1; //vip等级
+}
+
+//VIP购买成功
+message CSVIPBuy {
+	option(msgid) = 4707;
+	optional int32 type = 1;
+}
+
+// 领取首充奖励
+message CSVIPFirstChargeReward{
+	option (msgid) = 4708;
+}
+
+//
+message SCVIPFirstChargeReward{
+	option (msgid) = 4709;
+	optional int32 firstChargeRewardState = 1;		// 是否领取首充 0 不可领取，1 可领取，2 已领取
+}
+
+//领取限时个人充值奖励
+message CSTimeLimitRecharge{
+	option (msgid) = 4710;
+	optional int32 aid =  1;//AID
+}
+
+//个人充值奖励信息
+message SCTimeLimitRecharge{
+	option (msgid) = 4711;
+	optional int32 aid =  1;//服务端下发的AID
+	optional int32 lvl =  2;//开放等级
+	optional int32 money = 3;//所需充值金额
+	optional int64 leaveTime = 4;//剩余时间
+	optional int32 rewardSn = 5;//奖励Id
+	optional  EAwardType status = 6;//EAwardType
+}
+
+

@@ -1,0 +1,101 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 01401_01500_Fashion.proto-----
+
+// 通知，登录下发变装信息
+message SCLoginFashionHenshin {
+	option (msgid) = 1491;
+	repeated DFashionHenshin dFashionList = 1;   // 时装列表
+	// 为了兼容策划变卦，允许可以多个变装存在
+	repeated DFashionHenshin dFashionHenshinList = 2; // 所有变装信息
+	required int32 modelSn = 3; // 玩家模型
+}
+
+// 通知，得到新套装
+message SCAddFashionMsg{
+	option (msgid) = 1492;
+	required int32 fashionSn = 1; // 套装sn
+}
+
+// 请求，打开套装界面
+message CSFashionOpen {
+	option (msgid) = 1401;
+}
+
+// 通知，时装过期
+message SCFashionTimeOut {
+	option (msgid) = 1402;
+	repeated int32 fashionSn = 1; // 过期的时装sn
+	required int32 modelSn = 2; // 玩家模型
+}
+
+// 请求，解锁套装
+message CSFashionUnlock {
+	option (msgid) = 1403;
+	required int32 fashionSn = 1; // 套装sn
+}
+
+// 应答，解锁套装
+message SCFashionUnlock {
+	option (msgid) = 1404;
+	required int32 fashionSn = 1; // 套装sn
+}
+
+// 请求，穿套装
+message CSFashionWear {
+	option (msgid) = 1405;
+	required int32 fashionSn =1; // 套装sn
+}
+
+// 应答，穿套装
+message SCFashionWear {
+	option (msgid) = 1406;
+	required DFashionHenshin dFashionHenshin = 1; // 套装详细
+	required int32 modelSn = 2;	// 玩家模型
+}
+
+// 请求，打开变装界面（预留：用于处理过期变装）
+message CSFashionHenshinOpen {
+	option (msgid) = 1421;
+}
+
+// 通知，变身装过期
+message SCFashionHenshinTimeOut {
+	option (msgid) = 1422;
+	repeated int32 fashionSn = 1; // 过期的变装sn
+	required int32 modelSn = 2; // 玩家模型
+}
+
+// 应答，使用已拥有变身卡道具
+message SCItemUseFashionHenshin {
+	option (msgid) = 1423;
+	required DFashionHenshin dFashionHenshin = 1; //变身卡详情
+	required int32 modelSn = 2; // 玩家模型
+}
+
+// 请求，购买变身道具
+message CSFashionBuyHenshin {
+	option (msgid) = 1424;
+	optional int32 fashionSn = 1; // 购买的变身sn
+}
+
+// 应答，购买变身道具
+message SCFashionBuyHenshin {
+	option (msgid) = 1425;
+	optional int32 fashionSn = 1; // 购买的变身sn
+}
+
+// 请求，穿戴已经解锁的变身装（预留:暂时无用）
+message CSFashionHenshinWear {
+	option  (msgid) = 1426;
+	optional int32 fashionSn = 1; // 要穿戴的变砖sn
+}
+
+// 应答，穿戴已经解锁的变身装（预留:暂时无用）
+message SCFashionHenshinWear {
+	option  (msgid) = 1427;
+	optional int32 fashionSn = 1; // 要穿戴的变砖sn
+}
+
+

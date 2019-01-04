@@ -1,0 +1,52 @@
+
+ã
+msg.activity.protogame.msgoptions.protodefine.proto")
+SCActivityNeedUpdate
+
+id (:ˆÃÁ%"5
+CSGetActivityInfo
+isAll (
+
+id (:ˆÃÂ%"˜
+SCActivityInfo
+isAll (%
+activity (2.game.msg.DActivity1
+activityEffect (2.game.msg.DActivityEffect
+unactivatedIds (:ˆÃÃ%"W
+CSActivityCommit
+
+id (0
+activityParams (2.game.msg.DActivityParam:ˆÃÄ%"W
+SCActivityCommitReturn%
+activity (2.game.msg.DActivity
+success (:ˆÃÅ%"
+CSActivitySign:ˆÃÆ%"l
+SCActivitySignReturn
+	signIndex (
+signGroupSn (%
+signFlag (2.game.msg.ESignType:ˆÃÇ%"(
+CSActivityLvPackage
+
+lv (:ˆÃÈ%".
+SCActivityLvPackageReturn
+
+lv (:ˆÃÉ%"3
+CSActivityInfo
+time (
+fill (:ˆÃÌ%"F
+SCActivityInfoReturn
+recIndex (
+recIndexState (:ˆÃÍ%"E
+SCLoadHourVitInfoMsg
+lastTime (
+recStateList (:ˆÃÎ%"1
+SCHumanOnLineTimeMsg
+
+onlineTime (:ˆÃÏ%"'
+CSActivityIntegral
+
+sn (:ˆÃÐ%"v
+SCActivityIntegral
+score (#
+box (2.game.msg.DIntegralBox%
+	ditemList (2.game.msg.DProduce:ˆÃÑ%

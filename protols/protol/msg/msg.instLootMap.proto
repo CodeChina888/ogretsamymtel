@@ -1,0 +1,443 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 05601_05800_instLootMap.proto-----
+
+//请求报名多人抢夺
+message CSPVPLootMapSignUp {
+	option (msgid) = 5601;
+	optional int32 actInstSn = 1;// 活动副本id
+}
+
+//返回请求报名多人抢夺
+message SCPVPLootMapSignUp {
+	option (msgid) = 5602;
+	repeated DMemberInfo humanList = 1;
+	optional int32 countdownTime = 2; //剩余时间
+}
+
+//请求离开多人抢夺队列
+message CSLeavePVPLootMapSignUp {
+	option (msgid) = 5603;
+}
+
+//通知 队列人数变化 增加
+message SCLootMapIntoSignUpRoom {
+	option (msgid) = 5604;
+	optional DMemberInfo human = 1;
+}
+
+//通知 队列人数变化 减少
+message SCLootMapLeaveSignUpRoom {
+	option (msgid) = 5605;
+	optional int64 humanId = 1;
+}
+
+//切换为超时状态
+message SCLootMapSingUpRoomTimeOut{
+	option (msgid) = 55606;
+}
+
+//请求单人报名抢夺
+message CSPVELootMapSignUp{
+	option (msgid) = 5607;
+	optional int32 actInstSn = 1;// 活动副本id
+}
+
+// 通知客户端准备进入 推送给第一个人(队长)
+message SCLootMapReadyEnter{
+	option (msgid) = 5610;
+	optional ELootMapType mapType = 1;
+	optional int32 actInstSn = 2;// 活动副本id
+}
+
+// 客户端接受 SCLootMapReadyEnter 之后 发送给服务器说准备进入 服务器发送 SCStageSwitch 切换
+message CSLootMapEnter{
+	option (msgid) = 5611;
+	optional ELootMapType mapType = 1;
+	optional int32 actInstSn = 2;// 活动副本id
+}
+
+//请求进入 多人单人已经有了stage
+message CSLootMapGameEnter{
+	option (msgid) = 5612;
+}
+
+//通知 游戏开始
+message SCLootMapGameEnterLevel{
+	option (msgid) = 5613;
+	optional int32 level = 1;// 地图层数
+	optional int32 mapSn = 2; //地图sn
+	optional int32 lootMapSn = 3;
+	optional ELootMapType mapType = 4; //地图类型
+	repeated DLootMapEvent eventSnList = 5;// 事件sn数组
+	repeated DLootMapHuman huamanList = 6; //玩家
+	repeated DVector2 floorList = 7; // 地砖内容
+}
+
+//玩家加入
+message SCHumanEnter{
+	option (msgid) = 5614;
+	optional DLootMapHuman human = 1;
+}
+
+//物件出现
+message SCLootMapEventEnable{
+	option (msgid) = 5620;
+	optional DLootMapEvent dEvent = 1;
+}
+
+//物件消失
+message SCLootMapEventDisenable{
+	option (msgid) = 5621;
+	optional int32 eventId = 1;
+	optional DVector2 pos = 2;
+}
+
+//触发事件
+message CSTriggerEvent{
+	option (msgid) = 5625;
+	optional int32 eventId = 1; // 事件id
+	optional DVector2 pos = 2; // 验证位置是否正确
+}
+
+//触发回执
+message SCLootMapTriggerEvent{
+	option (msgid) = 5626;
+	optional int32 eventId = 1; // 该事件id
+	optional DVector2 pos = 2; // 坐标
+	repeated DItem itemList = 3; // 物品
+}
+
+//进入一个门
+message CSLootMapReadyEnterDoor{
+	option (msgid) = 5627;
+	optional int32 eventId = 1; // 验证传送门位置是否正确
+}
+
+//可以进入回执
+message SCLootMapReadyEnterDoor{
+	option (msgid) = 5628;
+	optional int32 eventId = 1;
+	optional DVector2 pos = 2; // 正确的传送门坐标
+	optional int64 humanId = 3; // 玩家id
+}
+
+// 发送给服务器 服务器让玩家移动到这个点
+message CSLootMapEnterDoor{
+	option (msgid) = 5629;
+	optional int32 eventId = 1;
+	optional DVector2 pos = 2;
+}
+
+//获得buff -> 针对攻击Buff有效果
+message SCLootMapAddBuff{
+	option (msgid) = 5630;
+	optional int64 humanId = 1; // == 0 则是怪物
+	optional int32 buffSn = 2; // 一个buff
+}
+
+//buff消失 -> 针对攻击buff有效
+message SCLootMapRmvBuff{
+	option (msgid) = 5631;
+	optional int64 humanId = 1; // == 0 则是怪物
+	repeated int32 buffSnList = 2; // 可能是数组
+}
+
+//玩家攻击变更
+message SCLootMapHumanAttack{
+	option (msgid) = 5632;
+	optional int64 humanId = 1;
+	optional int32 attack = 2;
+}
+
+//怪物攻击力变更
+message SCLootMapMonsterAttack{
+	option (msgid) = 5633;
+	repeated int32 eventIdList = 1;
+	repeated int32 attack = 2;
+}
+
+//打开一个地砖
+message CSLootMapOpenFloor{
+	option (msgid) = 5635;
+	optional DVector2 pos = 1; // 坐标位置
+}
+
+//地砖回执
+message SCLootMapOpenFloor{
+	option (msgid) = 5636;
+	optional DVector2 pos = 1; // 坐标位置
+}
+
+// 玩家播放跑步动作
+message CSLootMapPlayMove{
+	option (msgid) = 5642;
+	optional bool isPlay = 1;
+}
+
+// 玩家播放跑步动作
+message SCLootMapPlayMove{
+	option (msgid) = 5643;
+	optional int64 humanId = 1;
+	optional bool isPlay = 2;
+}
+
+//移动
+message CSLootMapMove{
+	option (msgid) = 5644;
+	optional DVector2 pos = 2;
+}
+
+//通知 移动
+message SCLootMapMove {
+	option (msgid) = 5645;
+	optional int64 humanId = 1;
+	optional DVector2 pos = 2;
+}
+
+//直接设置坐标
+message SCLootMapSetPos{
+	option (msgid) = 5646;
+	optional int64 humanId = 1;
+	optional DVector2 pos = 2;
+}
+
+//打怪
+message CSLootMapAttackMonster{
+	option (msgid) = 5650;
+	optional int32 eventId = 1;
+	optional DVector2 pos = 2;
+}
+
+//回执
+message SCLootMapAttackMonster{
+	option (msgid) = 5651;
+	optional int32 eventId = 1;
+	optional DVector2 pos = 2;
+	optional int64 humanId = 3;
+}
+
+//怪物血量更新
+message SCLootMapMonsterHP{
+	option (msgid) = 5652;
+	repeated int32 eventIdList = 1;
+	repeated int32 hpList = 2;
+	optional int64 humanId =3; // 造成该次伤害的human
+}
+
+// 玩家血量更新
+message SCLootMapHumanHP{
+	option (msgid) = 5653;
+	optional int64 humanId = 1;
+	optional int32 hp = 2;
+}
+
+// 玩家复活请求
+message CSDailyLootMapRevival{
+	option (msgid) = 5655;
+}
+
+// 玩家购买复活回执
+message SCDailyLootMapRevival{
+	option (msgid) = 5656;
+	optional int32 numBuyed = 1;
+}
+
+// 玩家复活回执 -> SCLootMapHumanHP <玩家需要清除buff>
+message SCLootMapHumanRevival{
+	option (msgid) = 5657;
+	optional int64 humanId = 1;
+	optional int32 hp = 2;
+	optional int32 attack = 3;
+}
+
+// 通知 玩家获取skill
+message SCLootMapGetSkill{
+	option (msgid) = 5670;
+	optional int64 humanId = 1;
+	optional DLootMapSkill skill = 2;
+	optional DVector2 pos = 3;
+}
+
+// 使用技能
+message CSLootMapUseSkill{
+	option (msgid) = 5671;
+}
+
+// 回执
+message SCLootMapUseSkill{
+	option (msgid) = 5672;
+	optional int64 humanId = 1;
+	optional DLootMapSkill skill = 2; // eventobject表
+}
+
+// pk状态
+message SCLootMapPkState{
+	option (msgid) = 5682;
+	repeated int64 humanIdList = 1;
+	optional bool isPk = 2;	
+}
+
+// 状态保护
+message SCLootMapProtectState{
+	option (msgid) = 5683;
+	optional int64 humanId = 1;
+	optional bool isProtect = 2;	
+}
+
+//战后物品改变
+message SCLootMapPkItemChange{
+	option (msgid) = 5684;
+	repeated DItem addItemList = 1; // 获得的物品
+	repeated DItem rmvItemList = 2; // 被删除的物品
+}
+
+//战斗回执
+message SCLootMapKill{
+	option (msgid) = 5685;
+	optional DMemberInfo killerInfo = 1;
+	optional DMemberInfo beKillerInfo = 2;
+	optional int32 killNumber = 3; // 胜利者杀人数量,失败者设置0
+	optional int32 hornorSn = 4;
+	optional int32 score = 5; // 抢夺积分
+	optional int32 rewardScore = 6; // 赏金内容
+}
+
+// 取消pk 特指在pk中退出
+message SCLootMapCanclePk{
+	option (msgid) = 5687;
+	optional int64 humanId = 1;
+}
+
+//从pk中返回
+message CSLootMapBackMap{
+	option (msgid) = 5688;
+	optional bool isWin = 1;
+}
+
+//任务内容
+message SCLootMapMission{
+	option (msgid) = 5700;
+	optional int32 missionSn = 1; // lootMapMission字段 == 0 则无任务
+	optional int32 progress = 2; // 进度 当 ELootMapMissionType == LootMapMissionEvent 使用
+	optional ELootMapMissionStateType state = 3;
+}
+
+//任务完成奖励
+message SCLootMapMissionComplete{
+	option (msgid) = 5701;
+	repeated DItem itemList = 1; // 物品 完成才进行分发
+}
+
+//积分变化
+message SCLootMapScoreChange{
+	option (msgid) = 5710;
+	optional int32 score = 1; // 当前积分
+	optional bool isBattleEnd = 2; // 是否战斗结束 true战斗结束
+}
+
+//积分奖励
+message SCLootMapScoreReward{
+	option (msgid) = 5720;
+	repeated DItem itemList = 1; // 积分获得得奖励
+}
+
+//时间模式
+message SCLootMapTimeMod{
+	option (msgid) = 5721;
+	optional ELootMapTimeMode modetype = 1; // 模式类型
+}
+
+//获取时间进行同步
+message CSLootMapGameTime{
+	option (msgid) = 5722;
+	optional int32 gameTime = 1; // 剩余时间
+}
+
+//暂定 一分钟 隔一段时间一个同步
+message SCLootMapGameTime{
+	option (msgid) = 5723;
+	optional int32 gameTime = 1; // 剩余时间
+}
+
+// 单场排名变化
+message SCLootMapScoreRank{
+	option (msgid) = 5730;
+	optional int64 humanId = 1;
+	optional int32 oneRank = 2;
+}
+
+//退出抢夺本
+message CSLootMapOut{
+	option (msgid) = 5750;
+}
+
+//退出抢夺本回执
+message SCLootMapOut{
+	option (msgid) = 5751;
+	optional int64 humanId = 1;
+}
+
+// 请求单人结束
+message CSLootMapSingleEnd{
+	option (msgid) = 5752;
+}
+
+// 回执单人结束 -> 发送 SCLootMapOut 退出活动
+message SCLootMapSingleEnd{
+	option (msgid) = 5753;
+	repeated DItem itemList = 1;
+}
+
+// 多人结束
+message SCLootMapMultipleEnd{
+	option (msgid) = 5754;
+	optional DMemberInfo firstHuman = 1; // 第一名玩家信息
+	optional int32 firstHumanScore = 2; // 第一名玩家分数(一场)
+	optional int32 rank = 3; // 我的排名
+	optional int32 score = 4; // 我的分数
+	optional int32 todayTop1Score = 5; // 今日最高分数
+	optional int32 addScore = 6; // 增加的积分
+	optional int64 allScore = 7; // 总积分
+}
+
+//}
+message CSLootMapGMTest{
+	option (msgid) = 5800;
+	optional ELootMapGMTestType gmType= 1;
+}
+
+//发起PK
+message CSLootMapPkFight {
+	option (msgid) = 5781;
+	optional int64 beFightId = 1;// 被挑战的玩家id
+}
+
+message SCLootMapPkFight {
+	option (msgid) = 5782;
+	required int32 resultCode = 1;// 0成功：非0为sysMsg.sn
+	optional int64 triggerHumanId = 2;// 主动攻击者ID
+	optional int64 targetHumanId = 3;// 被攻击者ID
+}
+
+//离开PK
+message CSLootMapPkLeave {
+	option (msgid) = 5783;
+}
+
+//结算PK
+message CSLootMapPkEnd {
+	option (msgid) = 5785;
+}
+
+//返回结算PK
+message SCLootMapPkEnd {
+	option (msgid) = 5786;
+	optional int64 winHumanId = 1; //胜利方id
+	optional int64 loseHumanId = 2; //失败方id
+	optional int64 triggerId = 3; //发起者id 
+	repeated DProduce produceList = 11;; // 胜利方获得道具，失败方损失道具 
+}
+
+

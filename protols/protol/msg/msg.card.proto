@@ -1,0 +1,47 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 05501_05599_card.proto-----
+
+//通知，登录下发抽卡数据
+message SCLoadCardInfoMsg{
+	option (msgid) = 5501;
+	repeated DrawCardBaseMsh cardInfo = 1; //抽卡信息
+	optional DCardExchangeInfo exchangeInfo = 2; // 兑换信息
+}
+
+//抽卡
+message CSDrawCardMsg{
+	option (msgid) = 5502;
+	optional EDrawType type =1;					//抽卡类型 0招募令抽卡 1金币抽卡
+	optional EDrawOperation operation = 2;		//抽卡操作 0单抽 1十连抽
+	optional bool isFree = 3;                   //是否免费 
+}
+
+//抽卡回执
+message SCDrawCardMsg{
+	option (msgid) = 5503;
+	optional EDrawType  type =1;
+	optional EDrawOperation operation = 2;
+	repeated DDropItem reward = 3;		//奖励道具列表
+	repeated DPartnerInfo partnerInfoList = 4; //新增伙伴信息
+	repeated int32 chipItemList = 5; //由英雄转换成物品的列表
+	optional DrawCardBaseMsh cardInfo = 6; //抽卡信息
+	optional int32 rewardScore = 7; // 抽卡奖励积分
+}
+
+// 请求，抽卡积分兑换
+message CSSummonScoreExchange {
+	option (msgid) = 5504;
+	optional int32 index = 1; // 兑换第几阶的礼包
+	optional int32 selectIndex = 2; // 选择兑换礼包中的物品index
+}
+
+// 应答，抽卡积分兑换
+message SCSummonScoreExchange {
+	option (msgid) = 5505;
+	optional DCardExchangeInfo info = 1; // 积分兑换卡片信息
+	optional DProduce produce = 3; // 获得的奖励道具
+}
+
+

@@ -1,0 +1,112 @@
+// -----------------------------------------
+// 账号验证
+// -----------------------------------------
+
+//心跳包之请求连接验证
+message CSMsgPing {
+	option (msgid) = 999;//不可修改999编号
+}
+
+//心跳包之返回连接验证
+message SCMsgPong {
+	option (msgid) = 1000;//不可修改1000编号
+}
+
+//填充消息
+message SCMsgFill {
+	option (msgid) = 101;
+}
+
+//登陆类型
+enum ELoginType {
+	PC = 1;			//pc登录
+	MI = 2;			//小米平台登录
+	FACEBOOK = 3;	//FACEBOOK平台登录
+	IOS = 4;		//IOS平台登录
+	SINA = 5;		//SINA登录
+	LANMAO = 6;	//懒猫sdk
+	QuickSDK = 7;//QuickSDK
+	YYBSQ	= 8;//应用宝手q
+	YYBWX	= 9;//应用宝微信
+	QuickNORMAL	= 10;//quick常规
+}
+//设备类型
+enum EDeviceType {
+	Pc = 0;			//电脑或游客登录
+	Ios = 1;		//Ios
+	IosBreak = 2;	//越狱
+	Android = 3;	//安卓
+
+}
+
+//登录请求
+message CSLogin {
+	option (msgid) = 111;
+	required string version = 1;		//最新版本号，验证通过才允许进入服务器
+	required ELoginType loginType = 2;	//登录类型ELoginType
+	required string channel = 3;
+	// 平台账号登录需要的参数
+	optional string account = 11;		//账号，即用户ID
+	optional string password = 12;		//密码，即访问口令（提供给服务器验证用的）//在懒猫sdk中用于存放signature
+	// 数据分析需要的参数
+	optional string deviceMAC = 21;		//设备MAC地址（数据分析SDK必填项）
+	optional int64 deviceIMEI = 22;		//设备IMEI号（数据分析SDK必填项）
+	optional EDeviceType deviceType = 23;//设备类型
+	optional int32 serverId = 24;           //服务器ID
+	optional string  token = 25;		//会话token
+	optional string timestamp = 26;//时间戳
+}
+//登录请求返回结果
+message SCLoginResult {
+	option (msgid) = 112;
+	optional int32 resultCode = 1;		//返回结果编号：0成功，非0失败（即sysMsg中的sn）
+	optional bool keyActivate = 3;		//是否激活码
+	optional bool isServerFull = 4;		//是否是服务期人满了
+	optional int32 showGiftCode = 5;	//0不显示，1是显示 礼包码
+	optional int32 showService = 6;		//0不显示，1是显示 联系客服
+	optional int32 showGm = 7;			//0不显示，1是显示 Gm命令
+	optional string accountId = 8;		//玩家id
+}
+
+//绑定账号返回结果
+message SCAccountBind {
+	option (msgid) = 113;
+	optional int32 resultCode = 1;		//返回结果编号：0成功，非0失败（即sysMsg中的sn）
+}
+//绑定账号（登录阶段发送绑定）
+message CSAccountBind {
+	option (msgid) = 114;
+	required ELoginType loginType = 1;	//登录类型ELoginType
+	// 平台账号登录需要的参数
+	optional string account = 2;		//账号，即用户ID
+	optional string password = 3;		//密码，即访问口令（提供给服务器验证用的）
+}
+//绑定账号（游戏阶段发送绑定）
+message CSAccountBindInGame {
+	option (msgid) = 115;
+	required ELoginType loginType = 1;	//登录类型ELoginType
+	// 平台账号登录需要的参数
+	optional string account = 2;		//账号，即用户ID
+	optional string password = 3;		//密码，即访问口令（提供给服务器验证用的）
+}
+
+//请求重连
+message CSAccountReconnect {
+	option (msgid) = 121;
+	required string name = 1;		//平台账号
+	required int64 sessionKey = 2;		//连接关键字
+}
+//请求重连返回结果
+message SCAccountReconnectResult {
+	option (msgid) = 122;
+	required int32 resultCode = 1;		//0成功；非0失败（参见SysMsg.xlsx：）
+}
+
+//对登陆队列中的玩家进行提示(有多少人在排队，需要等多长时间)
+message SCAccountLoginQueue{
+	option (msgid) = 153;
+	optional int32 num = 1;  //前面有多少人在排队
+	optional int32 sec = 2;  //预计等待时间
+	optional bool full = 3;  //服务器是否已满
+	optional int32 total = 4;	//排队总人数  
+}

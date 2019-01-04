@@ -1,0 +1,24 @@
+
+ˆ
+msg.card.protogame.msgoptions.protodefine.proto"z
+SCLoadCardInfoMsg+
+cardInfo (2.game.msg.DrawCardBaseMsh1
+exchangeInfo (2.game.msg.DCardExchangeInfo:à√˝*"v
+CSDrawCardMsg!
+type (2.game.msg.EDrawType+
+	operation (2.game.msg.EDrawOperation
+isFree (:à√˛*"î
+SCDrawCardMsg!
+type (2.game.msg.EDrawType+
+	operation (2.game.msg.EDrawOperation#
+reward (2.game.msg.DDropItem/
+partnerInfoList (2.game.msg.DPartnerInfo
+chipItemList (+
+cardInfo (2.game.msg.DrawCardBaseMsh
+rewardScore (:à√ˇ*"B
+CSSummonScoreExchange
+index (
+selectIndex (:à√Ä+"n
+SCSummonScoreExchange)
+info (2.game.msg.DCardExchangeInfo#
+produce (2.game.msg.DProduce:à√Å+

@@ -1,0 +1,14 @@
+// -----------------------------------------
+// 平台相关
+// -----------------------------------------
+//提交礼包激活码
+message CSCheckGiftCode{
+	option(msgid) = 4901;
+	optional string code = 1;	//激活码
+}
+//激活码返回
+message SCCheckGiftCodeReturn{
+	option(msgid) = 4902;
+	optional int32 result = 1;	//成功码
+	repeated DProduce produceList = 2;  // 兑换码奖励	
+}

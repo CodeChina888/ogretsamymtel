@@ -1,0 +1,64 @@
+// -----------------------------------------
+// 玩家登录
+// -----------------------------------------
+//请求，查询玩家角色列表
+message CSQueryCharacters {
+	option (msgid) = 1001;
+}
+//应答，返回玩家角色列表
+message SCQueryCharactersResult {
+	option (msgid) = 1002;
+	repeated DCharacter characters = 1;		//角色列表集合 支持多角色
+}
+
+//请求，创建角色
+message CSCharacterCreate {
+	option (msgid) = 1003;
+	required int32 profession = 1;			//职业
+	optional int32 sex = 2;					//性别
+	required string name = 3;				//姓名
+}
+//应答，创建角色返回
+message SCCharacterCreateResult {
+	option (msgid) = 1004;
+	required int32 resultCode = 1;		//0成功；非0失败（参见SysMsg.xlsx：）
+	optional int32 resultReason = 3;	//执行结果描述  sysmsg中的sn
+	optional int64 humanId = 2;			//新创建角色ID
+}
+
+//请求，删除角色
+message CSCharacterDelete {
+	option (msgid) = 1005;
+	required int64 id = 1;					//角色ID
+}
+//应答，删除角色结果
+message SCCharacterDeleteResult {
+	option (msgid) = 1006;
+	required int32 resultCode = 1;			//0成功；非0失败（参见SysMsg.xlsx：）
+}
+
+//请求，角色登录
+message CSCharacterLogin {
+	option (msgid) = 1007;
+	required int64 humanId = 1;				//角色ID
+}
+//应答，角色登录结果
+message SCCharacterLoginResult {
+	option (msgid) = 1008;
+	required int32 resultCode = 1;			//0成功；非0失败（参见SysMsg.xlsx：）
+	required int64 serverTime = 2;			//服务器时间
+	required int64 serverStartDate = 3;     //开服时间
+}
+
+//创建角色时随机名字
+message CSCharacterCreateName {
+	option (msgid) = 1009;
+	required int32 profession = 1;			//职业
+	required int32 sex = 2;					//性别
+}
+//创建角色时返回随机名字
+message SCCharacterCreateName {
+	option (msgid) = 1010;
+	required string name = 1;				// 姓名
+}
+

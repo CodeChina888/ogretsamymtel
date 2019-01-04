@@ -1,0 +1,66 @@
+
+Í
+msg.shopExchange.protogame.msgoptions.protodefine.proto"H
+SCShopBuyItemInfo,
+shopCompete (2.game.msg.DExShopBuyNum:ˆÃµ"F
+CSShopExchangeOpen)
+shopType (2.game.msg.EShopExchType:ˆÃ¶"h
+SCShopExchangeOpen)
+shopType (2.game.msg.EShopExchType
+goldCost (
+itemSn (	:ˆÃ·"I
+CSShopExchangeRefresh)
+shopType (2.game.msg.EShopExchType:ˆÃ¸"{
+SCShopExchangeRefresh)
+shopType (2.game.msg.EShopExchType
+result (
+goldCost (
+itemSn (	:ˆÃ¹"T
+CSShopMysSoulBuy)
+shopType (2.game.msg.EShopExchType
+itemSn (:ˆÃº"d
+SCShopMysSoulBuy)
+shopType (2.game.msg.EShopExchType
+result (
+itemSn (:ˆÃ»"e
+CSShopExchangeBuy)
+shopType (2.game.msg.EShopExchType
+itemSn (
+buyNum (:ˆÃ¼"‡
+SCShopExchangeBuy)
+shopType (2.game.msg.EShopExchType
+result (
+left (
+itemSn (
+
+itemBuyNum (:ˆÃ½"G
+CSShopExchangeReset)
+shopType (2.game.msg.EShopExchType:ˆÃ¾"z
+SCShopExchangeReset
+result ()
+shopType (2.game.msg.EShopExchType
+money (
+
+resetTimes (:ˆÃ¿"/
+SCShopExResetTimes
+
+resetTimes (	:ˆÃÀ"=
+SCAllShopInfo%
+shopInfo (2.game.msg.DShopInfo:ˆÃç":
+
+CSOpenShop%
+shopType (2.game.msg.EShopType:ˆÃè":
+
+SCOpenShop%
+shopInfo (2.game.msg.DShopInfo:ˆÃé"=
+	CSShopBuy
+
+sn (
+itemSn (
+count (:ˆÃê"9
+	SCShopBuy%
+shopItem (2.game.msg.DShopItem:ˆÃë"9
+	CSShopRef%
+shopType (2.game.msg.EShopType:ˆÃì"9
+	SCShopRef%
+shopInfo (2.game.msg.DShopInfo:ˆÃí

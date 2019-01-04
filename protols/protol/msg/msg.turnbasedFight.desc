@@ -1,0 +1,79 @@
+
+÷
+msg.turnbasedFight.protogame.msgoptions.protodefine.proto"ž
+SCTurnbasedStageStep
+step (
+stepAll (+
+team1 (2.game.msg.DTurnbasedTeamObjs+
+team2 (2.game.msg.DTurnbasedTeamObjs%
+selfTeam (2.game.msg.ETeamType&
+	priorTeam (2.game.msg.ETeamType
+bossId (
+canQuickFight (
+multiple	 (:ˆÃÙO"Q
+SCTurnbasedObjectEnter0
+fightObjList (2.game.msg.DTurnbasedObject:ˆÃÚO"Q
+SCTurnbasedObjectLeave0
+fightObjList (2.game.msg.DTurnbasedObject:ˆÃÛO"h
+SCTurnbasedRoundChange
+round (
+maxRound (&
+buff (2.game.msg.DTurnbasedBuff:ˆÃÜO"¡
+SCTurnbasedCastSkill
+casterId (
+
+sn (3
+
+targetList (2.game.msg.DTurnbasedSkillTarget/
+caster (2.game.msg.DTurnbasedSkillTarget:ˆÃÝO"I
+SCTurnbasedRoundOrderEnd&
+buff (2.game.msg.DTurnbasedBuff:ˆÃÞO"‚
+SCTurnbasedBuff
+casterId (&
+buff (2.game.msg.DTurnbasedBuff
+isRemove (
+damage (
+rage (:ˆÃßO";
+CSTurnbasedCastSkill
+
+sn (
+casterId (:ˆÃàO"(
+CSTurnbasedSpeed
+speed (:ˆÃíO"(
+SCTurnbasedSpeed
+speed (:ˆÃîO"+
+CSTurnbasedAutoFight
+auto (:ˆÃïO"+
+SCTurnbasedAutoFight
+auto (:ˆÃðO"
+CSTurnbasedStartFight:ˆÃñO"
+CSTurnbasedQuickFight:ˆÃòO"ô
+SCTurnbasedFinish$
+winTeam (2.game.msg.ETeamType1
+objList (2 .game.msg.DTurnbasedFinishObject,
+	fightType (2.game.msg.ECrossFightType
+star (
+harm (
+param32 (
+param64 (
+isCombatEnd (:ˆÃóO"+
+SCTurnbasedRoundEnd
+round (:ˆÃôO"+
+CSTurnbasedRoundEnd
+round (:ˆÃõO"+
+CSTurnbasedStopFight
+stop (:ˆÃöO"+
+SCTurnbasedStopFight
+stop (:ˆÃ÷O"-
+CSTurnbasedActionEnd
+select (:ˆÃøO"1
+SCTurnbasedActionStart
+actionId (:ˆÃùO"
+CSTurnbasedLeaveFight:ˆÃúO"J
+SCTurnbasedRageSkillWaitList
+	fighterId (
+removeId (:ˆÃûO"$
+CSTurnbasedMonsterChangeEnd:ˆÃüO"E
+SCTurnbasedHumanSelSkill
+	fighterId (
+timeout (:ˆÃ…R

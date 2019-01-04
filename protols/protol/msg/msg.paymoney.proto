@@ -1,0 +1,187 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 03700_03799_paymoney.proto-----
+
+//请求充值校验码
+message CSPayCheckCode{
+	option (msgid) = 3715;	
+	optional int32 sn = 1;	//充值配表SN
+}
+
+//返回充值校验码
+message SCPayCheckCode{
+	option (msgid) = 3716;
+	optional string code = 1;
+	optional int32 sn = 2;	//充值配表SN
+}
+
+//充值结果推送接口 
+message SCPayCharge {
+	option (msgid) = 3717;
+	optional int64 chargeGold = 1;
+	optional DChargeInfo chargeInfo = 2; //充值信息
+	optional int32 vipLevel = 3;	//VIP等级
+}
+
+//充值完成，返回充值记录
+message SCCharge{
+	option (msgid) = 3718;
+	required int32 sn = 1;	//充值配表SN
+	required string orderId = 2;	//订单号
+	required int64 gold=3;	//获得元宝数量
+}
+
+//Gs充值接口
+message CSGsPayCharge {
+	option (msgid) = 3719;
+	optional int32 sn = 1;
+}
+
+//广播红包
+message SCGrantPresent {
+	option (msgid) = 3723;
+	optional int32 id = 1; //红包ID
+	optional string name = 2;	//红包名称
+	optional int64 humanId = 3; //发放人ID
+	optional string humanName = 4; 	//发放人名称
+	optional int32 moneyType = 5; 	//发放货币类型
+	optional int32 moneyCount = 6; 	//发放货币总数
+}
+
+//帮派好友月卡购买成功 <删除> 
+message SCCardChargeSuccess{
+	option (msgid) = 3724;
+	optional int32 cardSn = 1; //
+	optional int32 cardNum = 2; //
+}
+
+//充值完成，返回充值记录,sn大于100的商品 <删除> 
+message SCCharge100{
+	option (msgid) = 3725;
+	required int32 sn = 1;	//充值配表SN
+	required string orderId = 2;	//订单号
+	optional int64 gold=3;	//获得元宝数量
+}
+
+//打开充值界面
+message CSOpenPayUI {
+	option (msgid) = 3726;
+}
+
+//打开充值界面
+message SCOpenPayUI {
+	option (msgid) = 3727;
+	optional int64 chargeGold = 1;	//累计充值金额
+	repeated DChargeInfo chargeInfos = 2;	//充值信息 
+	//optional int32 vipLevel = 3;	//VIP等级
+}
+
+//请求充值记录
+message CSPayLogs {
+	option (msgid) = 3728;
+}
+
+//请求充值记录
+message SCPayLogs {
+	option (msgid) = 3729;
+	repeated DPayLog logs = 1; 
+}
+
+//请求充值游戏服信息
+message CSReqChargeUrl {
+	option (msgid) = 3730;
+}
+
+//请求充值游戏服信息
+message SCReqChargeUrl {
+	option (msgid) = 3731;
+	optional string serverIp = 1;		//游戏服Ip
+	optional int32 serverId = 2;	//服务Id
+}
+
+//打开VIP界面
+message CSOpenVipUI {
+	option (msgid) = 3732;
+}
+
+//打开VIP界面
+message SCOpenVipUI {
+	option (msgid) = 3733;
+	optional int64 chargeGold = 1;	//累计充值金额
+	optional int32 vipLevel = 2;	//VIP等级
+	optional string vipGiftLog = 3;	//VIP礼包购买记录 
+}
+
+//充值抢红包
+message CSLotteryPresent{
+	option (msgid) = 3734;
+	required int32 id = 1;//红包id
+}
+
+//充值
+message CSPayCharge {
+	option (msgid) = 3735;
+	optional int32 sn = 1;
+}
+
+//IOS充值校验
+message CSPayChargeIOS {
+	option (msgid) = 3736;
+	optional int32 sn = 1;				//充值标识
+	optional string order = 2;			//订单
+	optional string receiptData = 3;	//账单
+}
+
+//IOS充值校验结果
+message SCPayChargeIOS {
+	option (msgid) = 3737;
+	optional int32 sn = 1;				//充值标识
+	optional string order = 2;			//订单
+	optional int32 resultCode = 3;		//充值校验结果
+}
+
+//每日领取月卡奖励
+message CSRewardCardCharge {
+	option (msgid) = 3738;
+	optional int32 sn = 1;
+}
+
+//每日领取月卡奖励
+message SCRewardCardCharge {
+	option (msgid) = 3739;
+	optional int32 sn = 1;				//充值标识
+	optional int32 MonthRestNum = 2;         //月卡剩余次数
+	optional int32 RecFlag = 3;              //1今天已领取；0今天未领取
+}
+
+//应用宝充值验证请求
+message CSYYBRecharge {
+	option (msgid) = 3740;
+	optional string jsonStr	= 1;	//充值校验参数json字符串
+	optional string extends = 2;	//扩展字段
+}
+
+//应用宝充值验证成功返回
+message SCYYBRecharge {
+	option (msgid) = 3741;
+	optional string jsonStr	= 1;	//充值校验参数json字符串
+	optional int64 timestamp = 2;	//时间戳
+	optional string extends = 3;	//扩展字段
+}
+
+//查询平台充值开关
+message CSRechargeSwitch {
+	option (msgid) = 3742;
+	optional string appId	= 1;	//充值校验参数json字符串
+	optional string channelId = 2;	//扩展字段
+	optional string version	= 3;	//版本号
+}
+
+//返回普通充值开关查询结果
+message SCRechargeSwitch {
+	option (msgid) = 3743;
+	optional string jsonStr	= 1; 	//平台返回json字符串
+}
+
+

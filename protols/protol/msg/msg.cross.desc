@@ -1,0 +1,49 @@
+
+¢
+msg.cross.protogame.msgoptions.protodefine.proto"5
+CSTokenLogin
+token (	
+humanId (:ˆÃ•N"[
+SCTokenLoginResult
+
+resultCode (
+resultReason (	
+isServerFull (:ˆÃ–N"B
+SCTokenLoginQueue
+num (
+sec (
+full (:ˆÃ—N"(
+SCCombatantKick
+reason (	:ˆÃ˜N"B
+CSUploadOperate(
+operate (2.game.msg.DCrossOperate:ˆÃšN"Q
+SCNotifyOperate
+index ((
+operate (2.game.msg.DCrossOperate:ˆÃ›N"
+CSCrossStageEnter:ˆÃœN"'
+CSStartFight
+playerId (:ˆÃN">
+SCStartFightResult
+seed (
+frameLength (:ˆÃžN"(
+CSFinishFight
+playerId (:ˆÃŸN"
+SCFinishFightResult:ˆÃ N",
+SCEnemyDisconnect
+playerId (:ˆÃ¡N"
+SCCrossStageLoadOK:ˆÃ¢N"'
+CSCrossPing
+	timestamp (:ˆÃ£N"'
+SCCrossPing
+	timestamp (:ˆÃ¤N")
+CSCrossUdpLogin
+humanId (:ˆÃ¥N"¹
+SCCrossFightInfo
+areaSwitchKey (	
+mapSn (,
+	fightType (2.game.msg.ECrossFightType
+token (	
+
+ip (	
+port (!
+team (2.game.msg.ETeamType:ˆÃ¦N

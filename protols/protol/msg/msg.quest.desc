@@ -1,0 +1,33 @@
+
+Ê
+msg.quest.protogame.msgoptions.protodefine.proto"?
+SCQuestDailyInfo$
+quest (2.game.msg.DQuestDaily:ˆÃÑ"'
+CSCommitQuestDaily
+
+sn (:ˆÃÒ"a
+SCCommitQuestDaily$
+quest (2.game.msg.DQuestDaily
+dItem (2.game.msg.DItem:ˆÃÓ"V
+SCLivenessInfoChange
+dailyQuestLiveness (
+weeklyQuestLiveness (:ˆÃÔ"(
+CSGetLivenessReward
+
+sn (:ˆÃÕ"^
+SCGetLivenessRewardResult
+
+sn (
+result (
+dItem (2.game.msg.DItem:ˆÃÖ"
+CSOpenAchievement:ˆÃï"A
+SCAchievementInfo%
+infos (2.game.msg.DAchievement:ˆÃð"(
+CSCommitAchievement
+
+sn (:ˆÃñ"X
+SCCommitAchievement
+
+sn (
+result (
+dItem (2.game.msg.DItem:ˆÃò

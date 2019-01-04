@@ -1,0 +1,108 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 04800_04899_activity.proto-----
+
+//通知活动变化
+message SCActivityNeedUpdate{
+	option(msgid) = 4801;
+	repeated int32 id = 1;	//变化的活动ID
+}
+
+//获取活动列表
+message CSGetActivityInfo {
+	option(msgid) = 4802;
+	optional bool isAll	= 1;	//是否全部数据
+	repeated int32 id = 2;		//指定的活动Id
+}
+
+//返回活动列表
+message SCActivityInfo {
+	option(msgid) = 4803;
+	optional bool isAll	= 1;			//是否全部数据
+	repeated DActivity activity = 2;	//活动
+	repeated DActivityEffect activityEffect = 3;	//活动效果
+	repeated int32 unactivatedIds = 4;				//未激活的活动id
+}
+
+//执行活动操作
+message CSActivityCommit{
+	option(msgid) = 4804;
+	optional int32 id = 1; 	 //活动id
+	repeated DActivityParam activityParams = 2;	//活动参数
+}
+
+//返回活动列表
+message SCActivityCommitReturn {
+	option(msgid) = 4805;
+	optional DActivity activity = 2;	//活动
+	optional bool success = 3;//成功或者失败
+}
+
+//执行每日签到
+message CSActivitySign{
+	option(msgid) = 4806;
+}
+
+//返回每日签到
+message SCActivitySignReturn {
+	option(msgid) = 4807;
+	optional int32 signIndex = 1;		//签到次数
+	optional int32 signGroupSn = 2;		//签到组数
+	optional ESignType signFlag = 3;	//签到标识
+}
+
+//执行等级礼包
+message CSActivityLvPackage{
+	option(msgid) = 4808;
+	optional int32 lv = 1;  //领取礼包等级
+}
+
+//返回等级礼包
+message SCActivityLvPackageReturn{
+	option(msgid) = 4809;
+	optional int32 lv = 1;  //领取礼包等级
+}
+
+//客户端领取整点体力
+message CSActivityInfo{
+	option(msgid) = 4812;
+	optional int32 time = 1;  //领取索引(1, 2, 3)
+	optional int32 fill = 2;  //0 领取，1 花费元宝领取(补领)
+}
+
+//服务端返回整点体力领取信息
+message SCActivityInfoReturn{
+	option(msgid) = 4813;
+	optional int32 recIndex = 1;		//领取的索引（1，2，3）
+	optional int32 recIndexState = 2;	//领取后的状态变化 0可领 1已领 2可补领 3不可领
+}
+
+//登录下发整点体力数据
+message SCLoadHourVitInfoMsg{
+	option(msgid) = 4814;
+	optional int64 lastTime = 1;  //用户上一次领取时间戳
+	repeated int32 recStateList = 2; //0可领 1已领 2可补领 3不可领
+}
+
+//服务端下发的玩家在线时间
+message SCHumanOnLineTimeMsg{
+	option(msgid) = 4815;
+	optional int64 onlineTime = 1;  //本次玩家在线时间
+}
+
+//七日积分活动奖励 领取
+message CSActivityIntegral{
+	option(msgid) = 4816;
+	optional int32 sn = 1;  //宝箱标识	
+}
+
+// 登陆接受宝箱状态 / 领取回执
+message SCActivityIntegral{
+	option(msgid) = 4817;
+	optional int32 score = 1;  //积分
+	repeated DIntegralBox box = 2;
+	repeated DProduce ditemList = 3;//奖励列表
+}
+
+

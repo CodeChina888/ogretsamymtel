@@ -1,0 +1,80 @@
+
+¬
+msg.common.protogame.msgoptions.protodefine.proto"<
+SCDebugClient
+openSRDebug (
+logType (:ˆÃ°	"5
+SCHumanData
+human (2.game.msg.DHuman:ˆÃÍ"4
+
+SCInitData
+stage (2.game.msg.DStage:ˆÃÎ"
+
+CSInitData:ˆÃÏ"
+CSPing:ˆÃÐ"
+SCPing:ˆÃÑ"$
+SCHumanKick
+reason (:ˆÃÒ"E
+SCStageObjectInfoChange#
+obj (2.game.msg.DStageObject:ˆÃÕ"
+CSHumanInfo:ˆÃÖ"h
+SCHumanInfo
+generalColCount (
+combat (
+competeTopRank (
+	guildName (	:ˆÃ×";
+SCMoneyInfoChange
+money (2.game.msg.DMoney:ˆÃØ"q
+SCPropInfoChange'
+type (2.game.msg.EPropChangeType
+prop (2.game.msg.DProp
+combat (:ˆÃÙ"'
+SCCombatChange
+combat (:ˆÃÚ"5
+SCLevelChange
+level (
+actMax (:ˆÃÛ"7
+SCStateCurChange
+hpCur (
+mpCur (:ˆÃÜ"3
+SCTeamBundleIDChange
+teamBundleID (:ˆÃÞ"1
+SCActFullTimeChange
+actFullTime (:ˆÃß"M
+SCDailyCostBuyChange.
+dDailyCostBuy (2.game.msg.DDailyCostBuy:ˆÃà"G
+SCDailyResetChange*
+dDailyReset (2.game.msg.DDailyReset:ˆÃá"J
+SCWeeklyResetChange,
+dWeeklyReset (2.game.msg.DWeeklyReset:ˆÃâ"$
+SCModUnlock
+snList (:ˆÃã"
+CSDailyActBuy:ˆÃþ"K
+SCDailyActBuy
+goldCost (
+actGain (
+numBuyed (:ˆÃÿ"$
+CSDailyCoinBuy
+num (:ˆÃ€	"M
+SCDailyCoinBuy
+goldCost (
+coinGain (
+numBuyed (:ˆÃ	"?
+CSModUnlockView%
+modeType (2.game.msg.EModeType:ˆÃ‚	"h
+SCModUnlockView%
+modeType (2.game.msg.EModeType'
+produceList (2.game.msg.DProduce:ˆÃƒ	"<
+	SCLogCost
+
+sn (
+cost (
+reason (	:ˆÃ¦	"„
+SCPartnerPropInfoChange'
+type (2.game.msg.EPropChangeType
+prop (2.game.msg.DProp
+
+id (
+combat (:ˆÃå"
+SCLogOp
+log (	:ˆÃë

@@ -1,0 +1,426 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 06500_06599_guild.proto-----
+
+//请求所有公会信息
+message CSGuildInfo {
+	option (msgid) = 6501;
+	required int32 page						 = 1;					//第几页  从1 开始
+}
+
+//返回所有公会信息
+message SCGuildInfoResult {
+	option (msgid) = 6502;
+	repeated DGuildInfo guildInfo			 = 1;					//公会信息
+	optional int32 size						 = 2;					//总共有多少个公会
+	repeated int64  myApplyId = 4;		//我正在申请中的工会
+	optional int32 currentPage				 = 3;					//当前是第几页
+}
+
+//请求公会详细信息
+message CSGuildMemberInfo {
+	option (msgid) = 6503;
+	required int64 guildId					= 1;					//公会ID
+}
+
+//返回公会详细信息
+message SCGuildMemberResult {
+	option (msgid) = 6504;
+	optional DGuildInfo guildInfo				= 1;				//公会信息
+	repeated DGuildMemberInfo guildMemberInfo   = 2;				//会员信息
+}
+
+//创建指定名字公会
+message CSGuildCreate {
+	option (msgid) = 6505;
+	required string guildName					= 1;				//要创建公会的名字
+	optional string content = 2;					//公会宣言
+	optional int32 icon = 3;					//图标
+}
+
+//返回创建公会结果
+message SCGuildCreateResult {
+	option (msgid) = 6506;
+	optional bool result						 = 1;				//是否成功, true 成功，false 失败
+	optional int64 guildId						 = 2;				//创建成功后公会id
+}
+
+//请求设置公会信息
+message CSGuildSet {
+	option (msgid) = 6507;
+	optional int64 guildId						 = 1;			//公会id
+	optional int32 isApply						 = 2;			//是否需要申请 0 不改变，1 默认可直接加入, 2 需申请
+	optional int32 QQ							 = 3;			//qq群
+	optional int32 initiationMinLevel			 = 4;			//入会最低等级
+}
+
+//请求设置公会名字
+message CSGuildRename {
+	option (msgid) = 6508;
+	optional int64 guildId						 = 1;			//公会id
+	optional string guildName					 = 2;			//新的公会名字
+}
+
+//请求设置公会公告
+message CSDeclare {
+	option (msgid) = 6509;
+	optional int64 guildId						 = 1;			//公会id
+    optional string guildDeclare				 = 2;			//公会宣告
+}
+
+//请求设置公会内部公告
+message CSNotice {
+	option (msgid) = 6510;
+	optional int64 guildId						 = 1;			//公会id
+	optional string guildNotice					 = 2;			//公会内部宣告
+}
+
+//请求设置公会图标
+message CSGuildIcon {
+	option (msgid) = 6511;
+	optional int64 guildId				= 1;			//公会id
+	optional int32 icon					= 2;			//公会图标
+}
+
+//返回设置
+message SCGuildSet {
+	option (msgid) = 6512;
+	optional bool result						 = 1;			//设置是否成功 true 成功 false失败
+	optional int32 pos							 = 2;			//修改位置，1设置公会信息，2公会名字，3公告，4内部公告，5公会图标
+}
+
+//请求搜索相关名字的公会
+message CSGuildSeek {
+	option (msgid) = 6513;
+	optional string guildName					 = 1;			//搜索相关公会名字
+}
+
+//返回搜索相关名字的公会
+message SCGuildSeekResult{
+	option (msgid) = 6514;
+	repeated DGuildInfo guildInfo				 = 1;			//公会信息
+}
+
+//加入公会
+message CSGuildJoin {
+	option (msgid) = 6515;
+	optional int32 addGuild						 = 1;		// 0 快速加入，1 加入， 2 申请加入
+	optional int64 guildId						 = 2;		// 要加入的公会id
+}
+
+//返回入会结果
+message SCGuildJoinResult {
+	option (msgid) = 6516;
+	optional bool result						 = 1;			//是否成功, true 成功，false 失败
+	optional int64 guildId						 = 2;			//公会id
+	optional int32 isApply						 = 3;			//是否为申请  1.申请  0.加入
+}
+
+//主动离开公会
+message CSGuildLeave {
+	option (msgid) = 6517;
+}
+
+//返回退会
+message SCGuildLeaveResult {
+	option (msgid) = 6518;
+	optional bool result						= 1;			//true 退会成功 false 退会失败
+	optional int64 pertainGuild					= 2;			//所属公会
+	optional int32 isKickOut					= 3;			//0:自己退会, 1:是被踢
+}
+
+//公会长踢人（会长功能）
+message CSGuildKickOut {
+	option (msgid) = 6519;
+	required int64 id							= 1;			//踢出的玩家ID
+}
+
+//公会长踢人返回结果
+message SCGuildKickOut {
+	option (msgid) = 6520;
+	required bool result						= 1;			//true成功；false失败
+}
+
+// 查看申请信息
+message CSApplyInfo {
+	option (msgid) = 6521;
+}
+
+//返回申请信息
+message SCApplyInfoResult{
+	option (msgid) = 6522;
+	repeated DGuildApplyHumanInfo applyInfo		= 1;			// 申请信息
+}
+
+//会长或管理对申请入会玩家的处理
+message CSApplyReply{
+	option (msgid) = 6523;
+	optional int32 reply						= 1;			//1 同意 ，2 拒绝
+	optional int64 humanId						= 2;			//玩家id
+}
+
+//返回对申请入会玩家处理结果
+message SCApplyReplyResult{
+	option (msgid) = 6524;
+	optional bool result						= 1;			//true 成功 false失败
+	optional int64 humanId						= 2;			//玩家id
+}
+
+// 清理全部申请信息
+message CSApplyClear{
+	option (msgid) = 6525;
+}
+
+// 会长设置官职
+message CSGuildPostSet{
+	option (msgid) = 6526;
+	optional int64 humanId						= 1;				// 要设置的会员id
+	optional int32 post							= 2;				// 0普通会员 ，1 会长， 2 副会长
+}
+
+//返回设置官职结果
+message SCGuildPostSetResult{
+	option (msgid) = 6527;
+	optional bool result						= 1;				// 是否设置成功 true成功，false失败
+	optional int64 humanId						= 2;				// 对应的玩家
+	optional int32 post							= 3;				// humanId当前位置
+}
+
+//请求公会是否献祭
+message CSGuildImmoInfo{
+    option (msgid) = 6528;
+}
+
+//返回公会是否献祭
+message SCGuildImmoInfoResult{
+    option (msgid) = 6529;
+    optional bool isGuildImmo					= 1;			//公会仙草是否培养，true培养过了，false还未培养
+    repeated int32 immoSnList = 2;//献宝箱列表
+}
+
+//公会献祭
+message CSGuildImmo{
+	option (msgid) = 6530;
+	optional EGuildImmoType type				= 1;				// 建设类型，0未建设，1初级建设，2中级建设，3高级建设
+}
+
+//返回献祭次数
+message SCGuildImmoResult{
+	option (msgid) = 6531;
+	optional bool result						= 1;				//是否献祭成功 true 成功，false失败
+	optional int32 num							= 2;				//献祭了几次
+	optional int32 guildLiveness 				= 3;				//工会献祭进度
+	optional int32 currentPersion				= 4;				//当前献祭人数
+	optional int32 guildLevel 					=5;				//公会等级
+	optional int32 guildExp 					= 6;				//公会经验
+}
+
+//公会属性升级返回
+message SCGuildLvExp{
+	option (msgid) = 6536;
+	optional int64 guildId						= 1;				 //公会id
+	optional int32 guildLevel					= 2;				 //公会等级
+	optional int32 guildExp						= 3;				 //公会经验
+	optional int32 guildActive					= 4;				 //公会活跃
+	optional int64 guildContribute				= 5;				 //玩家对公会的贡献
+}
+
+//公会抽奖重置
+message CSGuildDrawReset{
+	option (msgid) = 6550;
+}
+
+//公会抽奖领奖
+message CSGuildPrize{
+	option (msgid) = 6551;
+}
+
+//公会抽奖领奖返回
+message SCGuildPrize{
+	option (msgid) = 6552;
+	optional bool result = 1;
+}
+
+//请求
+message CSGuildImmoLog{
+	option (msgid) = 6553;
+}
+
+//公会献祭记录
+message SCGuildImmoLog{
+	option (msgid) = 6554;
+	repeated DGuildImmo log = 1;//献祭记录
+}
+
+// 领取进度宝箱
+message CSGuildImmoGiftBag{
+	option (msgid) = 6555;
+	optional int32 sn = 1;
+}
+
+// 领取进度宝箱
+message SCGuildImmoGiftBag{
+	option (msgid) = 6556;
+	repeated int32 sn = 1; // 已经领取的sn
+}
+
+//取消加入公会
+message CSGuildCancleJoin {
+	option (msgid) = 6557;
+	optional int64 guildId						 = 1;		// 要取消申请的公会id
+}
+
+//取消返回入会结果
+message SCGuildCancleJoinResult {
+	option (msgid) = 6558;
+	optional bool result						 = 1;			//是否成功, true 成功，false 失败
+}
+
+//请求公会技能列表
+message CSGuildSkillList {
+    option (msgid) = 6559;
+}
+
+//反馈公会技能列表
+message SCGuildSkillList {
+    option (msgid) = 6560;
+    repeated DGuildSkill skills = 1; // 技能列表
+}
+
+//请求升级公会技能
+message CSGuildSkillUpgrade {
+    option (msgid) = 6561;
+    optional int32 sn = 1; // 技能sn
+}
+
+//反馈升级公会技能
+message SCGuildSkillUpgrade {
+    option (msgid) = 6562;
+	optional bool result = 1; // 结果
+	optional int32 oldSn = 2; // 技能sn
+	optional int32 newSn = 3; // 技能sn
+}
+
+//请求公会副本信息
+message CSGuildInstInfo {
+    option (msgid) = 6563;
+}
+
+//反馈公会副本信息
+message SCGuildInstInfo {
+    option (msgid) = 6564;
+    optional bool isOpen   = 1; // 是否开启
+    optional int32 chapter = 2; // 当前章节
+    repeated DGuildInstStageInfo stageHp = 3; // 关卡当前hp
+    optional int32 resetType = 4; // 1: 重置当前章节；2：重置回前一章节
+    optional int64 resetTime = 5; // 下次重置时间
+    repeated int32 chapterAwardGot = 6; // 领过奖励的章节
+    repeated int32 stageAwardGot = 7; // 领过奖励的关卡
+    optional int32 challengeTimes = 8; // 剩余挑战次数
+    optional int64 challengeTimesAddTime = 9; // 挑战次数+1的时间
+    optional int32 challengeBuyTimes = 10; // 已购买挑战次数
+}
+
+//请求挑战公会副本
+message CSGuildInstChallenge {
+    option (msgid) = 6565;
+    optional int32 stage = 1; // 关卡id
+}
+
+//请求领取章节奖励
+message CSGuildInstChapterReward {
+    option (msgid) = 6567;
+    optional int32 chapter = 1; // 章节id
+}
+
+//反馈领取章节奖励
+message SCGuildInstChapterReward {
+    option (msgid) = 6568;
+    optional int32 result = 1;
+    optional int32 chapter = 2; // 章节id
+}
+
+//请求领取关卡奖励
+message CSGuildInstStageReward {
+    option (msgid) = 6569;
+    optional int32 stage = 1; // 关卡id
+    optional int32 slot = 2; // 格子索引0开始
+}
+
+//反馈领取关卡奖励
+message SCGuildInstStageReward {
+    option (msgid) = 6570;
+    optional int32 result = 1;
+    optional int32 stage = 2; // 关卡id
+    optional int32 slot = 3; // 格子索引0开始
+    optional int32 itemSn = 4; // 物品Sn
+    optional int32 itemNum = 5; // 物品数量
+}
+
+//请求设置公会副本章节重置方式
+message CSGuildInstResetType {
+    option (msgid) = 6571;
+    optional EGuildInstResetType resetType = 1;
+}
+
+//反馈公会副本章节重置方式
+message SCGuildInstResetType {
+    option (msgid) = 6572;
+    optional int32 result = 1;
+    optional EGuildInstResetType resetType = 2;
+}
+
+//结算一次公会副本伤害
+message CSGuildInstHarm {
+	option (msgid) = 6573;
+	optional bool leave = 1; // true: 中途退出; false: 战斗结束
+}
+
+//返回结算一次公会副本伤害
+message SCGuildInstHarm {
+	option (msgid) = 6574;
+	optional int32 stage = 1; // 关卡id
+	optional int64 harmTotal = 2; // 总伤害
+	optional int32 contribute = 3; // 获取贡献
+	optional string killer = 4; // 击杀者
+}
+
+//请求公会副本关卡信息
+message CSGuildInstStageInfo {
+	option (msgid) = 6575;
+	optional int32 stage = 1; // 关卡id
+}
+
+//反馈公会副本关卡信息
+message SCGuildInstStageInfo {
+	option (msgid) = 6576;
+    optional DGuildInstStageInfo stage = 1; // 关卡信息
+}
+
+//请求关卡领奖情况
+message CSGuildInstStageRewardInfo {
+	option (msgid) = 6577;
+	optional int32 stage = 1; // 关卡id
+}
+
+//反馈关卡领奖情况
+message SCGuildInstStageRewardInfo {
+	option (msgid) = 6578;
+    repeated DStageReward list = 1; // 关卡领奖列表
+	optional int32 stage = 2; // 关卡id
+}
+
+//请求购买挑战次数
+message CSGuildInstBuyChallengeTimes {
+	option (msgid) = 6579;
+}
+
+//反馈购买挑战次数
+message SCGuildInstBuyChallengeTimes {
+	option (msgid) = 6580;
+	optional int32 times = 1; // 已购买挑战次数
+    optional int32 challengeTimes = 2; // 剩余挑战次数
+}
+
+

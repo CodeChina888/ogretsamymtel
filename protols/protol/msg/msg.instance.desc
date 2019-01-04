@@ -1,0 +1,60 @@
+
+â
+msg.instance.protogame.msgoptions.protodefine.proto"
+CSInstInfoAll:à√ô"=
+SCInstInfoAll%
+chapInfo (2.game.msg.DChapInfo:à√ö"3
+CSInstEnter
+instSn (
+param (	:à√õ"
+CSInstLeave:à√ù"
+	CSInstEnd:à√ü"´
+	SCInstEnd#
+instEnd (2.game.msg.DInstEnd
+fightNumRemain (
+star (
+starAll ('
+	boxStatus (2.game.msg.EAwardType
+
+starStatus (	:à√†"0
+
+CSInstAuto
+instSn (
+num (:à√°"`
+
+SCInstAuto
+instSn (#
+instEnd (2.game.msg.DInstEnd
+fightNumRemain (:à√¢",
+CSInstFightNumReset
+instSn (:à√£"V
+SCInstFightNumReset
+instSn (
+fightNumRemain (
+resetNum (:à√§"5
+CSInstOpenBox
+chapSn (
+index (:à√•"u
+SCInstOpenBox
+chapSn ('
+	boxStatus (2.game.msg.EAwardType$
+produces (2.game.msg.DProduce:à√¶"v
+SCLoadInstRes0
+resTypeInfos (2.game.msg.DInstResTypeInfo,
+instResInfos (2.game.msg.DInstResInfo:à√¡"*
+CSInstResEnter
+	instResSn (:à√¬"
+CSInstResLeave:à√√"
+CSInstResEnd:à√ƒ"±
+SCInstResEnd
+	instResSn ($
+produces (2.game.msg.DProduce/
+resTypeInfo (2.game.msg.DInstResTypeInfo
+star (
+damageRatio (
+isWin (:à√≈")
+CSInstResAuto
+	instResSn (:à√∆"m
+SCInstResAuto/
+resTypeInfo (2.game.msg.DInstResTypeInfo$
+produces (2.game.msg.DProduce:à√«

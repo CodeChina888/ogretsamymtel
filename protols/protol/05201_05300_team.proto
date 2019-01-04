@@ -1,0 +1,246 @@
+// -----------------------------------------
+// 队伍
+// -----------------------------------------
+//活动副本类型
+enum EActInstType{
+	// 1开头代表单人PVE相关类型
+	LootmapSingle = 11;// 抢夺本单人	
+
+	// 2开头代表单人PVP相关类型
+	LootmapMulti = 21;// 抢夺本多人	
+	
+	// 3开头代表多人PVE相关类型
+	WorldBoss = 31;// 世界boss
+
+	// 4开头代表多人PVP相关类型
+	
+}
+
+//队伍信息
+message DTeamInfo {
+	optional int32 teamId = 1;			//队伍ID
+	optional int32 actInstSn = 2;		//活动副本SN
+	optional int64 leaderId = 3;		//队长的玩家ID
+	optional string leaderName = 4;		//队长名字
+	optional int32 leaderLevel = 5;		//队长等级
+	optional int32 teamNum = 6;			//队伍人数
+}
+
+//队员信息
+message DMemberInfo {
+	optional int64 id = 1;				//玩家ID
+	optional string name = 2;			//玩家名字
+	optional int32 level = 3;			//玩家等级
+	optional int32 combat = 4;			//玩家战斗力
+	optional int32 profession = 5;		//职业
+	optional int32 sex = 6; 			//性别
+	optional int32 modelSn = 7; 		//模型SN
+	optional bool isOnline = 8;			//是否在线：true在线，false离线
+}
+
+//活动副本已完成次数
+message DFinishNum {
+	optional int32 actInstSn = 1;		//活动副本SN
+	optional int32 num = 2;				//已完成次数
+}
+
+// 试炼商店兑换限制次数
+message DTrialShopBuy {
+	optional int32 sn = 1;				//物品sn
+	optional int32 num = 2;				//已兑换次数
+}
+
+//请求活动副本信息
+message CSTeamRepInfo {
+	option (msgid) = 5201;
+}
+
+//返回活动副本信息
+message SCTeamRepInfo {
+	option (msgid) = 5202;
+	repeated DFinishNum dFinishNum= 1;			//活动副本已完成次数
+}
+
+//返回队伍及队员信息
+message SCTeamMemberInfo {
+	option (msgid) = 5203;
+	required DTeamInfo teamInfo = 1;			//队伍信息
+	repeated DMemberInfo memberInfo = 2;		//队员信息列表
+}
+
+//返回队伍信息
+message SCTeamInfo {
+	option (msgid) = 5204;
+	required DTeamInfo teamInfo = 1;			//队伍信息
+}
+
+//返回队员信息
+message SCMemberInfo {
+	option (msgid) = 5205;
+	repeated DMemberInfo memberInfo = 1;		//队员信息列表
+}
+
+//创建指定副本的队伍
+message CSTeamCreate {
+	option (msgid) = 5206;
+	required int32 actInstSn = 1;				//活动副本SN
+}
+
+//快速加入指定副本的队伍，如无队伍存在则自己创建一个队伍
+message CSTeamJoin {
+	option (msgid) = 5207;
+	required int32 actInstSn = 1;				//活动副本SN
+}
+
+//主动离队
+message CSTeamLeave {
+	option (msgid) = 5208;
+}
+
+//主动离队返回结果
+message SCTeamLeave {
+	option (msgid) = 5209;
+	required bool result = 1;	//true成功；false失败（找不到队伍信息）
+}
+
+//队长踢人（队长功能）
+message CSTeamKickOut {
+	option (msgid) = 5210;
+	required int64 id = 1;		//踢出的玩家ID
+}
+
+//队长踢人返回结果
+message SCTeamKickOut {
+	option (msgid) = 5211;
+	required bool result = 1;	//true成功；false失败（找不到队员）
+}
+
+//好友邀请（队长功能）
+message CSTeamInviteOne {
+	option (msgid) = 5212;
+	required int64 id = 1;		//邀请的玩家ID
+}
+
+//收到好友邀请
+message SCTeamInviteOne {
+	option (msgid) = 5213;
+	required DTeamInfo teamInfo = 1;	//队伍信息
+}
+
+//全服邀请（队长功能）
+message CSTeamInviteAll {
+	option (msgid) = 5214;
+	optional string content = 1;		//邀请附语
+}
+
+//申请入队
+message CSTeamApplyJoin {
+	option (msgid) = 5215;
+	required int32 teamId = 1;			//队伍ID
+	required int32 actInstSn = 2;		//活动副本SN
+}
+
+//申请入队返回结果
+message SCTeamApplyJoin {
+	option (msgid) = 5216;
+	required int32 result = 1;				//0成功（成功才返回队伍信息）；非0失败（参见SysMsg.xlsx：521401已有队伍，521402队伍不存在，521403已开始副本，521404人数已满）
+	optional DTeamInfo teamInfo = 2;		//队伍信息
+	repeated DMemberInfo memberInfo = 3;	//队员信息列表
+}
+
+//进入副本
+message CSTeamEnterRep {
+	option (msgid) = 5217;
+}
+
+//进入副本返回结果，失败才下发
+message SCTeamEnterRep {
+	option (msgid) = 5218;
+	required int32 result = 1;	//>0失败（参见SysMsg.xlsx：521601队长才能开始副本，521602活动副本已关闭，521603活动副本已开启）
+}
+
+//组队副本通知刷第几波怪
+message SCMonsterMadeIndex {
+	option (msgid) = 5219;
+	required int32 indexCur = 1;	//当前第几波
+	required int32 indexMax = 2;	//最大波数
+}
+
+//请求经典战役信息
+message CSStoryInfo {
+	option (msgid) = 5220;
+}
+
+//返回经典战役信息
+message SCStoryInfo {
+	option (msgid) = 5221;
+	repeated int32 snLastPass = 1;		//最后通关的关卡sn：320111,0,0,0
+	repeated int32 awardRecord = 2;		//领奖记录(0不可领取,1可领取，2已领取)：2,0,0,0
+}
+
+//领取经典战役通关奖励
+message CSStoryPassAward {
+	option (msgid) = 5222;
+	required int32 actInstSn = 1;		//活动副本SN
+}
+
+//领取经典战役通关奖励结果
+message SCStoryPassAward {
+	option (msgid) = 5223;
+	required int32 result = 1;			//0成功；非0失败（参见SysMsg.xlsx：）
+}
+
+//请求魔王梦境信息
+message CSMHXKWarInfo {
+	option (msgid) = 5224;
+}
+
+//返回魔王梦境信息
+message SCMHXKWarInfo {
+	option (msgid) = 5225;
+	repeated int32 snLastPass = 1;		//最后通关的关卡sn：320111,0,0,0
+}
+
+//以下为组队PVP用到的部分//////////////////////////////////////////////////////////////////
+
+
+//开始匹配
+message CSTeamMatch {
+	option (msgid) = 5252;
+}
+
+//开始匹配返回结果
+message SCTeamMatch {
+	option (msgid) = 5253;
+	required int32 result = 1;	//0成功（成功即进入匹配状态）；非0失败（参见SysMsg.xlsx：525301队长才能开始匹配，525302活动副本已关闭，525303活动副本已开启）
+}
+
+//返回匹配的队伍信息
+message SCTeamVSTeam {
+	option (msgid) = 5254;
+	repeated DMemberInfo memberOne = 1;	//一队的队员信息
+	repeated DMemberInfo memberTwo = 2;	//二队的队员信息
+}
+
+//搜索队伍
+message CSFindTeam {
+	option (msgid) = 5255;
+	required int32 teamId = 1;	//5-6位的队伍ID
+}
+
+//搜索队伍返回结果
+message SCFindTeamResult {
+	option (msgid) = 5256;
+	required int32 result = 1;	//0成功（成功即加入队伍）；非0失败（参见SysMsg.xlsx：525601你已有队伍，525602队伍不存在，525603队伍正在战斗中，525604队伍人数已满）
+}
+
+//取消匹配（由队长取消匹配）
+message CSTeamMatchCancel {
+	option (msgid) = 5257;
+}
+
+//取消匹配返回结果
+message SCTeamMatchCancel {
+	option (msgid) = 5258;
+	required int32 result = 1;	//0成功（成功即取消匹配状态）；非0失败（参见SysMsg.xlsx：525801队长才能取消匹配，525802队伍不存在，525803活动副本已开启）
+}

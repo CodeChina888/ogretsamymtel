@@ -1,0 +1,17 @@
+import "options.proto";
+// -----------------------------------------
+// 测试消息
+// -----------------------------------------
+//从客户端发送到服务器
+message CSLogin {
+	option (msgid) = 11;
+	required string name = 1;		//平台账号
+	optional string password = 2;		//平台密码
+}
+
+//登录请求返回结果
+message SCLoginResult {
+	option (msgid) = 12;
+	optional int32 resultCode = 1;		//错误编号
+	optional string resultReason = 2;	//错误原因
+}

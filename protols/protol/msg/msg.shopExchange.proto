@@ -1,0 +1,137 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 02101_02200_shopExchange.proto-----
+
+//兑换商店已购买物品信息
+message SCShopBuyItemInfo{
+	option (msgid) = 2101;
+	repeated DExShopBuyNum shopCompete = 1;	//竞技场商店
+}
+
+//打开--商店界面--（针对 神秘商店 和 魂点商店）
+message CSShopExchangeOpen {
+	option (msgid) = 2102;
+	required EShopExchType shopType = 1;//商店类型
+}
+
+//返回--商店界面--（针对 神秘商店 和 魂点商店）
+message SCShopExchangeOpen {
+	option (msgid) = 2103;
+	required EShopExchType shopType = 1;//商店类型
+	required int32 goldCost = 2;		//刷新所需元宝
+	required string itemSn = 3;			//面板商品列表SN,格式为 json[(id,num),(id,num),(id,num),(id,num),(id,num),(id,num)]	
+}
+
+// 刷新物品--（针对 神秘商店 和 魂点商店）
+message CSShopExchangeRefresh {
+	option (msgid) = 2104;
+	required EShopExchType shopType = 1;//商店类型
+}
+
+// 刷新物品 返回--（针对 神秘商店 和 魂点商店）
+message SCShopExchangeRefresh {
+	option (msgid) = 2105;
+	required EShopExchType shopType = 1;//商店类型
+	required bool result = 2;			//刷新结果 true or false
+	optional int32 goldCost = 3;		//刷新所需元宝
+	optional string itemSn = 4;			//面板商品列表SN,格式为 json[(id,num),(id,num),(id,num),(id,num),(id,num),(id,num)]
+}
+
+//商店--购买（针对 神秘商店 和 魂点商店）
+message CSShopMysSoulBuy {
+	option (msgid) = 2106;
+	required EShopExchType shopType = 1;//商店类型
+	required int32 itemSn = 2;			//商店道具sn，非item sn
+}
+
+//商店--购买返回（针对 神秘商店 和 魂点商店）
+message SCShopMysSoulBuy {
+	option (msgid) = 2107;
+	required EShopExchType shopType = 1;//商店类型
+	required bool result = 2;			//true or false
+	required int32 itemSn = 3;			//商店道具sn，非item sn
+}
+
+//商店--兑换
+message CSShopExchangeBuy {
+	option (msgid) = 2108;
+	required EShopExchType shopType = 1;//商店类型
+	required int32 itemSn = 2;			//道具sn
+	required int32 buyNum = 3;			//兑换次数（默认一次）
+}
+
+//商店--兑换结果
+message SCShopExchangeBuy {
+	option (msgid) = 2109;
+	required EShopExchType shopType = 1;//商店类型
+	required bool result = 2;			//兑换结果：true成功，false失败
+	optional int64 left = 3;			//剩余荣誉积分
+	optional int32 itemSn = 4;			//限购物品Sn
+	optional int32 itemBuyNum = 5;		//限购物品已兑换次数
+}
+
+//兑换次数重置
+message CSShopExchangeReset {
+	option (msgid) = 2110;
+	required EShopExchType shopType = 1;//商店类型：竞技场商店
+}
+
+message SCShopExchangeReset {
+	option (msgid) = 2111;
+	optional bool result = 1;			//重置结果
+	required EShopExchType shopType = 2;//商店类型：竞技场商店
+	optional int32 money = 3;			//下一次重置，需要的元宝 
+	optional int32 resetTimes = 4;		//已经重置的次数
+}
+
+message SCShopExResetTimes {
+	option (msgid) = 2112;
+	optional string resetTimes = 1;		//重置结果：竞技 defaults = "0,0,0,0"	
+}
+
+//通知，加载所有商店信息
+message SCAllShopInfo{
+	option (msgid) = 2151;
+	repeated DShopInfo shopInfo = 1; //所有商店信息
+}
+
+//请求，打开商店
+message CSOpenShop{
+	option (msgid) = 2152;
+	optional EShopType shopType = 1;    //商店类型	  
+}
+
+//应答，打开商店
+message SCOpenShop{
+	option (msgid) = 2153;
+	optional DShopInfo shopInfo = 1; //商店信息	  
+}
+
+//请求，购买商品
+message CSShopBuy{
+	option (msgid) = 2154;
+	optional int32 sn = 1;     //商店格子Sn
+	optional int32 itemSn = 2; //道具Sn
+	optional int32 count = 3;  //购买次数,1次的物品数量由该格子商品配置控制，0默认为1次
+}
+
+//应答，购买商品
+message SCShopBuy{
+	option (msgid) = 2155;
+	optional DShopItem shopItem = 1;  
+}
+
+//请求，刷新商店
+message CSShopRef{
+	option (msgid) = 2156;
+	optional EShopType shopType = 1;  //商店类型
+}
+
+//应答，刷新商店
+message SCShopRef{
+	option (msgid) = 2157;
+	optional DShopInfo shopInfo = 1; //商店信息
+}
+
+

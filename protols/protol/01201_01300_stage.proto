@@ -1,0 +1,330 @@
+// -----------------------------------------
+// 地图相关
+// -----------------------------------------
+//地图单位信息
+message DStageObject {
+	optional DVector2 pos = 1;			//坐标
+	optional DVector2 dir = 2;			//方向
+	optional int64 objId = 3;			//WordldObjectId
+	optional int32 modelSn = 4;			//模型Sn
+	optional string name = 5;			//昵称
+	optional EWorldObjectType type = 6;	//对象类识别码 HUMAN玩家 MONSTER怪物 DROP掉落物 DOT持续伤害 NPC游戏角色 BULLET子弹
+	optional DStageHuman human = 7;		//玩家对象
+	optional DStageMonster monster = 8;	//怪物对象
+	optional DStageDrop drop = 9;		//掉落物
+	optional DStagePick pick = 10;		//采集物
+	optional DStageNPC npc = 11;		//npc
+	optional DStagePartner partner = 12;//伙伴
+}
+
+//地图单位信息（被其他玩家看到） 玩家
+message DStageHuman {
+	repeated DVector3 posEnd					= 1;		//目标路径坐标
+	optional int32 level						= 2;		//等级
+	optional int32 sex							= 3;		//性别
+	optional int32 profession					= 4;		//职业
+	optional int32 hpCur						= 5;		//血量
+	optional int32 hpMax						= 6;		//最大血量
+	optional int32 mpCur						= 7;		//魔量
+	optional int32 mpMax						= 8;		//最大魔量
+
+	optional bool evil							= 10;		//罪恶,红名（未实现）
+	optional int32 titleSn						= 11;		//称号（未实现）
+	optional int64 teamId						= 12;		//队伍Id（未实现）
+	optional int64 unionId						= 13;		//帮派Id（未实现）
+	optional int64 countryId					= 14;		//阵营Id（未实现）
+	
+	optional bool fashionShow					= 15;		//是否显示时装
+	optional int32 fashionWeaponSn				= 16;		//时装武器
+	optional int32 fashionClothesSn				= 17;		//时装衣服
+	optional int32 equipWeaponSn				= 18;		//身上武器
+	optional int32 equipClothesSn				= 19;		//身上衣服
+	
+	optional string pvpMode						= 24;		//pvp模式
+	optional bool inFighting					= 25;		//是否在战斗状态
+	repeated DSkillGroup skillGroup 			= 26;		//技能设置
+	optional int32 combat						= 28;		//战力
+	optional string propJson					= 33;		//属性map 的json
+	optional int32 sn							= 34;		//配置SN
+	optional bool titleShow						= 40;		//是否显示称号
+	optional string name						= 41;		//名字
+}
+
+message DStagePartner {
+	repeated DVector3 posEnd					= 1;		//目标路径坐标
+	optional int32 level						= 2;		//等级
+	optional int32 sex							= 3;		//性别
+	optional int32 profession					= 4;		//职业
+	optional int32 hpCur						= 5;		//当前血量
+	optional int32 hpMax						= 6;		//最大血量
+	optional int32 mpCur						= 7;		//当前魔量
+	optional int32 mpMax						= 8;		//最大魔量
+	
+	optional bool fashionShow					= 15;		//是否显示时装
+	optional int32 fashionWeaponSn				= 16;		//时装武器
+	optional int32 fashionClothesSn				= 17;		//时装衣服
+	optional int32 equipWeaponSn				= 18;		//身上武器
+	optional int32 equipClothesSn				= 19;		//身上衣服
+
+	//以下为武将特殊需要的信息
+	optional int32 advLevel						= 30;		//进阶等级
+	optional int32 stars						= 31;		//星级
+}
+
+//地图单位信息（被玩家看到） 怪物
+message DStageMonster {
+	repeated DVector3 posEnd = 1;			//目标路径坐标
+	optional int32 hpCur = 3;			//当前血量
+	optional int32 hpMax = 4;			//最大血量
+	optional int32 collisionRadius = 5;		//碰撞半径
+	optional float speed = 6;			//速度
+	optional bool  active = 7;			//怪物是否激活
+	optional int32 face = 8;			//模型出现朝向
+	optional string pvpMode	= 10;			//pvp模式
+	optional int32 pvpDiWoId = 11;			//pvp模式敌我组id
+	optional int64 teamBundleID		= 12;			//老大和小弟一起群体标号
+	repeated DSkill skill = 13;				//技能
+	optional int32 skillGroupSn		= 14;		//技能组
+	optional int32 index = 15;				//怪物顺序索引
+	optional float atkSpeed		= 16;		//攻击速度
+	optional bool canMove		= 17;		//是否可以移动
+	optional bool canCastSkill      = 18;		//是否可以施法
+	optional bool canAttack		= 19;		//是否可以有各种动作
+	optional string propJson		= 20;		//属性map 的json
+	optional int32 combat		= 21;			//战力
+	optional int32 sn		= 22;			//配置SN
+	optional int32 birthSn = 23; //出生点SN
+	optional int64 masterId = 24;	//主人ID
+}
+
+//地图单位信息（被玩家看到） 持续技能
+message DStageDot {
+	optional int32 dotSn = 1;				//sn
+	optional DVector2 pos = 2;				//坐标
+	optional int32 scopeType = 3;				//范围类型（1，圆形）
+	optional int32 scopeParam1 = 4;			//范围参数1
+	optional int32 scopeParam2 = 5;			//范围参数2
+	optional int64 createId = 6;				//创建ID 可能是 武将 bullet dot 
+}
+
+message DStageBullet {
+	optional int32 bulletSn = 1;				//sn
+	optional DVector2 pos = 2;				//坐标
+	optional DVector2 posTar = 3;				//坐标
+	optional int64 unitTarID = 4;				//目标单位的ID
+	optional int32 skillSn = 5;				//bullet 所属技能的SN
+	optional int64 createId = 6;				//创建ID 可能是 武将 bullet dot 
+	optional int64 fireId = 7;				//技能释放者ID 只能是武将 怪物 
+}
+
+//地图单位信息（被玩家看到） 掉落物
+message DStageDrop {
+	optional string type = 1;			//掉落物 item物品 coin金币
+	optional int32 itemSn = 2;			//物品SN
+	optional int32 num = 3;				//数量
+	optional int64 humanId = 4;			//该物品的归属者
+	optional int32 protectTime = 5;			//保护时间（秒） 在这期间只有本人才能拾取
+	optional int32 bind = 6;			//是否绑定
+	optional int64 monsterId = 7;			//哪个怪物掉的
+}
+
+//地图单位信息（被玩家看到） 采集物
+message DStagePick {
+	optional int32 pickSn = 1;				//sn
+	optional DVector2 pos = 2;				//坐标
+	optional bool visible = 3;				//是否可见
+}
+
+//地图单位信息（被玩家看到） NPC
+message DStageNPC {
+	
+}
+
+//客户端已准备好 进入地图
+message CSStageEnter {
+	option (msgid) = 1201;
+}
+
+//进入地图 返回结果
+message SCStageEnterResult {
+	option (msgid) = 1202;
+	repeated DStageObject obj = 1;
+}
+
+//切换地图
+message CSStageSwitch {
+	option (msgid) = 1203;
+	optional int32 type = 1;  //（无用字段）1普通地图，2副本地图，3竞技场
+	optional string areaSwitchKey = 2;		//目的地图SN，本地图传送点key
+}
+
+//切换地图
+message SCStageSwitch {
+	option (msgid) = 1204;
+	required DStage stage = 1;			//地图信息
+}
+
+message SCStageEnterEnd {
+	option (msgid) = 1205;
+	repeated int32 seek = 1; //随机种子(框架随机种子)
+	repeated DProduce produces = 2; //产出物品
+}
+
+//强制设定对象坐标
+message CSStageSetPos {
+	option (msgid) = 1208;
+	optional int64 objId = 1;			//对象ID
+	optional DVector3 pos = 2;		//坐标
+}
+
+//强制设定玩家坐标（群发） 接到这个消息后 玩家会变为静止状态
+message SCStageSetPos {
+	option (msgid) = 1209;
+	optional int64 humanId = 1;			//玩家ID
+	repeated DVector2 pos = 2;			//坐标
+}
+
+//转向广播（群发）
+message CSStageDirection {
+	option (msgid) = 1210;
+	optional int64 objId = 1;			//WorldObjectID
+	optional DVector3 direction = 2;	//向量
+}
+
+//开始移动
+message CSStageMove {
+	option (msgid) = 1211;
+	optional int64 objId = 1;			//WorldObjectID
+	optional DVector3 posBegin = 2;			//移动开始坐标
+	repeated DVector3 posEnd = 3;			//目标路径坐标
+	optional DVector3 dir = 4;			//移动完的最终方向
+}
+
+//开始移动广播（群发）
+message SCStageMove {
+	option (msgid) = 1212;
+	optional int64 objId = 1;			//WorldObjectID
+	optional DVector3 posBegin = 2;			//移动开始坐标
+	repeated DVector3 posEnd = 3;			//目标路径坐标
+	optional DVector3 dir = 4;			//移动完的最终方向
+}
+
+//停止移动
+message CSStageMoveStop {
+	option (msgid) = 1214;
+	optional int64 sendId = 1;				//谁停止
+	optional DVector2 posEnd = 2;		//停止坐标
+	optional DVector2 dirEnd = 3;		//停止朝向
+}
+
+//停止移动广播（群发）
+message SCStageMoveStop {
+	option (msgid) = 1215;
+	optional int64 objId = 1;
+	optional DVector2 posEnd = 2;		//停止坐标
+	optional DVector2 dirEnd = 3;		//停止朝向
+}
+
+//地图单位出现在视野范围（群发）
+message SCStageObjectAppear {
+	option (msgid) = 1216;
+	optional DStageObject objAppear = 1;		//obj信息
+	optional int32 type = 2;					//出现类型：1正常出现，2复活
+}
+
+//地图单位离开视野范围（群发）
+message SCStageObjectDisappear {
+	option (msgid) = 1217;
+	optional int64 objId = 1;					//WorldObjectId
+	optional int32 type = 2;					//消失类型：1正常消失，2死亡
+	optional string killerName = 3;				//击杀者姓名
+	optional int64 killerId = 4;				//击杀者id
+	optional int32 skillSn = 5;					//击杀者击杀技能sn，没有则不传
+	optional int32 killCount = 6;				//击杀者连杀个数
+}
+
+//瞬移移动广播（群发）
+message SCStageMoveTeleport {
+	option (msgid) = 1221;
+	optional int64		objId		= 1	;		//WorldObjectID
+	optional DVector2	posEnd		= 2	;		//瞬移结束坐标
+	optional string		type		= 3	;		//瞬移类型，前端用来播放特效
+}
+
+//在手机地图上移动（临时解决方案）
+message CSStageMove2 {
+	option (msgid) = 1222;
+	optional DVector2 posBegin = 1;			//移动开始坐标
+	optional DVector2 direction = 2;			//目标路径坐标
+}
+
+
+//切换到当前地图的某个坐标位置
+message SCStagePullTo {
+	option (msgid) = 1226;
+	optional DVector2 pos = 1;		//地图坐标
+}
+
+// 战斗状态类型
+// stun = 1;				//眩晕
+// immobilize = 2;			//缠绕
+// silence = 3;				//沉默
+// sheep = 4;				//变羊
+// charm = 5;				//魅惑
+// god = 6;					//无敌
+// superArmor = 7;			//霸体
+// immunePhy = 8;			//物理免疫
+// immuneMag = 9;			//法术免疫
+// immuneAbnormal = 10;		//异常免疫
+// shieldPhy = 11;			//物理盾
+// shieldMag = 12;			//法术盾
+// shieldAll = 13;			//免伤盾
+message SCUnitobjStatusChange {
+	option (msgid) = 1227;
+	optional int64 type = 1;			//unitObj的战斗状态类型，详见UnitObjectStateType
+	optional int64 id = 2;				//unitobj id
+	optional int64 teamBundleID	= 3;	//老大和小弟一起群体标号
+	optional bool canMove		= 4;	//是否可以移动
+	optional bool canCastSkill  = 5;	//是否可以施法
+	optional bool canAttack		= 6;	//是否可以有各种动作
+}
+
+
+//*1280开始为城镇假人协议******************************************************************************
+
+//假人信息
+message DDummy {
+	optional int64 humanId				= 1;		//人物唯一ID
+	optional int32 modelSn				= 2;		//模型Sn
+	optional string name				= 3;		//角色名称
+	optional int32 sex					= 4;		//性别
+	optional int32 profession			= 5;		//职业
+
+	optional bool fashionShow			= 6;		//是否显示时装
+	optional int32 fashionWeaponSn		= 7;		//时装武器
+	optional int32 fashionClothesSn		= 8;		//时装衣服
+	optional int32 equipWeaponSn		= 9;		//身上武器
+	optional int32 equipClothesSn		= 10;		//身上衣服
+}
+
+message SCAllDummy {//下发所有的假人信息
+	option (msgid) = 1280;
+	repeated DDummy dummy = 1;	//假人信息
+}
+
+message SCAddDummy {//下发增加的假人信息
+	option (msgid) = 1281;
+	repeated DDummy dummy = 1;	//假人信息
+}
+
+message SCOfflineDummy {//下发假人下线
+	option (msgid) = 1282;
+	required int64 id = 1;					//角色ID
+}
+
+message CSDelDummy {//请求删除假人，自动下发增加假人
+	option (msgid) = 1283;
+	required int64 id = 1;					//角色ID
+}
+
+

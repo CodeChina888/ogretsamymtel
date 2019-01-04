@@ -1,0 +1,122 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 03501_03600_rank.proto-----
+
+//请求排行榜
+message CSRequestRank {
+	option (msgid) = 3519;
+	optional ERankType type = 1;	//排行榜类型
+}
+
+//返回等级排行
+message SCLevelRank {
+	option (msgid) = 3502;
+	repeated DRank ranks = 1;		//等级排行信息
+	optional int32 status = 2;      //膜拜状态 0：不能膜拜， n：可以膜拜n次,-1:膜拜信息出错
+	optional int32 selfRank = 3;	//玩家自己的排名 -1 没有入榜。
+	optional int32 selfLevel = 4;	//玩家自己的等级
+}
+
+//返回战力排行
+message SCCombatRank {
+	option (msgid) = 3504;
+	repeated DRank ranks = 1;		//战力排行信息
+	optional int32 status = 2;      //膜拜状态 0：不能膜拜， n：可以膜拜n次,-1:膜拜信息出错
+	optional int32 selfRank = 3;	//玩家自己的排名 -1 没有入榜。
+	optional int32 selfCombat = 4;	//玩家自己的战力
+}
+
+//请求获取查看玩家信息
+message CSSelectInfo {
+	option (msgid) = 3505;
+	required int64 id = 1;			//玩家Id
+}
+
+//返回玩家信息
+message SCSelectInfo {
+	option (msgid) = 3506;
+	optional DSeeProperty seeProperty = 1;			//查看玩家基本信息
+	repeated DItem itemBody = 2;					//装备列表
+	repeated DItem fashionBody = 3;					//身上时装列表
+	optional bool fashionShow = 4;					//是否显示时装
+	optional int32 equipWeaponSn = 5;				//正在使用的武器sn
+	optional int32 equipUnusedWeaponSn = 6 ;		//身上未使用的武器sn
+	optional int32 trench = 7;						//正在使用的装备位置, 1是主武器 2是副武器
+	optional int32 result = 8;						//1:查询成功 2:查询不到好友 3:其他错误
+}
+
+//玩家膜拜
+message CSWorship {
+	option (msgid) = 3507;
+	required EWorshipType type = 1;			//膜拜的类型 战力0； 等级1； 公会2； 竞技场（战神榜）3；
+}
+
+//玩家膜拜返回
+message SCWorship {
+	option (msgid) = 3508;
+	required bool result = 1;        //膜拜的结果
+}
+
+//返回公会排行
+message SCGuildRank {
+	option (msgid) = 3510;
+	repeated DRankGuild ranks = 1;		//等级排行信息
+	optional int32 status = 2;      //膜拜状态 0：不能膜拜， n：可以膜拜n次,-1:膜拜信息出错
+	optional int32 selfRank = 3;	//玩家自己仙盟的等级 -1 没有入榜。
+	optional int32 selfLevel = 4;	 //自己仙盟的等级
+}
+
+//返回总战力排行
+message SCSumCombatRank {
+	option (msgid) = 3512;
+	repeated DRank ranks = 1;		//总战力排行信息
+	optional int32 selfRank = 2;		//玩家自己的排名 -1 没有入榜。
+	optional int32 selfCombat = 3;		//玩家自己的战斗力
+}
+
+//返回副本排行榜结果
+message SCInstanceRank {
+	option (msgid) = 3514;
+	repeated DRank ranks = 1;		//副本排行信息
+   	optional int32 selfRank = 2;    //自己的排名
+	optional int32 selfStars = 3;   //自己的星星数
+}
+
+//返回爬塔排行榜
+message SCGetPVETowerRank {
+	option (msgid) = 3516;
+	repeated DPVERank rank = 1; 	//排行榜信息
+	optional int32 selfRank = 2;  	//自己的排名 -1 没有入榜。
+	optional int32 selfGrade = 3;	//自己的成绩 1 默认爬塔值。
+}
+
+//返回洞天福地排行榜
+message SCFairylandRank {
+	option (msgid) = 3518;
+	repeated DFairylandRank ranks = 1;	//排行榜信息
+	optional int32 selfRank = 2;		//自己的排名 -1 没有入榜
+	optional int32 selfGrade = 3;		//自己的积分 0 没有积分
+}
+
+//返回竞技场排行榜
+message SCCompeteRankNew {
+	option (msgid) = 3521;
+	repeated DCompeteRank ranks = 1;	//排行榜信息
+	optional int32 selfRank = 2;		//自己的排名 -1 没有入榜
+}
+
+//排行榜暂无数据
+message SCNodata{
+	option (msgid) = 3522;
+}
+
+//返回活动总战力排行
+message SCActCombatRank {
+	option (msgid) = 3523;
+	repeated DRank ranks = 1;		//总战力排行信息
+	optional int32 selfRank = 2;		//玩家自己的排名 -1 没有入榜。
+	optional int32 selfCombat = 3;		//玩家自己的战斗力
+}
+
+

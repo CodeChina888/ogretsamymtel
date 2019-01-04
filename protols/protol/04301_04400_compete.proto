@@ -1,0 +1,118 @@
+// -----------------------------------------
+// 竞技场
+// -----------------------------------------
+// 打开竞技场
+message CSCompeteOpen {
+	option (msgid) = 4301;
+}
+// 竞技场玩家信息
+message DCompeteHuman {
+	optional int64 humanID = 1;				//角色id
+	optional string name = 2;				//角色名字
+	optional int32 headSn = 3;				//头像
+	optional int32 fightingForce = 4;		//战斗力
+	optional int32 rank = 5;				//排位赛名次
+	optional int32 topRank = 6;				//排位赛历史最高排名
+	optional int64 lastBattleTime = 7;		//最后挑战竞技场时间
+	required DPartnerLineup armyList = 8;	//上阵信息（按位置排放，为空的则所有信息都是0）
+	optional int32 challengeNum =9;			//今日已挑战次数
+	optional int32 buyChallengeNum = 10;	//今日已购买的挑战次数
+	optional int32 todayWinNums = 11;		//今日胜利次数
+	optional int32 surplusNum = 12;			//剩余挑战次数
+	optional DProp  drop = 13; 				//属性
+}
+// 打开竞技场返回
+message SCCompeteOpen {
+	option (msgid) = 4302;
+	optional int64 competeToken = 1;		//威望值
+	optional DCompeteHuman dCompeteHuman = 2;	//竞技场玩家信息
+}
+
+// 排名信息
+message DCompeteRankInfo {
+	optional int32 rank = 1;				// 排名
+	optional string name = 2;				// 姓名
+	optional int64 humanId = 3;				// 玩家id
+	optional int32 combat = 4;				// 战斗力
+	optional int32 level = 5;				// 等级
+	optional int32 modelSn = 6; 			// 模型SN
+}
+// 返回竞技场排名榜
+message SCCompeteRank {
+	option (msgid) = 4304;
+	repeated DCompeteRankInfo dCompeteRankInfo = 1;
+	optional int32 status = 2;   //膜拜状态 0：不能膜拜， n：可以膜拜n次,-1:膜拜信息出错
+	optional int32 selfrank = 3;  //-1：数据出错。
+}
+
+// 进入挑战
+message CSCompeteFight {
+	option (msgid) = 4305; 
+	optional int64 beChallengerRoleId = 1;	// 被挑战的玩家id
+	optional int32 beChallengerRank = 2;	// 被挑战的排名
+}
+
+// 挑战结果
+message SCCompeteFightResult{
+	option (msgid) = 4306;
+	optional bool isFail = 1;      			//战斗结果 false 胜利 true 失败
+	optional int32 rank = 2;				//当前名次
+	optional int32 topRank = 3;				//最高排名
+	optional string beChallengerName = 4;	//对手名字
+	optional int32 todayWinNums = 5;		//今日胜利次数
+	optional int64 lastBattleTime = 6;		//最后排外赛挑战时间
+	repeated DProduce breakReward  = 7;		//突破最高名次的奖励
+	repeated DProduce reward = 8;			//固定结算奖励
+}
+
+//用户请求离开竞技场
+message CSCompeteLeave {
+	option (msgid) = 4307;//离开竞技场地图，回到主城
+}
+
+//竞技场结束
+message CSCompeteEnd {
+	option (msgid) = 4309;
+}
+
+//请求战报
+message CSCompeteFightRecord{
+	option (msgid) = 4311;
+}
+//战斗者信息
+message DCompeteFighter{
+	optional int64 humanID = 1;				//玩家ID
+	optional string humanName = 2;			//玩家名
+	optional int32 rank = 3;				//排名
+	optional int32 modelID = 4;				//模型ID
+}
+//战斗记录信息
+message DCompeteRecord{
+	optional DCompeteFighter challenger = 1;	//挑战方
+	optional DCompeteFighter beChallenger = 2;	//被挑战方
+	optional bool winFlag = 3;				//挑战方是否胜利
+	optional int64 battleEndTime = 4;		//战斗结束时间
+}
+//请求战报返回
+message SCCompeteFightRecord{
+	option (msgid) = 4312;
+	repeated DCompeteRecord dCompeteRecord = 1;
+}
+
+// 购买挑战次数
+message CSCompeteBuyNum{
+	option (msgid) = 4313;
+}
+
+// 购买挑战次数返回
+message SCCompeteBuyNumResult {
+	option (msgid) = 4314;
+	required int32 resultCode = 1;		//0成功；非0失败（参见SysMsg.xlsx：）
+	optional int32 num = 2;				// 剩余可挑战次数
+	optional int32 needGold = 3;		//下次购买需要的元宝
+}
+//登陆下发竞技场
+message SCCompeteLogin{
+	option (msgid) = 4315;
+	optional int32 surplusNum = 3;
+}

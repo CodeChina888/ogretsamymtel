@@ -1,0 +1,666 @@
+// -----------------------------------------
+// 活动相关
+// -----------------------------------------
+
+//签到标识
+enum ESignType {
+	signNot = 0;	//未签
+	signed	= 1;	//已签
+}
+
+//寻宝类型
+enum ETreesureType {
+	getItems = 0;	//领取物品
+	getAwards	= 1;	//领取背包中的奖励
+}
+
+
+
+//活动参数
+message DActivityParam{
+	repeated int64 numParam = 1;	//数值参数列表
+	repeated string strParam = 2;	//字符串参数列表
+	repeated DItem items = 3;		//物品参数列表
+}
+//活动参数组
+message DActivityZoneItem {
+	optional int32 zone = 1;	//分组
+	repeated DActivityParam activityParams = 2;	//活动参数列表
+}
+//活动
+message DActivity {
+	optional int32 id = 1;  		//活动id
+	optional int32 team = 2;		//活动分组
+	optional int32 type = 3;		//类型
+	optional int64 beginTime = 4;  	//开始时间(Unix timestamp)
+	optional int64 endTime = 5;  	//结束时间(Unix timestamp)数值为0表示无限制
+	repeated DActivityZoneItem zoneItems = 6;	//活动参数组列表
+	optional bool showPoint = 7;	//显示红点
+	optional string notice = 8;  	//活动公告提示
+	optional int32 label = 9;		//标签
+	optional int32 index = 10;//索引
+	optional int64 planTime = 11;	//进度截止(Unix timestamp)数值为0表示无限制
+}
+//活动效果
+message DActivityEffect{
+	optional int32 type = 1; 		//类型
+	repeated int64 numParam = 2;	//数值参数列表
+}
+
+//通知活动变化
+message SCActivityNeedUpdate{
+	option(msgid) = 4801;
+	repeated int32 id = 1;	//变化的活动ID
+}
+//获取活动列表
+message CSGetActivityInfo {
+	option(msgid) = 4802;
+	optional bool isAll	= 1;	//是否全部数据
+	repeated int32 id = 2;		//指定的活动Id
+}
+//返回活动列表
+message SCActivityInfo {
+	option(msgid) = 4803;
+	optional bool isAll	= 1;			//是否全部数据
+	repeated DActivity activity = 2;	//活动
+	repeated DActivityEffect activityEffect = 3;	//活动效果
+	repeated int32 unactivatedIds = 4;				//未激活的活动id
+}
+//执行活动操作
+message CSActivityCommit{
+	option(msgid) = 4804;
+	optional int32 id = 1; 	 //活动id
+	repeated DActivityParam activityParams = 2;	//活动参数
+}
+//返回活动列表
+message SCActivityCommitReturn {
+	option(msgid) = 4805;
+	optional DActivity activity = 2;	//活动
+	optional bool success = 3;//成功或者失败
+}
+//执行每日签到
+message CSActivitySign{
+	option(msgid) = 4806;
+}
+//返回每日签到
+message SCActivitySignReturn {
+	option(msgid) = 4807;
+	optional int32 signIndex = 1;		//签到次数
+	optional int32 signGroupSn = 2;		//签到组数
+	optional ESignType signFlag = 3;	//签到标识
+}
+//执行等级礼包
+message CSActivityLvPackage{
+	option(msgid) = 4808;
+	optional int32 lv = 1;  //领取礼包等级
+}
+//返回等级礼包
+message SCActivityLvPackageReturn{
+	option(msgid) = 4809;
+	optional int32 lv = 1;  //领取礼包等级
+}
+
+//客户端领取整点体力
+message CSActivityInfo{
+	option(msgid) = 4812;
+	optional int32 time = 1;  //领取索引(1, 2, 3)
+	optional int32 fill = 2;  //0 领取，1 花费元宝领取(补领)
+}
+
+//服务端返回整点体力领取信息
+message SCActivityInfoReturn{
+	option(msgid) = 4813;
+	optional int32 recIndex = 1;		//领取的索引（1，2，3）
+	optional int32 recIndexState = 2;	//领取后的状态变化 0可领 1已领 2可补领 3不可领
+}
+
+//登录下发整点体力数据
+message SCLoadHourVitInfoMsg{
+	option(msgid) = 4814;
+	optional int64 lastTime = 1;  //用户上一次领取时间戳
+	repeated int32 recStateList = 2; //0可领 1已领 2可补领 3不可领
+}
+//服务端下发的玩家在线时间
+message SCHumanOnLineTimeMsg{
+	option(msgid) = 4815;
+	optional int64 onlineTime = 1;  //本次玩家在线时间
+}
+
+//宝箱
+message DIntegralBox {
+	optional int32 sn = 1;  		//宝箱标识 activitySeven SN
+	optional int32 rewardId = 2;		//奖励id
+	optional EAwardType  type = 3;//领取状态
+}
+
+//七日积分活动奖励 领取
+message CSActivityIntegral{
+	option(msgid) = 4816;
+	optional int32 sn = 1;  //宝箱标识	
+}
+
+// 登陆接受宝箱状态 / 领取回执
+message SCActivityIntegral{
+	option(msgid) = 4817;
+	optional int32 score = 1;  //积分
+	repeated DIntegralBox box = 2;
+	repeated DProduce ditemList = 3;//奖励列表
+}
+
+
+// -----------------------------------------
+// 
+// //领奖类型枚举
+// enum EAwardType {
+// 	AwardNot = 0;	//不能领奖
+// 	Awarding = 1;	//可以领奖
+// 	Awarded = 2;	//已经领奖
+// }
+// 说明
+// -----------------------------------------
+//获取活动信息,通过活动消息组返回
+//CSGetActivityInfo
+//	isAll = true;
+	
+//------------------------------------------------------活动类型1 每月签到----------------------
+//返回的活动信息
+//message SCActivityInfo{
+//
+//}
+//	DActivity
+//		DActivityZoneItem(多个)
+//			参数中zone=0时:单个DActivityParam:params.numParam[0]为签到天数,
+//							params.numParam[1]为补签天数,
+//							params.numParam[2]==0时为本日未签到,
+//							params.numParam[3]为补签需求元宝,
+//			参数中zone=1时:多个DActivityParam:params.items为奖励,
+//							params.numParam[0]为vip,
+//							params.numParam[1]为vip倍数,
+//
+//月签到
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]==0为签到,params.numParam[0]!=0为补签
+//------------------------------------------------------活动类型2 七日签到----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，单个DActivityParam:params.items为奖励组,
+//							params.numParam[0]为签到天数,
+//							params.numParam[1]==0时为本日未签到
+//
+//七日签到
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//------------------------------------------------------活动类型3 等级礼包----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，多个DActivityParam:params.items为奖励组,
+//							params.numParam[0]=reward_index,
+//							params.numParam[1]==1为已经领取,
+//							params.numParam[2]为需求类型(1=等级，2=消费金钱，3=消费元宝),
+//							params.numParam[3]为需求数量
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=reward_index
+//------------------------------------------------------活动类型4 体力领取----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，多个DActivityParam:取params.items为奖励组,
+//							params.strParam[0]为名称(早餐,午餐,晚餐),
+//							params.numParam[0]=reward_index,
+//							params.numParam[1]==0为未领取,
+//							params.numParam[2]为开始小时,
+//							params.numParam[3]为结束小时,
+//							params.numParam[4]为补领需求元宝,
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=reward_index,
+//			params.numParam[1]==1为补领
+//------------------------------------------------------活动类型5 成长基金----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(多个)
+//			参数中zone=0时:单个DActivityParam:params.numParam[0]==0为未购买基金,
+//							params.numParam[1]为VIP级别要求,
+//							params.numParam[2]为元宝要求,
+//							params.numParam[3]为元宝总数,
+//							params.numParam[4]为购买基金人数,
+//			参数中zone=1时:多个DActivityParam:params.items为奖励组,
+//							params.numParam[0]=reward_index,
+//							params.numParam[1]==0为未领取,
+//							params.numParam[2]为级别要求,
+//			参数中zone=2时:多个DActivityParam:params.items为奖励组,
+//							params.numParam[0]=reward_index,
+//							params.numParam[1]==0为未领取,
+//							params.numParam[2]为购买人数要求,
+
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=reward_index
+
+//购买基金
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=0
+//------------------------------------------------------活动类型6 月卡奖励----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(多个)
+//			参数中zone=0时，月卡
+//							params.items为奖励组,
+//							params.numParam[0]==0为已经领取次数,
+//							params.numParam[1]为剩余天数,
+//							params.numParam[2]==0为未领取,
+//							params.numParam[3]为PayCharge表sn
+
+//			参数中zone=1时，季卡或终生卡
+//							params.items为奖励组,
+//							params.numParam[0]==0为已经领取次数,
+//							params.numParam[1]为剩余天数,
+//							params.numParam[3]为PayCharge表sn
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=0 为月卡，params.numParam[0]=1 为季卡或终身卡
+//------------------------------------------------------活动类型7 特殊登录----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)DActivityParam:params.items为奖励组,
+//								params.strParam[0]=iconname,
+//								params.numParam[0]=reward_index,
+//								params.numParam[1]==1为已经领取,
+//								params.numParam[2]为剩余时间,
+//								params.numParam[3]为开始时间(unixtime),
+//								params.numParam[4]为结束时间(unixtime),
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=reward_index
+//------------------------------------------------------活动类型8 经验追回----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)DActivityParam:params.items为奖励组,
+//								params.numParam[0]=reward_index,
+//								params.numParam[1]==1为已经领取免费部分,
+//								params.numParam[2]==1为已经领取付费部分,
+//								params.numParam[3]为付费百分比倍率,
+//								params.numParam[4]免费数量,
+//								params.numParam[5]付费数量,
+//								params.numParam[6]付费元宝,
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=reward_index,
+//			params.numParam[1]==1付费,
+//------------------------------------------------------活动类型9 礼包激活码----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.strParam[0]=giftcode
+
+//------------------------------------------------------活动类型10 限时充值----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)(第一个DActivityParam.params.numParam[0]是玩家在活动期间充了多少)
+//					DActivityParam:params.items为奖励组,
+//									params.numParam[0](sid),
+//									params.numParam[1](1已领取，0未领取),
+//									params.numParam[2](需要充值元宝,如果已经达到则为0),
+//									params.numParam[3](还需要充值元宝可以获得),
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0](sid)
+
+//------------------------------------------------------活动类型11 限时消费----------------------
+//如活动类型10
+//------------------------------------------------------活动类型12 资源双倍----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个))params.numParam[0](sid),
+//								params.numParam[1](加成多少),
+//								params.strParam[0](),
+//领取奖励
+//------------------------------------------------------活动类型13 许愿池----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(多个)
+//		参数中zone=1时,（单个）DActivityParam:params.items为奖励组,
+//								params.numParam[0]为档位SID，
+//								params.numParam[1]需要的元宝，
+//								params.numParam[2]需要的Vip，
+//								params.numParam[3]最少可得到，
+//								params.numParam[4]最多可得到,
+//								params.numParam[5]道具ID,
+//								params.numParam[6]获得数量，
+//								params.numParam[7]是否可以领取(0可领取，1已领取)
+//								params.numParam[8]剩余次数，
+//								params.numParam[9]vip几获得次数加1，
+//		zone无参数，DActivityParam多个params.numParam[0]道具ID,
+//									params.numParam[1]获得多少,
+//									params.strParam[0]名称,
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=档位 aid
+//------------------------------------------------------活动类型14 每日首次充值----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//		参数中zone=1时,（多个）(第一个DActivityParam.params.numParam[0]是玩家的进度)
+//			DActivityParam:params.items为奖励组
+//			params.numParam[0]为档位SID，
+//			params.numParam[1]=1已经领取了=0可以领取-1不能领取
+//			params.numParam[2]当天充值元宝数
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=档位sid
+//------------------------------------------------------活动类型15 兑换----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//		参数中zone=1时,（多个)DActivityParam:params.items为兑换到的东西
+//			params.numParam[0]为档位SID，
+//			params.numParam[1]已经兑换到了多少次
+//			params.numParam[2]可以兑换次数
+//			params.strParam[0]兑换需要道具
+
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=档位sid
+//------------------------------------------------------活动类型16 你选我送----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//		DActivityParam(两个) 第一个是昨日选的，第二个是今天的
+//			[0].numParam[0] == 0(表示玩家昨天并没有选择>0表示选定的SN）
+//			[0].numParam[1] == (index)
+//			[0].numParam[2] == 0未领取，1已领取
+//			[0].addItems 道具
+//			[1].numParam[0] == 0 （0 = 没有明天的数据 > 0 有数据SN）
+//			[1].numParam[1](所选的Index0,1,2，)
+//			[1].addItems 所有的3种道具
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0](0第二天领的，1领取昨天选的奖励)
+//		参数params.numParam[1](index,如果参数[0]不是0的话不用发)
+//------------------------------------------------------活动类型17 限时折扣----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//		参数中zone=1时,DActivityParam(单个).strParam[0]客户端需求
+
+//------------------------------------------------------活动类型18 在线礼包----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=0时，多个DActivityParam:
+//							params.items为奖励组,
+//							params.numParam[0] = 5, 在线时间
+//							params.numParam[1] = aid
+//							params.numParam[2]== 0为不可领取，1为可领取，2为已经领取,
+//							params.numParam[3]== 活动开始时间
+//							params.numParam[4]== 如果是五点重置就变成1，否则为0
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=aid 领取哪个时段
+
+//------------------------------------------------------活动类型19 单笔充值----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)(第一个DActivityParam.params.numParam[0]是玩家在活动期间充了多少)
+//					DActivityParam:params.items为奖励组,
+//									params.numParam[0](sid),
+//									params.numParam[1](1可领取，0不可领取，2已领取),
+//									params.numParam[2](需要充值元宝),
+//									params.numParam[3]可领取次数,
+//									params.numParam[4]已领取次数,
+//									
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0](sid)
+
+//------------------------------------------------------活动类型21 每日单笔充值----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)(第一个DActivityParam.params.numParam[0]是玩家在活动期间充了多少)
+//					DActivityParam:params.items为奖励组,
+//									params.numParam[0](sid),
+//									params.numParam[1](1已领取，0未领取),
+//									params.numParam[2](需要充值元宝),
+//									params.numParam[3]可领取次数,//配置表里面的
+//									params.numParam[4]已领取次数,
+//									
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0](sid)
+
+
+//------------------------------------------------------活动类型 22 限时折扣----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=0时，多个DActivityParam:
+//							params.numParam[0] = sid
+//							params.numParam[1] = 可购买的剩余次数
+//							params.numParam[2] = 物品道具SN
+//							params.numParam[3]== 一次购买获得物品的数量
+//							params.numParam[4] = 购买该商品消耗的货币类型
+//							params.numParam[5]== 购买物品对应消耗的货币数量
+//							params.numParam[6]== 商品价格的折扣
+//							params.numParam[7]== 商品可购买的最大次数
+//							params.numParam[8]== 0为不限制，1以上为VIP等级
+//							params.numParam[9]== 0为不限制，1以上为主角等级
+
+//------------------------------------------------------活动类型 23 每日福利----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(两个) 
+//			DActivityParam: 登陆福利
+//							DActivityParam:params.items为奖励组,
+//							params.numParam[0] = AID
+//			....				params.numParam[1] = 最小VIP等级
+//							params.numParam[2] = 领取状态
+//			DActivityParam :每周福利
+//							DActivityParam:params.items为奖励组,
+//							params.numParam[0] = AID
+//							params.numParam[1] = 最小VIP等级
+//							params.numParam[2] = 花费物品sn
+//							params.numParam[3] = 花费物品数量
+//							params.numParam[4] = 领取状态
+//							params.numParam[5] = 剩余数量
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=aid 购买哪个物品
+//------------------------------------------------------活动类型 25 寻宝----------------------
+//返回的活动信息
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个) 
+//			DActivityParam: 
+//							params.items为物品组
+//							params.numParam[0] = 剩余可获取次数
+//							params.numParam[1] = 最大可获取次数
+//							params.numParam[2] = 已领取次数
+//							params.numParam[3] = 该活动倒计时(暂时没用)
+//							params.numParam[4] = 领取按钮状态(0不能领取 1可领取)
+//							params.numParam[5] = 今日CD
+//							params.strParam[0] = 背包中的物品sn_list
+//							params.strParam[1] = 背包中的物品num_list
+//CSActivityCommit
+//	DActivityZoneItem
+//		参数activityId
+//		参数params.numParam[0]=aid 购买哪个物品
+//------------------------------------------------------活动类型30 寻仙有礼----------------------
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)(第一个DActivityParam.params.numParam[0]是玩家在活动期间招募了多少次)
+//					DActivityParam:params.items为奖励组,
+//									params.numParam[0](sid),
+//									params.numParam[1](1可领取，0不可领取，2已领取),
+//									params.numParam[2]需要数量,
+//									
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0](sid)
+//------------------------------------------------------活动类型26 10W元宝----------------------
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)(第一个DActivityParam.params.numParam[0]是玩家在活动期间登录多少次)
+//					DActivityParam:params.items为奖励组,
+//									params.numParam[0](sid),
+//									params.numParam[1](1可领取，0不可领取，2已领取),
+//									params.numParam[2]需要数量,
+//									
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0](sid)
+//------------------------------------------------------活动类型28 七日尊享----------------------
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个)
+//			参数中zone=1时，(多个)(第一个DActivityParam.params.numParam[0]是玩家在活动期间是否激活了numParam[1]需要充值多少元宝numParam[2]活动开启天数 )
+//					DActivityParam:params.items为奖励组,
+//									params.numParam[0](sid),
+//									params.numParam[1](1可领取，0不可领取，2已领取),
+//									params.numParam[2]需要登录天数,
+//									params.numParam[3]价值
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0](sid)
+
+//------------------------------------------------------活动类型29 新服礼包----------------------
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个) zone=1 总的多少天客户端自己算（开始时间至进度截止的天数）
+//				第一个DActivityParam.params.numParam[0] 返还率（百分比）numParam[1] 每日返回上限 numParam[2] 每轮天数 numParam[3] 返回的货币类型
+//					DActivityParam
+//									params.numParam[0]第几天
+//									params.numParam[1](返回元宝数量),
+//									params.numParam[2] 1可领取，0不可领取，2已领取
+//
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0] 领取天数
+//------------------------------------------------------活动类型27 新服排行----------------------
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem zone=1
+//					 DActivityParam.params.numParam[0]活动编号
+//									params.numParam[1]类型（暂时为1后面可能有其他的类型）,
+//									params.numParam[2]从
+//									params.numParam[3]至（可能 从1到1 那么就是第一名）
+//									params.items为奖励组
+//		DActivityZoneItem	
+//					zone = 0时 客户端取实时的排行榜 
+//					zone = 2时 服务器下发截止的排行榜 取 SCActCombatRank
+
+
+//------------------------------------------------------活动类型31 寻仙折扣----------------------
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个) zone=1
+//							DActivityParam:params.numParam[0] 折扣百分比（客户端/100）
+//										   params.numParam[1] 活动次数上限
+//										   params.numParam[2] 现在进行了几次
+//------------------------------------------------------活动类型32 充值福利----------------------
+//SCActivityInfo
+//	DActivity
+//		DActivityZoneItem(单个) zone=1 	
+//				第一个DActivityParam.params.numParam[0] 今日累充.numParam[1] 客户端抬头值
+//					DActivityParam（只下发有返还元宝的数据）items为奖励组,
+//									params.numParam[0] aid
+//									params.numParam[1] 类型（1领取，2购买）
+//									params.numParam[2] 特殊进度
+//									params.numParam[3] 当前进度
+//									params.numParam[4] 总进度
+//									params.numParam[5] 原价（按类型）
+//									params.numParam[6] 现价（按类型）
+//									params.numParam[7] 状态
+//
+//领取奖励
+//CSActivityCommit
+//	DActivityZoneItem
+//  参数activityId
+//		参数params.numParam[0] 领取天数
+//------------------------------------------------------活动类型----------------------------------

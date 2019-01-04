@@ -1,0 +1,98 @@
+
+Ÿ
+msg.paymoney.protogame.msgoptions.protodefine.proto"#
+CSPayCheckCode
+
+sn (:ˆÃƒ"1
+SCPayCheckCode
+code (	
+
+sn (:ˆÃ„"e
+SCPayCharge
+
+chargeGold ()
+
+chargeInfo (2.game.msg.DChargeInfo
+vipLevel (:ˆÃ…"<
+SCCharge
+
+sn (
+orderId (	
+gold (:ˆÃ†""
+CSGsPayCharge
+
+sn (:ˆÃ‡"|
+SCGrantPresent
+
+id (
+name (	
+humanId (
+	humanName (	
+	moneyType (
+
+moneyCount (:ˆÃ‹"=
+SCCardChargeSuccess
+cardSn (
+cardNum (:ˆÃŒ"?
+SCCharge100
+
+sn (
+orderId (	
+gold (:ˆÃ"
+CSOpenPayUI:ˆÃŽ"T
+SCOpenPayUI
+
+chargeGold (*
+chargeInfos (2.game.msg.DChargeInfo:ˆÃ"
+	CSPayLogs:ˆÃ"3
+	SCPayLogs
+logs (2.game.msg.DPayLog:ˆÃ‘"
+CSReqChargeUrl:ˆÃ’";
+SCReqChargeUrl
+serverIp (	
+serverId (:ˆÃ“"
+CSOpenVipUI:ˆÃ”"N
+SCOpenVipUI
+
+chargeGold (
+vipLevel (
+
+vipGiftLog (	:ˆÃ•"%
+CSLotteryPresent
+
+id (:ˆÃ–" 
+CSPayCharge
+
+sn (:ˆÃ—"G
+CSPayChargeIOS
+
+sn (
+order (	
+receiptData (	:ˆÃ˜"F
+SCPayChargeIOS
+
+sn (
+order (	
+
+resultCode (:ˆÃ™"'
+CSRewardCardCharge
+
+sn (:ˆÃš"N
+SCRewardCardCharge
+
+sn (
+MonthRestNum (
+RecFlag (:ˆÃ›"8
+CSYYBRecharge
+jsonStr (	
+extends (	:ˆÃœ"K
+SCYYBRecharge
+jsonStr (	
+	timestamp (
+extends (	:ˆÃ"L
+CSRechargeSwitch
+appId (	
+	channelId (	
+version (	:ˆÃž"*
+SCRechargeSwitch
+jsonStr (	:ˆÃŸ

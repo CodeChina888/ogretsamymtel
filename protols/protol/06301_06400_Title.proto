@@ -1,0 +1,53 @@
+// -----------------------------------------
+// 称号
+// -----------------------------------------
+// 称号成就状态
+enum EAchieveTitleStatus {
+	AchieveTitleDoing = 0;		//进行中
+	AchieveTitleFinished = 1;	//已获得
+	AchieveTitleUse = 2; 		//已穿戴
+}
+// 称号结构
+message DAchieveTitle {
+	optional int32 sn = 1; //称号sn(achieveTitle.sn)
+	optional int32 type = 2; //称号类型
+	
+	optional int32 progress = 11; //进度
+	optional EAchieveTitleStatus status = 12; //状态
+
+	optional int64 gainTime = 21; // 获得时间
+	optional int64 limitTime = 22; // 到期时间（永久则为0）
+}
+
+// 通知，下发称号成就(登录)
+message SCLoginAchieveTitle {
+	option(msgid) = 6301;
+	repeated DAchieveTitle achieveTitles = 1; // 所有的称号成就
+	optional int32 curTitleSn = 2; // 当前使用的称号
+}
+// 通知，下发称号成就(获得，更新，称号时间到期)
+message SCUpdateAchieveTitle {
+	option(msgid) = 6302;
+	repeated DAchieveTitle achieveTitles = 1; // 所有的称号成就
+	optional int32 curTitleSn = 2; // 当前使用的称号
+}
+// 通知，获得称号
+message SCGainAchieveTitle {
+	option(msgid) = 6303;
+	repeated int32 titleSn = 1; // 获得的称号
+}
+
+
+// 请求，选择称号
+message CSSelectAchieveTitle {
+	option(msgid) = 6311;
+	optional int32 titleSn = 1; // 选择的称号
+}
+// 应答，选择称号
+message SCSelectAchieveTitle {
+	option(msgid) = 6312;
+	optional int32 titleSn = 1; // 选择的称号
+	optional int32 oldUseSn = 2; // 之前使用的称号sn(之前没使用，则为0)
+}
+
+

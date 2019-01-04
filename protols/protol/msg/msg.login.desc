@@ -1,0 +1,37 @@
+
+£
+msg.login.protogame.msgoptions.protodefine.proto"
+CSQueryCharacters:ˆÃé"J
+SCQueryCharactersResult(
+
+characters (2.game.msg.DCharacter:ˆÃê"I
+CSCharacterCreate
+
+profession (
+sex (
+name (	:ˆÃë"[
+SCCharacterCreateResult
+
+resultCode (
+resultReason (
+humanId (:ˆÃì"&
+CSCharacterDelete
+
+id (:ˆÃí"4
+SCCharacterDeleteResult
+
+resultCode (:ˆÃî"*
+CSCharacterLogin
+humanId (:ˆÃï"`
+SCCharacterLoginResult
+
+resultCode (
+
+serverTime (
+serverStartDate (:ˆÃð"?
+CSCharacterCreateName
+
+profession (
+sex (:ˆÃñ",
+SCCharacterCreateName
+name (	:ˆÃò

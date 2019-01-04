@@ -1,0 +1,60 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 06601_06699_pk.proto-----
+
+//切磋镜像玩家
+message CSPKMirrorFight {
+	option(msgid) = 6601;
+	optional int64 beFightId = 1; // 被挑战的玩家id
+}
+
+//离开切磋镜像玩家副本
+message CSPKMirrorLeave {
+	option (msgid) = 6603;
+}
+
+//结算切磋镜像玩家副本
+message CSPKMirrorEnd {
+	option (msgid) = 6605;
+}
+
+//返回结算切磋镜像玩家副本
+message SCPKMirrorEnd {
+	option (msgid) = 6606;
+	optional bool isFail = 1; // 是否失败：true失败，false胜利
+	optional int64 beFightId = 2; // 被挑战方id
+	optional string beFightName = 3; // 被挑战方昵称 
+	// 以下失败不发送
+	optional int32 winCount = 11; // 今日胜利次数
+	repeated DProduce items = 12; // 奖励物品
+}
+
+//切磋真人玩家
+message CSPKHumanFight {
+	option(msgid) = 6611;
+	optional int64 beFightId = 1; // 被挑战的玩家id
+}
+
+//离开切磋真人玩家副本
+message CSPKHumanLeave {
+	option (msgid) = 6613;
+}
+
+//结算切磋真人玩家副本
+message CSPKHumanEnd {
+	option (msgid) = 6615;
+}
+
+//返回结算切磋真人玩家副本
+message SCPKHumanEnd {
+	option (msgid) = 6616;
+	optional bool isFail = 1; // 是否失败：true失败，false胜利
+	optional int64 beFightId = 2; // 被挑战方id
+	optional string beFightName = 3; // 被挑战方昵称 
+	// 以下失败不发送
+	optional int32 winCount = 11; // 今日胜利次数
+	repeated DProduce items = 12; // 奖励物品
+}
+
+

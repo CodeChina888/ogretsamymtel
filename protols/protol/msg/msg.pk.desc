@@ -1,0 +1,23 @@
+
+û
+msg.pk.protogame.msgoptions.protodefine.proto"+
+CSPKMirrorFight
+	beFightId (:ˆÃÉ3"
+CSPKMirrorLeave:ˆÃË3"
+CSPKMirrorEnd:ˆÃÍ3"ƒ
+SCPKMirrorEnd
+isFail (
+	beFightId (
+beFightName (	
+winCount (!
+items (2.game.msg.DProduce:ˆÃÎ3"*
+CSPKHumanFight
+	beFightId (:ˆÃÓ3"
+CSPKHumanLeave:ˆÃÕ3"
+CSPKHumanEnd:ˆÃ×3"‚
+SCPKHumanEnd
+isFail (
+	beFightId (
+beFightName (	
+winCount (!
+items (2.game.msg.DProduce:ˆÃØ3

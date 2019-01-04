@@ -1,0 +1,108 @@
+
+ì
+msg.skill.protogame.msgoptions.protodefine.proto"ù
+SCSkillInfo*
+skillInfoSet (2.game.msg.DSkillInfo$
+
+skillTrain (2.game.msg.DSkill$
+train (2.game.msg.DSkillTrain
+mutiple (:à√Ø"B
+SCSkillUnlock*
+skillInfoSet (2.game.msg.DSkillInfo:à√∞"@
+SCSkillTrainUnlock#
+	trainList (2.game.msg.DSkill:à√±"B
+CSSkillInstall)
+
+skillGroup (2.game.msg.DSkillGroup:à√’"B
+SCSkillInstall)
+
+skillGroup (2.game.msg.DSkillGroup:à√÷"I
+CSSkillLvUp
+bOneKey ("
+skillSet (2.game.msg.DSkill:à√◊"8
+SCSkillLvUp"
+skillSet (2.game.msg.DSkill:à√ÿ")
+CSSkillStageUp
+skillTag (:à√Ÿ"9
+SCSkillStageUp 
+dSkill (2.game.msg.DSkill:à√⁄"-
+CSSkillTrainMutiple
+mutiple (:à√È"-
+SCSkillTrainMutiple
+mutiple (:à√Í"'
+CSSkillTrain
+isOnekey (:à√Î"Q
+SCSkillTrain
+isOnekey ((
+	trainList (2.game.msg.DSkillTrain:à√Ï".
+CSSkillResetTrain
+
+resetIndex (:à√Ì"X
+SCSkillResetTrain
+
+resetIndex ((
+	trainList (2.game.msg.DSkillTrain:à√Ó"
+CSSkillSaveTrain:à√Ô">
+SCSkillSaveTrain#
+	skillList (2.game.msg.DSkill:à√"
+CSSkillTrainCheck:à√Ò"R
+SCSkillTrainCheck
+flag ((
+	trainList (2.game.msg.DSkillTrain:à√Ú"<
+CSSkillRuneUnlock
+skillTag (
+runeSn (:à√˝"B
+SCSkillRuneUnlock&
+runeInfo (2.game.msg.DSkillRune:à√˛">
+CSSkillRunePractice
+skillTag (
+runeSn (:à√ˇ"D
+SCSkillRunePractice&
+runeInfo (2.game.msg.DSkillRune:à√Ä"+
+CSSkillResetRune
+skillTag (:à√Å"r
+SCSkillResetRune
+skillTag (%
+runeSet (2.game.msg.DSkillRune
+lastResetSkillRuneTime (:à√Ç"p
+SCSkillGodsInfo*
+skillGodsSet (2.game.msg.DSkillGods
+godsSnInBattle (
+
+refreshNum (:à√ï"[
+SCSkillGodsUnlock'
+	skillGods (2.game.msg.DSkillGods
+godsSnInBattle (:à√ñ")
+CSSkillGodsLvUp
+godsTag (:à√á"g
+SCSkillGodsLvUp'
+	skillGods (2.game.msg.DSkillGods
+	soulValue (
+	critValue (:à√à"+
+CSSkillGodsStarUp
+godsTag (:à√â"C
+SCSkillGodsStarUp'
+	skillGods (2.game.msg.DSkillGods:à√ä"+
+CSSelectSkillGods
+godsTag (:à√ã"+
+SCSelectSkillGods
+godsTag (:à√å",
+CSGodsUnlockByItem
+godsTag (:à√ç"\
+SCGodsUnlockByItem'
+	skillGods (2.game.msg.DSkillGods
+godsSnInBattle (:à√é".
+CSGodsAddAttrRefresh
+godsTag (:à√è"q
+SCGodsAddAttrRefresh
+godsSn (
+curAddAttrId (
+refreshAddAttrId (
+
+refreshNum (:à√ê"D
+CSSelectGodsAddAttr
+godsTag (
+godsAddAttrId (:à√ë"D
+SCSelectGodsAddAttr
+godsTag (
+godsAddAttrId (:à√í

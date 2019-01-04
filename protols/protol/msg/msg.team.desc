@@ -1,0 +1,78 @@
+
+Õ
+msg.team.protogame.msgoptions.protodefine.proto"
+CSTeamRepInfo:ˆÃÑ("@
+SCTeamRepInfo(
+
+dFinishNum (2.game.msg.DFinishNum:ˆÃÒ("k
+SCTeamMemberInfo%
+teamInfo (2.game.msg.DTeamInfo)
+
+memberInfo (2.game.msg.DMemberInfo:ˆÃÓ(":
+
+SCTeamInfo%
+teamInfo (2.game.msg.DTeamInfo:ˆÃÔ("@
+SCMemberInfo)
+
+memberInfo (2.game.msg.DMemberInfo:ˆÃÕ("(
+CSTeamCreate
+	actInstSn (:ˆÃÖ("&
+
+CSTeamJoin
+	actInstSn (:ˆÃ×("
+CSTeamLeave:ˆÃØ("$
+SCTeamLeave
+result (:ˆÃÙ(""
+CSTeamKickOut
+
+id (:ˆÃÚ("&
+SCTeamKickOut
+result (:ˆÃÛ("$
+CSTeamInviteOne
+
+id (:ˆÃÜ("?
+SCTeamInviteOne%
+teamInfo (2.game.msg.DTeamInfo:ˆÃÝ(")
+CSTeamInviteAll
+content (	:ˆÃÞ(";
+CSTeamApplyJoin
+teamId (
+	actInstSn (:ˆÃß("z
+SCTeamApplyJoin
+result (%
+teamInfo (2.game.msg.DTeamInfo)
+
+memberInfo (2.game.msg.DMemberInfo:ˆÃà("
+CSTeamEnterRep:ˆÃá("'
+SCTeamEnterRep
+result (:ˆÃâ("?
+SCMonsterMadeIndex
+indexCur (
+indexMax (:ˆÃã("
+CSStoryInfo:ˆÃä("=
+SCStoryInfo
+
+snLastPass (
+awardRecord (:ˆÃå(",
+CSStoryPassAward
+	actInstSn (:ˆÃæ(")
+SCStoryPassAward
+result (:ˆÃç("
+CSMHXKWarInfo:ˆÃè("*
+SCMHXKWarInfo
+
+snLastPass (:ˆÃé("
+CSTeamMatch:ˆÃ„)"$
+SCTeamMatch
+result (:ˆÃ…)"i
+SCTeamVSTeam(
+	memberOne (2.game.msg.DMemberInfo(
+	memberTwo (2.game.msg.DMemberInfo:ˆÃ†)"#
+
+CSFindTeam
+teamId (:ˆÃ‡)")
+SCFindTeamResult
+result (:ˆÃˆ)"
+CSTeamMatchCancel:ˆÃ‰)"*
+SCTeamMatchCancel
+result (:ˆÃŠ)

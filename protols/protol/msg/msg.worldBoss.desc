@@ -1,0 +1,102 @@
+
+Õ
+msg.worldBoss.protogame.msgoptions.protodefine.proto",
+CSWorldBossEnter
+	actInstSn (:à√©-",
+CSWorldBossLeave
+	actInstSn (:à√´-"1
+CSWorldBossEnterFight
+	actInstSn (:à√≠-"W
+SCWorldBossEnterFight
+	actInstSn (
+
+resultCode (
+isReborn (:à√Æ-"1
+CSWorldBossLeaveFight
+	actInstSn (:à√Ø-"
+CSWorldBossInstSn:à√±-"Q
+SCWorldBossInstSn
+	actInstSn (
+isOpen (
+
+bossInstSn (:à√≤-"+
+CSWorldBossInfo
+	actInstSn (:à√≥-"i
+SCWorldBossInfo
+	actInstSn (
+
+bossInstSn (
+
+lv (
+hpMax (
+hpCur (:à√¥-"+
+CSWorldBossRank
+	actInstSn (:à√µ-"u
+SCWorldBossRank
+	actInstSn ($
+dPVEHarm (2.game.msg.DPVEHarm
+harmSelf (
+rankSelf (:à√∂-"=
+CSWorldBossHarm
+	actInstSn (
+harmSelf (:à√∑-"è
+SCWorldBossHarm
+	actInstSn (
+harmSelf (
+	coinAward (
+	bossHpCur (*
+dWBKillInfo (2.game.msg.DWBKillInfo:à√∏-"i
+SCWorldBossEnd
+	actInstSn (
+	bossHpCur (*
+dWBKillInfo (2.game.msg.DWBKillInfo:à√∫-"-
+CSWorldBossRevive
+	actInstSn (:à√Ω-"A
+SCWorldBossRevive
+	actInstSn (
+
+resultCode (:à√æ-"-
+CSWorldBossReborn
+	actInstSn (:à√ø-"T
+SCWorldBossReborn
+	actInstSn (
+
+resultCode (
+	numReborn (:à√¿-"5
+CSWorldBossInspireCDClean
+	actInstSn (:à√¡-"à
+SCWorldBossInspireCDClean
+	actInstSn (
+
+resultCode (
+tmNextInspire (
+
+numInspire (
+
+maxInspire (:à√¬-"ó
+SCWorldBossFightInfo
+	actInstSn (
+tmNextFight (
+tmNextInspire (
+
+numInspire (
+
+maxInspire (
+	numReborn (:à√ƒ-"1
+CSWorldBossOtherHuman
+	actInstSn (:à√≈-"_
+SCWorldBossOtherHuman
+	actInstSn (,
+dHumanInfoList (2.game.msg.DHumanInfo:à√∆-"0
+CSWorldBossRankFinal
+	actInstSn (:à√«-"z
+SCWorldBossRankFinal
+	actInstSn ($
+dPVEHarm (2.game.msg.DPVEHarm
+harmSelf (
+rankSelf (:à√»-".
+CSWorldBossUponTop
+	actInstSn (:à√…-"H
+SCWorldBossUponTop
+harmTop3Names (	
+killBossName (	:à√ -

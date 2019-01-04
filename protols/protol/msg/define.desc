@@ -1,0 +1,1715 @@
+
+με
+define.protogame.msg" 
+DVector2	
+x (	
+y ("+
+DVector3	
+x (	
+y (	
+z ("Ν
+
+DCharacter
+
+id (
+name (	
+
+profession (
+level (
+sex (
+fashionShow (
+fashionWeaponSn (
+fashionClothesSn (
+equipWeaponSn	 (
+equipClothesSn
+ ("€
+DUnit
+
+id (
+prop (2.game.msg.DProp
+name (	
+
+profession (
+level (
+modelSn (
+
+sn ("
+DHuman
+
+id (
+
+platformId (
+serverId (
+
+humanDigit (
+name (	
+
+profession (
+sex (
+
+sn (
+modelSn	 (
+headSn
+ (
+mountSn (
+level (
+combat (
+	sumCombat (
+generalMostCombat (
+creatHumanTime (
+prop2 (2.game.msg.DProp
+money3 (2.game.msg.DMoney)
+
+skillGroup4 (2.game.msg.DSkillGroup
+runeIds5 (.
+dDailyCostBuy< (2.game.msg.DDailyCostBuy*
+dDailyReset= (2.game.msg.DDailyReset,
+dWeeklyReset> (2.game.msg.DWeeklyReset(
+
+dGuideInfoF (2.game.msg.DGuideInfo*
+dVipPaymentG (2.game.msg.DVipPayment&
+	dShowInfoH (2.game.msg.DShowInfo
+modUnlockSnListd (
+modUnlockRewarde (
+	renameNumf (
+actFullTimeg (
+guildIdk ("‘
+DStage"
+posNow (2.game.msg.DVector2"
+dirNow (2.game.msg.DVector2
+stageId (
+mapSn (
+instSn (
+lineNum ("Ύ
+DDailyCostBuy
+dailyActBuyNum (
+dailyCoinBuyNum (
+dailyCompeteFightBuyNum (
+dailyTowerReviveBuyNum ( 
+dailyLootMapReviveBuyNum (
+dailyFreeWinksNum ("‚
+DDailyReset
+dailyOnlineTime (*
+dailySignFlag (2.game.msg.ESignType
+dailyCompeteFightNum (
+dailyCompeteIntegral ((
+
+dFinishNum (2.game.msg.DFinishNum,
+dRankWorship (2.game.msg.DRankWorship
+dailyQuestLiveness ("
+DWeeklyReset"J
+
+DGuideInfo
+
+OrderIndex (
+CurFunctionId (
+	FuncIndex ("3
+DVipPayment
+vipLevel (
+
+chargeGold ("S
+	DShowInfo
+fashionShow (
+fashionWeaponSn (
+fashionClothesSn ("H
+DGroove
+groove (
+stars (
+colors (
+levels ("
+DProp
+hpMax (
+hpMaxPct (
+hpMaxEx (
+rageCur (
+rageMax (
+atk (
+atkPct (
+atkEx (
+atkPhy	 (
+	atkPhyPct
+ (
+atkPhyEx (
+atkMag (
+	atkMagPct (
+atkMagEx (
+def (
+defPct (
+defEx (
+defPhy (
+	defPhyPct (
+defPhyEx (
+defMag (
+	defMagPct (
+defMagEx (
+hit (
+dodge (
+crit (
+antiCrit (
+critAdd (
+antiCritAdd (
+pene (
+penePhy (
+PeneMag  (
+block! (
+	antiBlock" (
+	bloodSuck# (
+control$ (
+antiControl% (
+damAdd2 (
+damAddEx3 (
+damRed4 (
+damRedEx5 (
+	damPhyAdd6 (
+damPhyAddEx7 (
+	damPhyRed8 (
+damPhyRedEx9 (
+	damMagAdd: (
+damMagAddEx; (
+	damMagRed< (
+damMagRedEx= (
+	damComAdd> (
+	damComRed? (
+
+damRageAdd@ (
+
+damRageRedA (
+cureAddB (
+	cureAddExC (
+healAddD (
+	healAddExE (
+shieldF (
+	shieldPhyG (
+	shieldMagH (
+damBackI (
+	poisonAddJ (
+poisonAddExK (
+antiPoisonAddL (
+antiPoisonAddExM (
+burnAddN (
+	burnAddExO (
+antiBurnAddP (
+antiBurnAddExQ (
+bloodAddR (
+
+bloodAddExS (
+antiBloodAddT (
+antiBloodAddExU (
+stunV (
+chaosW (
+banHealX (
+	paralyticY (
+banRageZ (
+silent[ (
+immortal\ (
+	immunePhy] (
+	immuneMag^ (
+
+invincible_ (
+certainlyHit` (
+certainlyControla (
+Weakb ("3
+DProduce
+
+sn (
+num (
+isItem ("ι
+DMoney
+coin (
+gold (
+act (
+exp (
+competeToken (
+	soulToken (
+
+towerToken (
+generalToken (
+summonToken	 (
+
+parnterExp
+ (
+	runeToken (
+
+lootSingle (
+lootMultiple (
+summonPresent (
+summonHigher (
+refreshToken (
+skillExperience (
+refineToken (
+summonScore (
+cimeliaToken (
+developmentToken (
+snatchToken (
+
+resetStone (
+	guildCoin ("D
+DPVPKill
+name (	
+modelSn (
+kill (
+die ("7
+DPVEHarm
+name (	
+modelSn (
+harm ("H
+DPayLog
+propId (	
+orderId (	
+time (	
+status (	"~
+DChargeInfo
+
+sn (
+num (
+lastDay (
+RecFlag (
+gift (
+giftOnce (
+iosProductId (	"
+DStageObject
+pos (2.game.msg.DVector2
+dir (2.game.msg.DVector2
+objId (
+modelSn (
+name (	(
+type (2.game.msg.EWorldObjectType$
+human (2.game.msg.DStageHuman(
+monster (2.game.msg.DStageMonster"
+drop	 (2.game.msg.DStageDrop"
+pick
+ (2.game.msg.DStagePick 
+npc (2.game.msg.DStageNPC(
+partner (2.game.msg.DStagePartner"†
+DStageHuman"
+posEnd (2.game.msg.DVector3
+level (
+sex (
+
+profession (
+hpCur (
+hpMax (
+mpCur (
+mpMax (
+evil
+ (
+titleSn (
+teamId (
+unionId (
+	countryId (
+fashionShow (
+fashionWeaponSn (
+fashionClothesSn (
+equipWeaponSn (
+equipClothesSn (
+pvpMode (	
+
+inFighting ()
+
+skillGroup (2.game.msg.DSkillGroup
+combat (
+propJson! (	
+
+sn" (
+	titleShow( (
+name) (	"·
+DStagePartner"
+posEnd (2.game.msg.DVector3
+level (
+sex (
+
+profession (
+hpCur (
+hpMax (
+mpCur (
+mpMax (
+fashionShow (
+fashionWeaponSn (
+fashionClothesSn (
+equipWeaponSn (
+equipClothesSn (
+advLevel (
+stars ("΄
+DStageMonster"
+posEnd (2.game.msg.DVector3
+hpCur (
+hpMax (
+collisionRadius (
+speed (
+active (
+face (
+pvpMode
+ (	
+	pvpDiWoId (
+teamBundleID (
+skill (2.game.msg.DSkill
+skillGroupSn (
+index (
+atkSpeed (
+canMove (
+canCastSkill (
+	canAttack (
+propJson (	
+combat (
+
+sn (
+birthSn (
+masterId ("
+	DStageDot
+dotSn (
+pos (2.game.msg.DVector2
+	scopeType (
+scopeParam1 (
+scopeParam2 (
+createId ("«
+DStageBullet
+bulletSn (
+pos (2.game.msg.DVector2"
+posTar (2.game.msg.DVector2
+	unitTarID (
+skillSn (
+createId (
+fireId ("~
+
+DStageDrop
+type (	
+itemSn (
+num (
+humanId (
+protectTime (
+bind (
+	monsterId ("N
+
+DStagePick
+pickSn (
+pos (2.game.msg.DVector2
+visible ("
+	DStageNPC"Π
+DDummy
+humanId (
+modelSn (
+name (	
+sex (
+
+profession (
+fashionShow (
+fashionWeaponSn (
+fashionClothesSn (
+equipWeaponSn	 (
+equipClothesSn
+ ("R
+DRecordFightRoleInfo
+name (	
+
+sn (
+aptitude (
+combat ("Κ
+
+DHpChgOnce
+hpChange (
+hpCur (
+hpMax (
+atkRage (
+defRage (
+effect (
+hpLost (
+	atkerType (
+hpType	 (	
+
+attackerId
+ ("
+attPos (2.game.msg.DVector2#
+backPos (2.game.msg.DBackPos
+	damegeNum (
+	damegeAdd (
+hurtAdd (
+disMoveTime ("A
+	DHpChgTar
+
+id ((
+
+dhpChgOnce (2.game.msg.DHpChgOnce"n
+DBackPos
+
+id (
+pos (2.game.msg.DVector2$
+type (2.game.msg.EBackPosType
+Binding ("e
+DFashionHenshin
+	fashionSn (,
+state (2.game.msg.EFashionHenshinType
+	limitTime ("c
+DInformCrossChat
+name (	
+content (	
+serverId (
+Icon (
+aptitude ("V
+
+DBagUpdate
+
+id (
+type (
+bagType (
+item (2.game.msg.DItem",
+	DDropItem
+itemSn (
+itemNum ("4
+DItem
+itemId (
+itemSn (
+num ("”
+DEquip
+itemId (
+itemSn (
+reinforceLv (
+
+advancedLv (
+refineLv (
+refineSlotLvs (
+refineSlotRecord ("N
+
+DSoulEquip
+SpiritID (
+Position (
+Level (
+Value ("
+DRune
+runeId (
+runeSn (
+runeLv (
+runeExp (
+state (
+itemId (
+itemSn (
+	equipSlot ("1
+DRuneRefining
+type (
+
+lightItems (	"J
+DDevourRune
+itemId (+
+	container (2.game.msg.EContainerType"L
+DBuff
+
+sn (
+timeLeft (%
+buffProp (2.game.msg.DBuffProp"/
+	DBuffProp
+buffKey (	
+	buffValue ("έ
+DPartnerInfo
+	partnerId (
+	partnerSn (
+unit (2.game.msg.DUnit
+skill (2.game.msg.DSkill
+star (
+advanceLevel (!
+pracProp (2.game.msg.DProp
+relation (
+combat	 (
+	attingPos
+ (
+
+partnerExp (!
+itemBody (2.game.msg.DItem#
+cimelia (2.game.msg.DCimelia
+runeIds ("X
+DCimelia
+	partnerId (
+star (
+level (
+advLevel (
+
+sn ("O
+DServantBriefInfo
+
+sn (
+level (
+starts (
+advance ("
+DPartnerBriefInfo
+
+id (
+level (
+star (
+advanceLevel (
+combat (
+
+sn (,
+servant (2.game.msg.DServantBriefInfo"G
+DDecoPartnerItems
+	partnerID (
+itemSn (
+itemNum ("|
+DPartnerLineup,
+
+typeLineup (2.game.msg.EPartnerLineup)
+
+typeStance (2.game.msg.EStanceType
+	idPartner ("e
+DServantInfo
+	partnerId (
+	servantId (
+power ( 
+addProp (2.game.msg.DProp"f
+DQuestDaily
+
+sn (
+nowProgress (6
+eQuestDailyStatus (2.game.msg.EQuestDailyStatus"µ
+DAchievement
+
+sn (
+targetProgress (
+nowProgress (
+
+lv (
+uniqueSn (,
+status (2.game.msg.EAchievementStatus
+
+updateTime (
+type ("(
+DExShopBuyNum
+
+sn (
+num ("4
+	DShopItem
+
+sn (
+itemSn (
+num ("¶
+	DShopInfo%
+shopType (2.game.msg.EShopType%
+shopItem (2.game.msg.DShopItem
+freeRefCount (
+lastReplyTime (
+countRefDaily (
+nextAutoRefTime ("S
+	DInstInfo
+instSn (
+star (
+fightNumRemain (
+resetNum ("|
+	DChapInfo
+chapSn (
+starAll ('
+	boxStatus (2.game.msg.EAwardType%
+instInfo (2.game.msg.DInstInfo"C
+DStarCondition
+dieNum (
+boutNum (
+remainHp ("Έ
+DInstEnd
+instSn (
+index (
+useSec (
+level (
+exp (
+coin ((
+producesRand (2.game.msg.DProduce)
+producesFirst (2.game.msg.DProduce";
+DInstResTypeInfo
+resType (
+fightNumRemain ("/
+DInstResInfo
+	instResSn (
+star ("
+DSkillGroup
+skillSet ("G
+DSkill
+skillTag (
+
+lv (
+stage (
+stageExp ("V
+
+DSkillInfo
+skill (2.game.msg.DSkill'
+	skillRune (2.game.msg.DSkillRune"Z
+DSkillTrain$
+itemList (2.game.msg.DProduce%
+	extraItem (2.game.msg.DProduce"=
+
+DSkillRune
+skillSn (
+runeSn (
+runeLv ("a
+
+DSkillGods
+godsTag (
+godsLv (
+exp (
+star (
+additionSkillSnd (",
+	DMailItem
+itemSn (
+itemNum ("έ
+DMail
+
+id (
+receiver (
+sender (
+
+senderName (	
+title (	
+content (	
+acceptTimestamp (
+deleteTimestamp (
+read	 (
+pickup
+ ("
+items (2.game.msg.DMailItem"Θ
+DFriendInfo
+humanId (
+name (	
+level (
+combat (
+online (
+vip (
+sign (	
+camp (
+actStage	 (
+headSn
+ (
+mountSn (
+modelSn ("γ
+DRank
+index (
+name (	
+humanId (
+combat (
+level (
+modelSn (
+guild (	
+equipWeaponSn (
+equipClothesSn	 (
+fashionClothesSn
+ (
+isFashionShow (
+stars ("N
+DSumCombatRank
+index (
+name (	
+humanId (
+combat ("l
+DCompeteRank
+index (
+name (	
+humanId (
+combat (
+modelSn (
+level ("Δ
+DSeeProperty
+modelSn (
+name (	
+humanId (
+combat (
+level (
+icon (
+guild (	
+sex (
+prop	 (2.game.msg.DProp
+titleSn
+ (
+vip ("A
+DRankWorship$
+type (2.game.msg.EWorshipType
+num ("δ
+
+DRankGuild
+index (
+name (	
+guildId (
+level (
+chairmanName (	
+
+chairmanId (
+equipWeaponSn (
+equipClothesSn	 (
+fashionClothesSn
+ (
+isFashionShow (
+modelSn ("…
+DPVERank
+rank (
+key (
+	humanName (	
+modelSn (
+humanId (
+lvl (
+combat (
+icon ("‹
+DFairylandRank
+rank (
+key (
+	humanName (	
+humanId (
+modelSn (
+lvl (
+combat (
+icon ("°
+DCompeteHuman
+humanID (
+name (	
+headSn (
+fightingForce (
+rank (
+topRank (
+lastBattleTime (*
+armyList (2.game.msg.DPartnerLineup
+challengeNum	 (
+buyChallengeNum
+ (
+todayWinNums (
+
+surplusNum (
+drop (2.game.msg.DProp"o
+DCompeteRankInfo
+rank (
+name (	
+humanId (
+combat (
+level (
+modelSn ("T
+DCompeteFighter
+humanID (
+	humanName (	
+rank (
+modelID ("
+DCompeteRecord-
+
+challenger (2.game.msg.DCompeteFighter/
+beChallenger (2.game.msg.DCompeteFighter
+winFlag (
+battleEndTime ("'
+DVipBuy
+type (
+number ("T
+DActivityParam
+numParam (
+strParam (	
+items (2.game.msg.DItem"S
+DActivityZoneItem
+zone (0
+activityParams (2.game.msg.DActivityParam"Ϊ
+	DActivity
+
+id (
+team (
+type (
+	beginTime (
+endTime (.
+	zoneItems (2.game.msg.DActivityZoneItem
+	showPoint (
+notice (	
+label	 (
+index
+ (
+planTime ("1
+DActivityEffect
+type (
+numParam ("P
+DIntegralBox
+
+sn (
+rewardId ("
+type (2.game.msg.EAwardType"z
+	DTeamInfo
+teamId (
+	actInstSn (
+leaderId (
+
+leaderName (	
+leaderLevel (
+teamNum ("
+DMemberInfo
+
+id (
+name (	
+level (
+combat (
+
+profession (
+sex (
+modelSn (
+isOnline (",
+
+DFinishNum
+	actInstSn (
+num ("(
+DTrialShopBuy
+
+sn (
+num ("©
+DTowerRewardBox
+
+towerLayer ((
+diff (2.game.msg.ETowerDifficulty
+rewardBoxSn (
+cardStateList (
+rewardBoxSn1 (
+cardStateList1 ("^
+DTowerLayerEnemy
+matchLayerType (2
+layerEnemyList (2.game.msg.DTowerMatchEnemy"}
+DTowerMatchEnemy
+layer (
+humanId (
+combat (
+passCond (
+	passParam (
+conditionSns ("~
+DTowerHuman
+humanId (
+
+lv (
+name (	
+modelSn (
+headSn (
+mountSn (
+
+towerLayer ("Y
+DTowerPartner
+	partnerId (
+
+sn (
+
+lv (
+prop (2.game.msg.DProp"q
+DrawCardBaseMsh"
+types (2.game.msg.EDrawType
+
+CD (
+num (
+FirstPay (
+freeNum ("N
+DCardExchangeInfo
+roundNum ('
+states (2.game.msg.ECardExchange"-
+DLootMapBuff
+buffSn (
+count ("7
+DLootMapSkill
+eventSn (
+levelObjectSn ("
+DLootMapHuman(
+	humanInfo (2.game.msg.DMemberInfo
+pos (2.game.msg.DVector2
+isProtecting (
+isPking (
+	isRedName (
+activeRobNum (
+passiveRobNum (
+
+killNumber (
+oneRank	 (
+oneScore
+ (
+score (
+rank (
+attack (
+
+hp (
+maxHp ()
+eggSkill (2.game.msg.DLootMapSkill!
+itemList (2.game.msg.DItem
+buffs ("}
+DLootMapEvent
+
+id (
+eventSn (
+
+eventObjSn (
+attack (
+
+hp (
+pos (2.game.msg.DVector2"3
+DWBKillInfo
+killerId (
+
+killerName (	"7
+
+DHumanInfo
+name (	
+
+id (
+modelSn ("@
+DNoviceActivity
+
+sn (
+status (
+	propgress ("N
+DSevenLoginAwardType
+
+sn (*
+loginDaytype (2.game.msg.EAwardType"
+DAchieveTitle
+
+sn (
+type (
+progress (-
+status (2.game.msg.EAchieveTitleStatus
+gainTime (
+	limitTime ("N
+DGainsituation
+humanId (
+name (	
+item (2.game.msg.DItem"¤
+DNetRedPacket
+redpacketid (
+humanId (
+nums (
+	begintime (
+endTime (&
+info (2.game.msg.DGainsituation
+redPacketSn ("s
+DCastellanInfo&
+type (2.game.msg.ECastellanType
+humanId (
+name (	
+
+sn (
+buyNum ("ψ
+
+DGuildInfo
+guildId (
+	guildName (	
+
+guildLevel (
+initiationMinLevel (
+guildLiveness (
+guildCDRName (	
+guildOwnNum (
+guildStatus (
+guildDeclare	 (	
+guildNotice
+ (	
+	guildIcon (
+guildExp (
+guildQQ (
+	guildPlan (
+guildCombat (
+leadrtId (
+rank (
+currentPersion ("‡
+DGuildMemberInfo
+memberId (
+
+memberName (	
+memberLevel (
+memberSn (
+memberContribute (
+memberTimeLogout (
+memberCombat (
+onlineStatus (
+post	 (&
+type
+ (2.game.msg.EGuildImmoType
+aptitude ("°
+DGuildApplyHumanInfo
+humanId (
+	humanName (	
+
+humanLevel (
+humanSn (
+humanCombat (
+aptitude (
+onlineStatus (
+
+timeLogout ("Α
+
+DGuildImmo
+time (
+name (	&
+type (2.game.msg.EGuildImmoType
+dareSn ((
+handle (2.game.msg.ELogHandleType#
+logType (2.game.msg.ELogType
+aptitude ("
+DGuildSkill
+
+sn ("3
+DGuildInstStageInfo
+hpCur (
+stage ("Q
+DStageReward
+slot (
+
+playerName (	
+itemSn (
+itemNum ("‘
+	DCaveBase
+caveSn (
+isOwn (
+combat (
+humanId (
+page (
+index (%
+caveType (2.game.msg.ECaveType
+	humanName (	#
+manType	 (2.game.msg.EManType
+useTime
+ (
+cdTimeCount (
+guildID (
+	guildName (	"¨
+DCaveDefense
+	humanName (	
+combat (
+humanID (
+unionID (
+	unionName (	
+isWin ((
+
+battleType (2.game.msg.ETokenType
+time ($
+itemList	 (2.game.msg.DProduce
+useTime
+ (
+page (
+index (%
+caveType (2.game.msg.ECaveType"c
+DCaveGuildMemberInfo
+	cave_page (
+	human_num (%
+caveType (2.game.msg.ECaveType"[
+DCrossOperate
+playerId ()
+type (2.game.msg.ECrossOperateType
+param (	"V
+DTurnbasedObjectProp
+hpCur (
+hpMax (
+rageCur (
+rageMax ("/
+DTurnbasedObjectSkill
+
+sn (
+
+lv ("d
+DTurnbasedBuff
+
+id (
+
+sn (
+ownerId (
+	roundLeft (
+triggleSkillSn ("‡
+DTurnbasedObject
+
+id (
+
+sn (
+pos (2.game.msg.EPosType,
+type (2.game.msg.ETurnbasedObjectType,
+prop (2.game.msg.DTurnbasedObjectProp2
+	skillList (2.game.msg.DTurnbasedObjectSkill*
+buffList (2.game.msg.DTurnbasedBuff"§
+DTurnbasedTeamObjs0
+fightObjList (2.game.msg.DTurnbasedObject!
+team (2.game.msg.ETeamType%
+stance (2.game.msg.EStanceType
+snInstMonster ("β
+DTurnbasedSkillTarget
+
+id (
+damage (
+rage (*
+buffList (2.game.msg.DTurnbasedBuff
+isCrit (
+isBlock (
+isDodge (
+isImmune (
+showRage	 (
+shield
+ (
+hpMax ("D
+DTurnbasedFinishObject
+
+id (
+hpCur (
+rageCur (*Δ
+
+EMoneyType
+minMoney 
+coin
+gold
+act
+exp
+competeToken
+	soulToken
+
+towerToken
+generalToken
+summonToken	
+
+parnterExp
+
+	runeToken
+
+lootSingle
+lootMultiple
+	lootScore
+
+vipExp
+summonPresent
+summonHigher
+refreshToken
+skillExperience
+refineToken
+summonScore
+cimeliaToken
+developmentToken
+snatchToken
+
+resetStone
+	guildCoin
+maxMoneyd*y
+EQualityType
+QualityWhite 
+QualityGreen
+QualityBlue
+QualityPurple
+QualityOrange
+
+QualityRed*
+EMapType
+
+common
+inst
+
+newbie
+compete	
+tower
+	worldBoss
+lootmap
+	pvpBattle
+mainCityFight	
+cave
+*#
+EContainerType
+Body
+Bag*
+EWorldObjectType	
+Human 
+Partner
+Pet
+NPC
+Monster
+MonsterElite
+MonsterBoss
+DOT
+
+BULLET*H
+EHumanSnType
+humanSnWarrior
+humanSnMage
+humanSnAssassin*5
+
+EAwardType
+AwardNot 
+Awarding
+Awarded*Σ
+EPropChangeType
+PropChangeNone 
+PropChangeLogin
+PropChangeLv
+PropChangeLineUp
+PropChangeRecruit
+PropChangeGods)
+PropChangeTitle*
+PropChangeSkillLvQ
+PropChangeSkillTrainR*z
+EModUnlockType
+ModUnlockeNone 
+ModUnlockHumanLevel
+ModUnlockInstance
+ModUnlockVip
+ModUnlockQuest*Ά
+	EModeType
+ModeNone 
+ModeBattleRunaway
+ModeBattleAuto
+ModeInstSweep
+ModeQuestDaily
+ModeAchievement
+ModeMail
+
+ModeFriend
+ModeChat
+
+ModeLineup	
+ModeRank
+
+ModeBag
+ModeShopGold
+ModeShopCompete
+ModeShopGeneral
+ModeShopTower
+
+ModeBuyVit
+ModeBuyGold
+ModeInstNormal
+ModeInstEpic
+ModeLootMapSingle
+ModeLootMultiple
+ModeCompete
+	ModeTower
+ModeWorldBoss
+ModeLevelBoss
+
+ModeMaster
+ModeBattlCity
+	ModeUnion
+ModeSkillLvUp
+ModeSkillRune
+ModePractice
+ModeSkillGods 
+ModeEquipIntensify!
+ModeEquipAdvanced"
+ModeEquipSoul#
+ModeEquipFashion$
+ModeEquipRefine%
+ModeCard&
+ModeLineupStance'
+ModePartner(
+ModePartnerAdvance)
+ModePartnerStar*
+ModePartnerDecp+
+ModePartnerOneDecp,
+ModeRuneDress-
+ModeRuneCallTen.
+ModeRuneCallOne/
+ModeRuneCallTop0
+ModeRuneEatAuto1
+ModeRuneCallAuto2
+ModeRuneCallPurple3
+ModePayFirst4
+ModePay5
+ModeVip6
+ModeActivity7
+ModeSevenDay8
+ModeServant9
+ModeSkillTrain:
+ModeMakeaWish;
+ModeRole<
+ModeGodsStar=
+ModeSkipBattle>
+ModeBattleSpeedUp?
+ModeTimeLimit@
+ModeCimeliaA
+ModeCimeliaAdvanceB
+ModeCimeliaStarC
+ModelResourceInstD
+ModeCaveE
+ModeChapterBoxTipF
+ModeGuildShopG
+ModeStrengthenH
+ModeTimeAcitvityI
+ModeSevenDayLoginJ*~
+
+ELoginType
+PC
+MI
+FACEBOOK
+IOS
+SINA
+
+LANMAO
+QuickSDK	
+YYBSQ	
+YYBWX	
+QuickNORMAL
+*9
+EDeviceType
+Pc 
+Ios
+IosBreak
+Android*F
+EBackPosType
+Down
+Back
+
+Flight	
+Catch
+Binding*
+EReviveType
+ReviveBirth 
+ReviveBuffNone	
+ReviveBuffOne
+ReviveBuffTwo
+ReviveBuffThree
+ReviveBuffFour*b
+EFashionHenshinType
+fashionHenshinLock 
+fashionHenshinUnLock
+fashionHenshinEquiped*Υ
+EInformType
+WorldInform
+PrivateInform
+	MapInform
+GuildInform
+
+TeamInform
+GMInform
+
+SystemInform
+RumorInform
+
+HornInform
+
+WarnInform
+ErrorInform
+DialogInform*Z
+
+ERumorType
+InformAddGen
+InformAddItem
+InformEvoluItem
+InformGenAdvUp*<
+EEquipRefineSLot
+RefineSlotLock 
+RefineSlotUnlock*x
+EPartnerLineup
+
+LUInst
+	LUCompete
+
+LUMost
+	LULootMap
+LUTower
+
+LUBoss
+LUSeason	
+LUMax
+*D
+EPartnerGetType
+UseItem
+DrawCard
+
+Debris
+
+Reward*D
+
+EPartnerUp	
+Level 
+Advance
+Cultivation
+	Decompose*M
+EQuestDailyStatus	
+Doing 
+	Completed
+Rewarded
+Discontented*]
+EAchievementStatus
+AchievementDoing 
+AchievementCompleted
+AchievementFinished* 
+EShopExchType
+ShopCompete*t
+	EShopType
+ShopNone 
+ShopGold
+ShopGeneral
+	ShopArena
+	ShopTower
+	ShopSeven
+	ShopGuild*!
+	EInstType
+
+Normal
+Hard*4
+ELevelAward
+LvAwardTotalLv
+LvAwardNeedLv*±
+	EMailType
+MailMaintainNotice
+MailFriendVit
+MailCompeteRankAward
+MailCompeteDailyAward
+MailLooMapAward
+MailWorldBossRankAward
+MailWorldBossKillAward
+MailLevelBossRankAward
+MailLevelBossKillAward	
+MailMonthCard
+
+
+MailMaster
+MailItemToRune
+MailCaveDevelopment
+MailCaveSnatch
+MailGuildNewLeader
+MailGuildKickout
+MailActCompetion
+MailCompeteRankDown*>
+EFriendType
+
+Friend 	
+Apply
+	Recommend	
+Black*²
+	ERankType
+RankTypeLevel 
+RankTypeGuild
+RankTypeSumCombat
+RankTypeInstance
+RankTypeFairyland
+RankTypeTower
+RankTypeArena
+RankTypeWorldBoss*X
+EWorshipType
+WorshipCombat 
+WorshipLevel
+WorshipGuild
+WorshipCompte*x
+EVipBuyType
+	actBuyNum
+
+coinBuyNum
+instResetNum
+competeFightNum
+caveDevelopment
+
+caveSnatch*
+ECostGoldType
+
+actBuyCost
+coinBuyCost
+instResetCost
+competeFightCost
+cardDrawOneCost
+cardDrawTenCost
+wdBossReviveCost
+wdBossInspireCDCost
+wdBossRebornCost	
+lvBossReviveCost
+
+lvBossInspireCDCost
+lvBossRebornCost
+towerReviveCost
+runeNormalCost
+runeSeniorCost
+towerDoubleCost
+towerTripleCost
+cityMagicLookCost
+lootMapReviveCost
+DevelopmentCost
+
+SnatchCost
+CreateGuild
+ChangeGuildName
+GuildInstBuyChanllengeTimes*$
+	ESignType
+signNot 
+
+signed*,
+ETreesureType
+getItems 
+	getAwards*B
+EActInstType
+LootmapSingle
+LootmapMulti
+	WorldBoss*H
+ETowerDifficulty
+TowerDiffLv1
+TowerDiffLv2
+TowerDiffLv3*8
+ETowerCardState
+TowerCardClose 
+TowerCardOpen**
+	EDrawType
+BySummonToken 
+
+ByGold*"
+EDrawOperation
+One
+Ten
+*@
+ECardExchange
+
+ExchangeUn 
+
+ExchangeDo
+ExchangeCan*U
+ELootMapType
+LootMapNull 
+LootMapSingle
+LootMapMultip
+
+LootMapEgg*W
+ELootMapBuffTarger
+LootMapBufTrigger
+LootMapBufMonster
+LootMapBufHuman*Ή
+ELootMapEventType
+LootMapEventNone 
+LootMapEventMonster
+LootMapEventHaloMonster
+LootMapEventResource
+LootMapEventBuff
+LootMapEventSkill
+LootMapEventNextDoor2
+LootMapEventEggDoor3
+LootMapEventRandomDoor4
+LootMapEventStop<
+LootMapEventFloord
+LootMapEventHumane*“
+ELootMapLevelLimitType
+LootMapLevelLimit_1
+LootMapLevelLimit_2
+LootMapLevelLimit_3
+LootMapLevelLimit_4
+LootMapLevelLimit_5
+LootMapLevelLimit_6
+LootMapLevelLimit_7
+LootMapLevelLimit_8
+LootMapLevelLimit_9	
+LootMapLevelLimit_10
+*ƒ
+ELootMapMissionType
+LootMapMissionNone 
+LootMapMissionClearMask
+LootMapMissionEvent
+LootMapMissionClearMonster*Z
+ELootMapMissionStateType
+LootMapMissionStateUndone 
+LootMapMissionStateComplete*
+ELootMapKillHornerType
+ootMapKillHornerNone 
+LootMapKillHornerFirst
+LootMapKillHornerStopKiller
+LootMapKillHornerKill*¥
+ELootMapTimeMode
+LootMapTimeModeNormal 
+LootMapTimeModeDoubleGet
+LootMapTimeModeDoublePve
+LootMapTimeModeDoublePvp
+LootMapTimeModeDoubleAll*
+ELootMapBuffLimitType
+LootMapBufAddAttackMinΐ„=
+LootMapBufAddAttackMax£…=
+LootMapBufSubAttackMin¤…=
+LootMapBufSubAttackMax‡†=
+LootMapBufAddHpMin†=
+LootMapBufAddHpMaxλ†=
+LootMapBufSubHpMinμ†=
+LootMapBufSubHpMaxΟ‡=#
+LootMapBufMonsterAddAttackMin¨=#
+LootMapBufMonsterAddAttackMax‹=#
+LootMapBufMonsterSubAttackMin=#
+LootMapBufMonsterSubAttackMaxο=
+LootMapBufMonsterAddHpMinπ=
+LootMapBufMonsterAddHpMaxΣ=
+LootMapBufMonsterSubHpMinΤ=
+LootMapBufMonsterSubHpMax·=*ς
+ELootMapGMTestType
+LootMapGMTest_protected
+LootMapGMTest_unProtected
+LootMapGMTest_pk
+LootMapGMTest_unpk
+LootMapGmTest_trigetPk
+LootMapGmTest_targetPk
+LootMapGmTest_pkRunAway
+LootMapGmTest_killNotific*[
+EAchieveTitleStatus
+AchieveTitleDoing 
+AchieveTitleFinished
+AchieveTitleUse*
+ECastellanType
+	LevelDuke 
+SumCombatDuke
+InstanceDuke
+FairylandDuke
+	TowerDuke
+	ArenaDuke
+WorldBossDuke*7
+EWinksSendType
+WinksMainCity
+WinksBattleEnd*V
+EGuildImmoType
+ErectUnknown 
+ErectPrimary
+ErectMedium
+ErectSenior*R
+ELogType
+LogTypeUnknown 
+LogTypeImmo
+LogTypeDare
+LogTypeDaily*¶
+ELogHandleType
+HandleUnknown 
+
+HandleJion
+HandleLeave
+HandleAppointCDR
+HandleAppointViceCDR
+
+HandleKick
+HandleOutgoingCDR
+HandleOutgoingViceCDR*,
+EGuildInstResetType
+CURRENT
+BACK*
+	ECaveType
+Low
+High*3
+
+ETokenType
+DevelopmentToken
+SnatchToken*D
+EManType
+Alliance 
+Foe
+Allianceandfoe
+	Stateless*6
+ECrossOperateType
+MOVE 
+STOPMOVE	
+SKILL*J
+ETurnbasedObjectType
+
+FightHuman 
+FightPartner
+FightMonster*'
+EStanceType
+StanceW 
+StanceM*,
+	ETeamType	
+Team0 	
+Team1	
+Team2*z
+EPosType
+Pos0 
+Pos1
+Pos2
+Pos3
+Pos4
+Pos5
+Pos6
+Pos7
+Pos8
+Pos9	
+
+PosMax
+*σ
+ECrossFightType
+FIGHT_INSTANCE
+FIGHT_DAILYREP
+FIGHT_COMPETE
+FIGHT_FRIEND_BOSS
+FIGHT_WORLD_BOSS
+FIGHT_COMMON
+FIGHT_TOWER
+FIGHT_FENGMO
+FIGHT_GUILD_REP	
+FIGHT_NEWBIE
+
+FIGHT_INST_RES
+FIGHT_INST_CAVE
+FIGHT_PK_MIRROR
+FIGHT_PK_HUMAN
+FIGHT_LOOTMAP_SINGLE
+FIGHT_LOOTMAP_MULTIPLE
+FIGHT_GUILD_INST

@@ -1,0 +1,71 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 02001_02100_quest.proto-----
+
+//通知，发送每日任务信息
+message SCQuestDailyInfo {
+	option (msgid) = 2001;
+	repeated DQuestDaily quest = 1;			//任务信息
+}
+
+//请求，提交每日任务，即完成任务领取奖励
+message CSCommitQuestDaily {
+	option (msgid) = 2002;
+	required int32 sn = 1;			//任务
+}
+
+//应答，每日任务，即完成任务领取奖励
+message SCCommitQuestDaily {
+	option (msgid) = 2003;
+	required DQuestDaily quest = 1;  
+	repeated DItem dItem = 2;  
+}
+
+//应答，发送活跃度变化
+message SCLivenessInfoChange {
+	option (msgid) = 2004;
+	optional int32 dailyQuestLiveness = 1; //每日活跃度
+	optional int32 weeklyQuestLiveness = 2;
+}
+
+//请求，领取活跃度奖励
+message CSGetLivenessReward {
+	option (msgid) = 2005;
+	required int32 sn = 1;		//活跃度奖励sn
+}
+
+//应答，领取活跃度奖励结果
+message SCGetLivenessRewardResult {
+	option (msgid) = 2006;
+	required int32 sn = 1;		//活跃度奖励sn
+	required bool result = 2;	//领取结果：true成功，false失败
+	repeated DItem dItem = 3;  
+}
+
+//打开成就任务
+message CSOpenAchievement {
+	option(msgid) = 2031;
+}
+
+//更新成就任务状态
+message SCAchievementInfo {
+	option(msgid) = 2032;
+	repeated DAchievement infos = 1;
+}
+
+//提交成就任务
+message CSCommitAchievement {
+	option(msgid) = 2033;
+	optional int32 sn = 1; //成就sn(配置表中的值)
+}
+
+//提交成就任务反馈
+message SCCommitAchievement {
+	option(msgid) = 2034;
+	optional int32 sn = 1; //成就sn(配置表中的值)
+    optional bool result = 2;	//领取结果：true成功，false失败
+	repeated DItem dItem = 3;  //任务奖励
+}
+
+

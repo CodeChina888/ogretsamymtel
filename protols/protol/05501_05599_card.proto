@@ -1,0 +1,74 @@
+
+
+//免费抽卡
+message DrawCardBaseMsh {
+	optional EDrawType types = 1;	
+	optional int64 CD = 2;				//下次cd时间
+	optional  int32 num =3;								// EDrawType类型总次数
+	optional bool FirstPay = 4;									//是否第一次付费招募
+	optional int32 freeNum = 5;			//今日已经免费抽卡的次数									
+}
+
+// 积分兑换卡片信息
+message DCardExchangeInfo {
+	optional int32 roundNum = 1; // 兑换轮数（一列全兑换算一轮，默认1）
+	repeated ECardExchange states = 2; // 0:未兑换，1:已兑换 （只下发是否兑换）
+}
+
+//抽卡类型
+enum EDrawType{
+	BySummonToken = 0;//招募命
+	ByGold = 1;//元宝抽取
+}
+
+
+enum EDrawOperation{
+	One  = 1;//抽一次
+	Ten = 10;//十连抽
+}
+// 兑换情况
+enum ECardExchange {
+	ExchangeUn = 0; // 未兑换
+	ExchangeDo = 1; // 已兑换
+	ExchangeCan = 2; // 可以兑换
+}
+
+//通知，登录下发抽卡数据
+message SCLoadCardInfoMsg{
+	option (msgid) = 5501;
+	repeated DrawCardBaseMsh cardInfo = 1; //抽卡信息
+	optional DCardExchangeInfo exchangeInfo = 2; // 兑换信息
+}
+
+//抽卡
+message CSDrawCardMsg{
+	option (msgid) = 5502;
+	optional EDrawType type =1;					//抽卡类型 0招募令抽卡 1金币抽卡
+	optional EDrawOperation operation = 2;		//抽卡操作 0单抽 1十连抽
+	optional bool isFree = 3;                   //是否免费 
+}
+
+//抽卡回执
+message SCDrawCardMsg{
+	option (msgid) = 5503;
+	optional EDrawType  type =1;
+	optional EDrawOperation operation = 2;
+	repeated DDropItem reward = 3;		//奖励道具列表
+	repeated DPartnerInfo partnerInfoList = 4; //新增伙伴信息
+	repeated int32 chipItemList = 5; //由英雄转换成物品的列表
+	optional DrawCardBaseMsh cardInfo = 6; //抽卡信息
+	optional int32 rewardScore = 7; // 抽卡奖励积分
+}
+
+// 请求，抽卡积分兑换
+message CSSummonScoreExchange {
+	option (msgid) = 5504;
+	optional int32 index = 1; // 兑换第几阶的礼包
+	optional int32 selectIndex = 2; // 选择兑换礼包中的物品index
+}
+// 应答，抽卡积分兑换
+message SCSummonScoreExchange {
+	option (msgid) = 5505;
+	optional DCardExchangeInfo info = 1; // 积分兑换卡片信息
+	optional DProduce produce = 3; // 获得的奖励道具
+}

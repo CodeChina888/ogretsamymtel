@@ -1,0 +1,92 @@
+
+Ž
+msg.friend.protogame.msgoptions.protodefine.proto"
+CSFriendList:ˆÃÉ"»
+SCFriendList)
+
+friendList (2.game.msg.DFriendInfo(
+	applyList (2.game.msg.DFriendInfo(
+	blackList (2.game.msg.DFriendInfo
+	yetGetNum (
+
+yetGiveNum (:ˆÃÊ"
+CSRecommendFriend:ˆÃÑ"@
+SCRecommendFriend$
+infos (2.game.msg.DFriendInfo:ˆÃÒ"*
+CSRequestFriend
+humanIds (:ˆÃË":
+SCRequestFriend
+result (
+humanIds (:ˆÃÌ")
+CSAcceptFriend
+humanIds (:ˆÃÍ"9
+SCAcceptFriend
+result (
+humanIds (:ˆÃÎ")
+CSRefuseFriend
+humanIds (:ˆÃÏ"9
+SCRefuseFriend
+result (
+humanIds (:ˆÃÐ"%
+CSSearchFriend
+name (	:ˆÃÓ"=
+SCSearchFriend$
+infos (2.game.msg.DFriendInfo:ˆÃÔ"(
+CSRemoveFriend
+humanId (:ˆÃÕ"8
+SCRemoveFriend
+result (
+humanId (:ˆÃÖ"'
+CSToBlackList
+humanId (:ˆÃÙ"7
+SCToBlackList
+result (
+humanId (:ˆÃÚ"+
+CSRemoveBlackList
+humanId (:ˆÃÛ";
+SCRemoveBlackList
+result (
+humanId (:ˆÃÜ"o
+SCFriendInfo
+option (#
+type (2.game.msg.EFriendType#
+info (2.game.msg.DFriendInfo:ˆÃÝ"+
+CSGiveFriendAc
+
+toHumanIds (:ˆÃÞ"M
+SCGiveFriendAc
+result (
+humanIds (
+
+yetGiveNum (:ˆÃß"+
+CSReceFriendAc
+
+toHumanIds (:ˆÃà"L
+SCReceFriendAc
+result (
+humanIds (
+	yetGetNum (:ˆÃá"
+CSFriendShare:ˆÃâ"*
+CSQueryCharacter
+queryId (:ˆÃã"©
+SCQueryCharacter
+humanId (
+
+humanDigit (
+level (
+name (	
+modelSn (
+titleSn (
+combat (
+vip (
+
+profession	 (
+competeRank (
+instStar (#
+	skillList (2.game.msg.DSkill+
+skillGodsList  (2.game.msg.DSkillGods
+skillGodsSn! (#
+	equipList) (2.game.msg.DEquip)
+info* (2.game.msg.DPartnerBriefInfo
+skille (
+godsf (:ˆÃä

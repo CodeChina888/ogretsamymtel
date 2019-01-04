@@ -1,0 +1,52 @@
+
+à
+msg.account.protogame.msgoptions.protodefine.proto"
+	CSMsgPing:ˆÃç"
+	SCMsgPong:ˆÃè"
+	SCMsgFill:ˆÃe"ƒ
+CSLogin
+version (	'
+	loginType (2.game.msg.ELoginType
+channel (	
+account (	
+password (	
+	deviceMAC (	
+
+deviceIMEI ()
+
+deviceType (2.game.msg.EDeviceType
+serverId (
+token (	
+	timestamp (	:ˆÃo"¢
+SCLoginResult
+
+resultCode (
+keyActivate (
+isServerFull (
+showGiftCode (
+showService (
+showGm (
+	accountId (	:ˆÃp")
+SCAccountBind
+
+resultCode (:ˆÃq"a
+CSAccountBind'
+	loginType (2.game.msg.ELoginType
+account (	
+password (	:ˆÃr"g
+CSAccountBindInGame'
+	loginType (2.game.msg.ELoginType
+account (	
+password (	:ˆÃs"<
+CSAccountReconnect
+name (	
+
+sessionKey (:ˆÃy"4
+SCAccountReconnectResult
+
+resultCode (:ˆÃz"S
+SCAccountLoginQueue
+num (
+sec (
+full (
+total (:ˆÃ™

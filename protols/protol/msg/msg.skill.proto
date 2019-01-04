@@ -1,0 +1,260 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 02901_03000_skill.proto-----
+
+//通知，登录下发玩家技能信息
+message SCSkillInfo{
+	option (msgid) = 2991;
+	repeated DSkillInfo skillInfoSet = 1;	//登录下发技能信息包
+	repeated DSkill skillTrain = 2; // 技能神通信息
+	optional DSkillTrain train = 3;	// 培养结果
+	optional int32 mutiple = 4; // 修炼倍率
+}
+
+//通知，技能解锁（暂时未使用）
+message SCSkillUnlock{
+	option (msgid) = 2992;
+	repeated DSkillInfo skillInfoSet = 1;	//下发解锁的技能信息包
+}
+
+//通知，技能阶级解锁变化
+message SCSkillTrainUnlock {
+	option (msgid) = 2993;
+	repeated DSkill trainList = 1;	//下发解锁修炼的技能信息包
+}
+
+//请求，主角上阵技能变动
+message CSSkillInstall {
+	option (msgid) = 2901;
+	required DSkillGroup skillGroup = 1;	//技能设置
+}
+
+//应答，主角上阵技能变动
+message SCSkillInstall {
+	option (msgid) = 2902;
+	optional DSkillGroup skillGroup = 1; 	//技能设置，格式：101,102,0,103,104,0,105（0代表空技能格）
+}
+
+//请求，主角技能升级
+message CSSkillLvUp {
+	option (msgid) = 2903;
+	optional bool bOneKey = 1;				//是否一键升级
+	repeated DSkill skillSet = 2;			//技能sn（带技能等级）
+}
+
+//应答，主角技能升级
+message SCSkillLvUp {
+	option (msgid) = 2904;
+	repeated DSkill skillSet = 2;			//技能结构体
+}
+
+// 请求，主角技能进阶
+message CSSkillStageUp {
+	option (msgid) = 2905;
+	optional int32 skillTag = 1;	// 请求升阶的技能
+}
+
+// 应答，主角技能进阶
+message SCSkillStageUp {
+	option (msgid) = 2906;
+	optional DSkill dSkill = 2;			//技能结构体
+}
+
+//请求，主角技能培养倍率
+message CSSkillTrainMutiple {
+	option (msgid) = 2921;
+	optional int32 mutiple = 1;				// 倍率
+}
+
+//应答，主角技能培养倍率
+message SCSkillTrainMutiple {
+	option (msgid) = 2922;
+	optional int32 mutiple = 1; 			// 倍率
+}
+
+//请求，主角技能培养（抽老虎机）
+message CSSkillTrain {
+	option (msgid) = 2923;
+	optional bool isOnekey = 1;             // 是否一键
+}
+
+//应答，主角技能培养
+message SCSkillTrain {
+	option (msgid) = 2924;
+	optional bool isOnekey = 1;             // 是否一键
+	optional DSkillTrain trainList = 2;		// 培养结果
+}
+
+//请求，重置技能培养
+message CSSkillResetTrain {
+	option (msgid) = 2925;
+	optional int32 resetIndex = 1;			// 重置的index （0，1，2）
+}
+
+//请求，重置技能培养
+message SCSkillResetTrain {
+	option (msgid) = 2926;
+	optional int32 resetIndex = 1; // 重置的index
+	optional DSkillTrain trainList = 2;	// 重置的培养结果
+}
+
+//请求，保存技能培养结果
+message CSSkillSaveTrain {
+	option (msgid) = 2927;
+}
+
+//应答，保存技能培养结果
+message SCSkillSaveTrain {
+	option (msgid) = 2928;
+	repeated DSkill skillList = 1; // 当前技能状态
+}
+
+//请求，检查是否有未处理的培养
+message CSSkillTrainCheck {
+	option (msgid) = 2929;
+}
+
+//应答，检查是否有未处理的培养
+message SCSkillTrainCheck {
+	option (msgid) = 2930;
+	required bool flag = 1; // 有则true,无则false
+	optional DSkillTrain trainList = 2;	// 培养结果
+}
+
+//请求，激活符文
+message CSSkillRuneUnlock{
+	option (msgid) = 2941;
+	required int32 skillTag = 1;
+	required int32 runeSn = 2;
+}
+
+//应答，符文激活
+message SCSkillRuneUnlock{
+	option (msgid) = 2942;
+	optional DSkillRune runeInfo = 1;		//符文信息
+}
+
+//请求，符文修炼
+message CSSkillRunePractice{
+	option (msgid) = 2943;
+	required int32 skillTag = 1;          	//技能ID
+	required int32 runeSn = 2;        		//符文类型 1代表A 2代表B	
+}
+
+//应答，符文修炼
+message SCSkillRunePractice{
+	option (msgid) = 2944;
+	optional DSkillRune runeInfo = 1;		//符文信息
+}
+
+//应答，重置某个技能符文
+message CSSkillResetRune{
+	option (msgid) = 2945;
+	required int32 skillTag = 1;          	//技能ID
+} 
+//应答，重置某个技能符文
+message SCSkillResetRune{
+	option (msgid) = 2946;
+	optional int32 skillTag = 1;          		//重置的技能ID
+	repeated DSkillRune runeSet = 2; 			//重置后的技能符文信息 
+	optional int64 lastResetSkillRuneTime = 3;  //最后重置技能符文的时间
+}
+
+//通知，登录下发爆点技能信息
+message SCSkillGodsInfo{
+	option (msgid) = 2965;
+	repeated DSkillGods skillGodsSet = 1;
+	optional int32 godsSnInBattle = 2;      //上阵爆点技能sn
+	optional int32 refreshNum = 3;          //当前爆点洗练次数
+}
+
+//请求，爆点培养升级
+message SCSkillGodsUnlock{
+	option (msgid) = 2966;
+	repeated DSkillGods skillGods = 1;      //解锁的爆点技能
+	required int32 godsSnInBattle = 2;      //上阵爆点技能ID
+}	
+
+
+//请求，爆点培养升级
+message CSSkillGodsLvUp{
+	option (msgid) = 2951;
+	required int32 godsTag = 1;         //爆点技能
+}
+
+//应答，爆点培养升级
+message SCSkillGodsLvUp{
+	option (msgid) = 2952;
+	optional DSkillGods skillGods = 1; 
+	optional int32 soulValue = 2;	//爆点培养一次获得的灵气值
+	optional int32 critValue = 3;	//爆点培养暴击倍率（万分比，默认10000）		
+}
+
+//请求，爆点升星
+message CSSkillGodsStarUp{
+	option (msgid) = 2953;
+	required int32 godsTag = 1;         //爆点技能
+}
+
+//应答，爆点升星
+message SCSkillGodsStarUp{
+	option (msgid) = 2954;
+	optional DSkillGods skillGods = 1; 
+}
+
+//请求，选择上阵爆点
+message CSSelectSkillGods{
+	option (msgid) = 2955;
+	required int32 godsTag = 1;          
+}
+
+//应答，选择上阵爆点
+message SCSelectSkillGods{
+	option (msgid) = 2956;
+	optional int32 godsTag = 1;    
+}
+
+//请求，道具解锁爆点
+message CSGodsUnlockByItem{
+	option (msgid) = 2957;
+	required int32 godsTag = 1;    
+}
+
+//请求，爆点附加技能洗练
+message SCGodsUnlockByItem{
+	option (msgid) = 2958;
+	optional DSkillGods skillGods = 1;    //解锁的爆点技能
+	optional int32 godsSnInBattle = 2; //上阵爆点技能ID   
+}	
+
+//请求，爆点附加技能洗练
+message CSGodsAddAttrRefresh{
+	option (msgid) = 2959;
+	required int32 godsTag = 1;          		//洗练附加技能所对应的爆点技能Id
+}
+
+//应答，爆点附加技能洗练
+message SCGodsAddAttrRefresh{
+	option (msgid) = 2960;
+	optional int32 godsSn = 1;    
+	optional int32 curAddAttrId = 2;        //爆点附加技能ID
+	optional int32 refreshAddAttrId = 3;    //洗练出来的附加技能ID
+	optional int32 refreshNum = 4; //当前洗练次数
+}
+
+//请求，是否替换新的洗练技能
+message CSSelectGodsAddAttr{
+	option (msgid) = 2961;
+	required int32 godsTag = 1;    
+	required int32 godsAddAttrId = 2;        //选择的附加技能id
+}
+
+//应答，是否替换新的洗练技能
+message SCSelectGodsAddAttr{
+	option (msgid) = 2962;
+	optional int32 godsTag = 1;    
+	optional int32 godsAddAttrId = 2;        //选择的附加技能id
+}
+
+

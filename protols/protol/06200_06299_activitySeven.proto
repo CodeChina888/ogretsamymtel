@@ -1,0 +1,54 @@
+//7日创角活动
+//-----------------------------------------------------
+// 7天创角结构
+message DNoviceActivity{
+	optional int32 sn = 1;		// 配置的SN
+	optional int32 status = 2;	// 活动状态（1进行中（不可领取），2可领取，3已领取）
+	optional int32 propgress = 3;	// 进度
+}
+//下发所有创角活动信息（如果超过7天不下发）
+message SCOpenNoviceActivity{
+	option(msgid) = 6200;
+	optional int64 createTime = 1;
+	optional int32 createDay = 2;
+	repeated DNoviceActivity dna = 3;
+}
+//提交
+message CSCommitNoviceActivity{
+	option(msgid) = 6201;
+	optional int32 sn = 1;
+}
+
+// 提交返回
+message SCCommitNoviceActivity{
+	option(msgid) = 6202;
+	optional int32 sn = 1;
+}
+
+//下发该类型的所有活动数据（更新进度）
+message SCTypeNoviceActivity{
+	option(msgid) = 6203;
+	optional int32 type = 1;
+	repeated DNoviceActivity dna = 2;
+}
+
+//七日登陆活动状态
+message DSevenLoginAwardType {
+	optional int32 sn = 1; //登陆天数[ 配置表SevenLogin.sn]
+	optional EAwardType loginDaytype = 2; //领取情况
+}
+
+//七日登陆领
+//当领取的是英雄的时候要多回复协议SCPartnerDrop
+message SCSevenLogin{
+	option(msgid) = 6204;
+	optional int32 loginDayNum = 1;//今日是第几天登陆
+	repeated DSevenLoginAwardType condition = 2;
+	optional bool isSuccess = 3;//是否领取成功
+	repeated DProduce itemList = 4;//奖励列表
+}
+
+message CSGetSevenLoginAward{
+	option(msgid) = 6205;
+	optional int32 sn = 1;//要领取的sn
+}

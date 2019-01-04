@@ -1,0 +1,42 @@
+// -----------------------------------------
+// Buff相关，都是群发，用户自己需要的数据会单发，比如说属性变化
+// -----------------------------------------
+//Buff基本信息
+message DBuff {
+	optional int32 sn = 1;			//Buff sn
+	optional int32 timeLeft = 2;		//剩余时间
+	repeated DBuffProp buffProp = 3;	//Buff的具体内容
+}
+
+//增加新Buff（群发）
+message SCBuffAdd {
+	option (msgid) = 1802;
+	optional int64		objId = 1;		//单元Id
+	optional DBuff		buff = 2;		//Buff信息
+}
+
+//Buff更新（群发）
+message SCBuffUpdate {
+	option (msgid) = 1803;
+	optional int64		objId = 1;		//单元Id
+	optional DBuff		buff = 2;		//Buff信息
+}
+
+//Buff消失（群发）
+message SCBuffDispel {
+	option (msgid) = 1804;
+	optional int64		objId = 1;		//单元Id
+	optional int32		sn = 2;			//需要移出的buffSn
+}
+
+//手动取消Buff
+message CSBuffDispelByHuman {
+	option (msgid) = 1805;
+	optional int32		sn = 1;		//Buff SN
+}
+
+//Buff状态的具体内容
+message DBuffProp {
+	optional string buffKey = 1;	//Buff的内容
+	optional double buffValue = 2;	//Buff的作用时间
+}

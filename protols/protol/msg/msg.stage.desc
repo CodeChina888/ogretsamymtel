@@ -1,0 +1,85 @@
+
+÷
+msg.stage.protogame.msgoptions.protodefine.proto"
+CSStageEnter:à√±	"@
+SCStageEnterResult#
+obj (2.game.msg.DStageObject:à√≤	";
+CSStageSwitch
+type (
+areaSwitchKey (	:à√≥	"7
+SCStageSwitch
+stage (2.game.msg.DStage:à√¥	"L
+SCStageEnterEnd
+seek ($
+produces (2.game.msg.DProduce:à√µ	"F
+CSStageSetPos
+objId (
+pos (2.game.msg.DVector3:à√∏	"H
+SCStageSetPos
+humanId (
+pos (2.game.msg.DVector2:à√π	"O
+CSStageDirection
+objId (%
+	direction (2.game.msg.DVector3:à√∫	"é
+CSStageMove
+objId ($
+posBegin (2.game.msg.DVector3"
+posEnd (2.game.msg.DVector3
+dir (2.game.msg.DVector3:à√ª	"é
+SCStageMove
+objId ($
+posBegin (2.game.msg.DVector3"
+posEnd (2.game.msg.DVector3
+dir (2.game.msg.DVector3:à√º	"p
+CSStageMoveStop
+sendId ("
+posEnd (2.game.msg.DVector2"
+dirEnd (2.game.msg.DVector2:à√æ	"o
+SCStageMoveStop
+objId ("
+posEnd (2.game.msg.DVector2"
+dirEnd (2.game.msg.DVector2:à√ø	"U
+SCStageObjectAppear)
+	objAppear (2.game.msg.DStageObject
+type (:à√¿	"Ü
+SCStageObjectDisappear
+objId (
+type (
+
+killerName (	
+killerId (
+skillSn (
+	killCount (:à√¡	"]
+SCStageMoveTeleport
+objId ("
+posEnd (2.game.msg.DVector2
+type (	:à√≈	"b
+CSStageMove2$
+posBegin (2.game.msg.DVector2%
+	direction (2.game.msg.DVector2:à√∆	"7
+SCStagePullTo
+pos (2.game.msg.DVector2:à√ 	"à
+SCUnitobjStatusChange
+type (
+
+id (
+teamBundleID (
+canMove (
+canCastSkill (
+	canAttack (:à√À	"4
+
+SCAllDummy
+dummy (2.game.msg.DDummy:à√Ä
+"4
+
+SCAddDummy
+dummy (2.game.msg.DDummy:à√Å
+"#
+SCOfflineDummy
+
+id (:à√Ç
+"
+
+CSDelDummy
+
+id (:à√É

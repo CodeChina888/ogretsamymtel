@@ -1,0 +1,121 @@
+
+
+msg.partner.protogame.msgoptions.protodefine.proto"e
+SCPartnerInfo$
+unit (2.game.msg.DPartnerInfo'
+servant (2.game.msg.DServantInfo:à√Ï"@
+CSPartnerLineup&
+type (2.game.msg.EPartnerLineup:à√Ì"B
+SCPartnerLineup(
+lineup (2.game.msg.DPartnerLineup:à√Ó"H
+CSPartnerChangeLineup(
+lineup (2.game.msg.DPartnerLineup:à√Ò"H
+SCPartnerChangeLineup(
+lineup (2.game.msg.DPartnerLineup:à√Ú"%
+CSPartnerRecruit
+
+sn (:à√ı"V
+SCPartnerRecruit
+result (+
+partnerInfo (2.game.msg.DPartnerInfo:à√ˆ",
+CSPartnerAddStar
+	partnerId (:à√˜"M
+SCPartnerAddStar
+result (
+	partnerId (
+curStar (:à√¯"C
+CSPartnerAddCont
+	partnerId (
+costPartnerId (:à√˘"M
+SCPartnerAddCont
+result (
+	partnerId (
+curCont (:à√˙"k
+CSPartnerAddLevel
+
+id (
+mode (
+costPartnerId (
+items (2.game.msg.DItem:à√˚"]
+SCPartnerAddLevel
+result (
+	partnerId (
+	partnerLv (
+exp (:à√¸"^
+CSPartnerPractice
+	partnerID (
+propId (
+itemId (
+itemNum (:à√˝"`
+SCPartnerPractice
+result (
+	partnerID (
+propId (
+	propValue (:à√˛"l
+SCPartnerDrop+
+partnerInfo (2.game.msg.DPartnerInfo'
+type (2.game.msg.EPartnerGetType:à√É"I
+SCLoadPokedexInfo
+	partnerSn (
+pokedexGroupIdList (:à√ï",
+SCAddPokedexInfo
+	partnerSn (:à√ñ"8
+CSGetPokedexGroupReward
+pokedexGroupId (:à√ó"[
+SCGetPokedexGroupReward!
+itemList (2.game.msg.DItem
+pokedexGroupId (:à√ò"J
+CSAddServant
+	partnerId (
+	servantId (
+index (:à√õ"å
+SCAddServant
+success (
+	partnerId (
+	servantId (
+index (
+power ( 
+addProp (2.game.msg.DProp:à√ú"M
+CSRemoveServant
+	partnerId (
+	servantId (
+index (:à√ù"Ä
+SCRemoveServant
+success (
+	partnerId (
+	servantId (
+index ( 
+addProp (2.game.msg.DProp:à√û"5
+SCServantClear
+success (
+num (:à√ü"
+CSVipServantClear:à√†"M
+CSCimeliaAddLevel
+	partnerId (
+ditem (2.game.msg.DItem:à√¢"^
+SCCimeliaAddLevel
+success (
+	partnerId (
+	cimeliaLv (
+exp (:à√£",
+CSCimeliaAddStar
+	partnerId (:à√§"M
+SCCimeliaAddStar
+result (
+	partnerId (
+curStar (:à√•"L
+CSCimeliaAddCont
+	partnerId (
+ditem (2.game.msg.DItem:à√¶"M
+SCCimeliaAddCont
+result (
+	partnerId (
+curCont (:à√ß"f
+CSNewDecomposeAll
+isDescompose (
+	partnerID (!
+itemList (2.game.msg.DItem:à√®"f
+SCNewDecomposeAll
+	partnerId (
+isDescompose (!
+itemList (2.game.msg.DItem:à√©

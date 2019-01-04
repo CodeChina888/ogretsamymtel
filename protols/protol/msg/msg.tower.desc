@@ -1,0 +1,92 @@
+
+”
+msg.tower.protogame.msgoptions.protodefine.proto"
+CSTowerModUnlock:à√ô*"Ì
+SCTowerInfo
+matchLv (
+matchCombat (
+yestodayMaxLayer (
+score (
+seasonEndTime (
+	towerRank (
+	stayLayer (
+willFightLayer (
+haveLifeNum (
+
+buyLifeNum (
+multiple (0
+rewardBoxList (2.game.msg.DTowerRewardBox
+layerCountList (.
+
+matchEnemy (2.game.msg.DTowerLayerEnemy:à√ö*"|
+SCTowerSeasonInfo
+score (
+seasonEndTime ('
+produceList (2.game.msg.DProduce
+	towerRank (:à√õ*"-
+SCTowerIsFight
+todayIsFight (:à√ú*"@
+CSTowerEnter
+
+fightLayer (
+selDifficulty (:à√¢*"*
+SCTowerEnter
+haveLifeNum (:à√£*"
+CSTowerLeave:à√§*"T
+
+CSTowerEnd/
+starCondition (2.game.msg.DStarCondition
+isFail (:à√•*"Å
+
+SCTowerEnd
+isFail (
+	isSpanDay (!
+items (2.game.msg.DProduce
+score (
+	towerRank (
+haveLifeNum (
+	stayLayer (
+willFightLayer (,
+	rewardBox (2.game.msg.DTowerRewardBox
+layerCountList) (:à√¶*"*
+CSTowerGoAhead
+	stayLayer (:à√ß*"n
+SCTowerGoAhead
+	stayLayer (
+
+fightLayer (.
+
+matchEnemy (2.game.msg.DTowerLayerEnemy:à√®*"/
+CSTowerOpenRewardBox
+boxLayer (:à√©*"
+SCTowerOpenRewardBox:à√™*"M
+CSTowerOpenCard
+boxLayer (
+	openIndex (
+isCost (:à√´*"ï
+SCTowerOpenCard,
+	rewardBox (2.game.msg.DTowerRewardBox
+	openIndex (*
+rewardItemList (2.game.msg.DProduce
+isCost (:à√¨*"
+CSTowerBuyLife:à√≠*"@
+SCTowerBuyLife
+haveLifeNum (
+
+buyLifeNum (:à√Æ*"
+CSTowerMultipleAward:à√Ø*"/
+SCTowerMultipleAward
+multiple (:à√∞*"
+CSTowerLayerCount:à√±*"2
+SCTowerLayerCount
+layerCountList (:à√≤*"
+CSTowerShowHumanInfo:à√≥*"F
+SCTowerShowHumanInfo'
+ShowList (2.game.msg.DTowerHuman:à√¥*"
+CSTowerResetConditon:à√µ*"M
+SCTowerResetConditon.
+
+matchEnemy (2.game.msg.DTowerLayerEnemy:à√∂*"$
+CSTowerSameLayerHuamnAmount:à√À*"9
+SCTowerSameLayerHuamnAmount
+humanAmount (:à√Ã*

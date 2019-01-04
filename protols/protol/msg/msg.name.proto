@@ -1,0 +1,38 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 02301_02300_name.proto-----
+
+//修改名字
+message CSChangeName {
+	option (msgid) = 2301;
+	required string name = 1;		//要改的名字
+}
+
+//修改名字返回结果
+message SCChangeNameResult {
+	option (msgid) = 2302;
+	required bool result = 1;		//返回结果
+	optional string shield = 2;		//如果是false的话，这个字段就是非法字
+	optional int32 renameNum = 3;	//已经改名了几次
+	optional string name = 4;		//返回现在使用的名字
+}
+
+//修改名字任务成功，改变DHuman的questNameChangePassed为true
+message SCChangeNameQuestFinish {
+	option (msgid) = 2303;
+	required bool questNameChangePassed = 1;		//返回结果
+}
+
+//随机请求一个没用过的名字
+message CSChangeNameRandom {
+	option (msgid) = 2304;
+}
+
+//随机请求一个没用过的名字结果
+message SCChangeNameRandomResult {
+	option (msgid) = 2305;
+	required string name = 1;
+}
+
+

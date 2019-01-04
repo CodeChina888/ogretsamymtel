@@ -1,0 +1,34 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 03201_03300_guide.proto-----
+
+//前端推送的引导状态
+message CSChangeGuideStatus {
+	option (msgid) = 3201;
+	optional int32 OrderIndex = 1;//新手引导：流程引导执行ID
+	optional int32 CurFunctionId = 2;//新手引导：新功能开启时新功能ID
+	optional int32 FuncIndex = 3;//新手引导：功能开启时引导执行计数
+}
+
+//玩家登陆软引导
+message SCLoginSoftGuide {
+	option (msgid) = 3211;
+	optional bool loginPrice = 1;	//登陆奖励
+	optional bool questDaily = 2;	//每日任务
+	optional bool relation = 3;		//将星录
+	optional bool lottery = 4;		//免费抽奖
+}
+
+//清除引导状态
+message CSClearGuideStatus {
+	option (msgid) = 3212;
+}
+
+//返回引导状态
+message SCClearGuideStatus {
+	option (msgid) = 3213;
+	optional bool guideClose = 1;
+}
+
+

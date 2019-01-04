@@ -1,0 +1,266 @@
+// -----------------------------------------
+// 物品相关
+// -----------------------------------------
+// 精炼槽位开启状态
+enum EEquipRefineSLot {
+	RefineSlotLock = 0;    // 未解锁
+	RefineSlotUnlock = 1;  // 解锁
+}
+
+//背包格物品变化
+message DBagUpdate {
+	optional int64 id = 1;		// 所在背包
+	optional int32 type = 2;	//变化类型（1：数量变化，2：新增物品，3：删除）
+	optional int32 bagType = 3;	//背包类型（暂时忽略）
+	optional DItem item = 4;	//实际对象，除删除外，可以直接替换
+}
+//掉落物品
+message DDropItem {
+	optional int32 itemSn = 1;	//物品sn
+	optional int32 itemNum = 2; //数量
+}
+//物品信息
+message DItem {
+	optional int64 itemId = 1;				//物品Id
+	optional int32 itemSn = 2;				//物品Sn
+	optional int32 num = 3;					//数量
+}
+//装备信息
+message DEquip {
+	optional int64 itemId = 1;          	//物品Id
+	optional int32 itemSn = 2;          	//物品Sn  
+	optional int32 reinforceLv = 3;		   	//强化等级
+	optional int32 advancedLv = 4;         	//进阶等级
+	optional int32 refineLv = 5;			//精炼品质等级
+	repeated int32 refineSlotLvs = 6;       //槽位等级
+	repeated int32 refineSlotRecord = 7;	//精炼未保存结果（变化量 +1/+2/-1/-2....）
+}
+
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
+//返回所有身上物品
+message SCBodyItemInfo {
+	option (msgid) = 1691;
+	repeated DEquip dEquipList = 1;			//身上装备列表
+}
+
+//返回所有背包物品
+message SCBagItemInfo {
+	option (msgid) = 1692;
+	repeated DItem dItemList = 1;			//背包物品列表
+}
+
+//物品变动信息协议
+message SCItemChange {
+	option (msgid) = 1693;		
+	repeated DItem add = 1;					//添加
+	repeated DItem mod = 2;					//修改
+	repeated int64 del = 3;					//删除
+}
+
+// 登录时，加载灵甲装备信息
+message SCLoadSoulEquipMsg{
+	option (msgid) = 1695;
+	repeated DSoulEquip SoulEquipList  = 1; //灵甲装备列表
+}
+
+// 背包更新
+message SCBagUpdate {
+	option(msgid) = 1696;
+	optional int32 type = 1; // 背包类型号
+	repeated DBagUpdate updates = 2;
+    optional bool arrange = 3; // 是否是整理背包
+}
+
+//掉落物品id
+message SCDropItem {
+	option (msgid) = 1698;
+	repeated DDropItem  item = 1;    //掉落物品
+}
+
+
+
+// -----------------------------------------
+// 背包物品相关
+// -----------------------------------------
+//请求，使用物品
+message CSItemUse {
+	option (msgid) = 1601;
+	optional int64 id = 1;				//背包物品id
+	optional int32 num = 2;			//使用物品数量
+}
+//使用物品
+message SCItemUse {
+	option (msgid) = 1602;
+	repeated DProduce produces = 1; //产出物品
+	optional bool isTip = 2;//是否提示 true提示 false 不提示
+}
+
+//请求，出售物品--多个
+message CSItemsBagSell {
+	option (msgid) = 1605;
+    repeated DItem pro = 1;
+}
+//应答，出售物品返回
+message SCItemsBagSell {
+	option (msgid) = 1606;
+	optional bool result = 1;			//出售结果
+	optional int32 getMoney =2;			//获得的金币
+}
+
+//请求，道具合成
+message CSCompoundItemMsg{
+	option (msgid) = 1607;
+	optional int32 compoundCount = 1;   //合成次数
+	optional int32 compoundItemSn = 2; //合成的道具ID
+}
+//应答，道具合成
+message SCCompoundItemMsg{
+	option (msgid) = 1608;
+	optional bool result = 1;        //合成成功失败
+}
+
+//请求，选择礼包物品
+message CSSelectPackageItem{
+	option (msgid) = 1609;
+	optional int32 num = 1;				// 礼包数量
+	optional int32 packageSn = 2; 		// 礼包sn(item.sn)
+	optional int32 index = 3;			// 从0开始
+}
+//应答，选择礼包物品
+message SCSelectPackageItem{
+	option (msgid) = 1610;
+	repeated DProduce produce = 1;  	// 获得的道具
+}
+
+
+
+// -----------------------------------------
+// 主角装备养成相关
+// -----------------------------------------
+//灵甲装备信息
+message DSoulEquip{
+	required int32 SpiritID =1;          	//铸灵ID
+	required int32 Position =2;    			//位置
+	required int32 Level =3;         		//段位等级
+	required int32 Value =4;         		//祝福值
+}
+//请求，穿装备
+message CSItemEquipPutOn {
+	option (msgid) = 1621;
+	required int64 unitId = 1;			//目标Id
+	required int64 itemId = 2;			//装备Id
+	optional int32 posion = 3;			//装备位置:1-主武器，2副武器
+}
+//应答，脱装备
+message CSItemEquipTakeOff {
+	option (msgid) = 1622;
+	required int64 unitId = 1;			//目标Id
+	required int64 itemId = 2;			//装备Id
+}
+
+//请求，强化等级
+message CSReinforceEquipMsg {
+	option (msgid) = 1623;
+	required int64 itemID  = 1;  //装备ID
+}
+//应答，强化等级返回
+message SCReinforceEquipMsg {
+	option (msgid) = 1624;
+	optional int32 ReinforceLevel	= 3;  		//当前的强化等级
+	optional int32 sn = 4;						//强化的装备ID
+}
+
+//请求，进阶
+message CSUpEquipMsg {
+	option (msgid) = 1625;
+	required int64 itemID  = 1;  //装备ID
+}
+//应答，进阶返回
+message SCUpEquipMsg {
+	option (msgid) = 1626;
+	required bool Result	= 1;	//真为成功，假为失败
+	optional int32 Level	= 2;  	//当前的等级
+}
+
+//请求，一键强化全部可强化装备
+message CSReinforceAllEquip2Msg {
+	option (msgid) = 1627;
+	repeated int64 itemID  = 1;  		//装备ID列表
+	repeated int32 TargetLevel  = 2;  	//目标等级列表
+}
+//应答，全部强化
+message SCReinforceAllEquip2Msg{
+	option (msgid) = 1628;
+	repeated int64 itemID  = 1;  		//装备ID列表
+	repeated int32 TargetLevel  = 2;  	//目标等级列表
+}
+
+//请求，装备精炼
+message CSEquipRefineSlotUp {
+	option (msgid) = 1629;
+	optional int64 itemID  = 1;  		//装备ID列表
+	optional bool isPerfect = 2;     //是否完美精炼
+}
+//应答，装备精炼
+message SCEquipRefineSlotUp {
+	option (msgid) = 1630;
+	optional int64 itemID  = 1;  		//装备ID列表
+	repeated int32 resultList = 3;		//精炼的结果（变化量 +1/+2/-1/-2....）
+}
+
+//请求，保存精炼结果
+message CSEquipRefineSaveSlotUp {
+	option (msgid) = 1631;
+	optional int64 itemID  = 1;  		//装备ID列表
+}
+//应答，保存精炼结果
+message SCEquipRefineSaveSlotUp {
+	option (msgid) = 1632;
+	optional int64 itemID  = 1;  		//装备ID列表
+	repeated int32 slotLvList = 3;		//保存后当前的槽段位等级
+}
+
+//请求，放弃精炼结果
+message CSEquipRefineAbandonSlotUp {
+	option (msgid) = 1633;
+	optional int64 itemID  = 1;  		//装备ID列表
+}
+//应答，放弃精炼结果
+message SCEquipRefineAbandonSlotUp {
+	option (msgid) = 1634;
+	optional int64 itemID  = 1;  		//装备ID列表
+}
+
+//请求，装备精炼品质提升
+message CSEquipRefineUp {
+	option (msgid) = 1635;
+	optional int64 itemID  = 1;  		//装备ID列表
+}
+//应答，装备精炼品质提升
+message SCEquipRefineUp {
+	option (msgid) = 1636;
+	optional int64 itemID  = 1;  		//装备ID列表
+	optional int32 refineLv = 2;		//当前的精炼品质等级
+	repeated int32 slotLvList = 3;		//槽位的等级
+}
+
+
+// -----------------------------------------
+// 主角装备养成，废弃
+// -----------------------------------------
+//装备进化
+message CSEquipEvolution {
+	option (msgid) = 1638;
+	required int64 unitId = 1;		//目标ID
+	required int64 itemid = 2;			//要进化的装备ID 
+	required int32 pos = 3;			// 装备位置：1,主武器，2副武器。如果是装备在背包，则不发
+}
+//装备进化结果返回
+message SCEquipEvolution {
+	option (msgid) = 1639;
+	required bool  result  =  1;    //装备进化结果
+}

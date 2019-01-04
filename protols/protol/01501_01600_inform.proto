@@ -1,0 +1,119 @@
+// -----------------------------------------
+// 信息、聊天相关
+// -----------------------------------------
+
+//频道位置示意，试着把下面的注释想象成一个屏幕!
+// __________________________________________________ 
+// |---------------11系统通告/10GM通告(从右向左滚动) 
+// |---------------12江湖传闻(从下向上淡出) 
+// |------------------
+// |------------------23弹窗提示
+// |-------------21黄色警告提示/22红色错误提示
+// |13喇叭-------------
+// |1世界/2私聊/3地图/4公会/5组队
+// __________________________________________________
+	
+// 通告类型
+enum EInformType {
+	// 聊天频道
+	WorldInform = 1;		// 世界频道（"{MsgIds.CSTeamInviteAll|参数}内容"）
+	PrivateInform = 2;		// 私聊频道
+	MapInform = 3;			// 地图频道
+	GuildInform = 4;		// 公会频道
+	TeamInform = 5;			// 组队频道
+	// 给所有人推送的消息
+	GMInform = 10;			// GM通告（"{播放次数}内容"）
+	SystemInform = 11;		// 系统通告（"{播放次数}内容"）
+	RumorInform = 12;		// 江湖传闻（"{ERumorType|参数}内容"）
+	HornInform = 13;		// 喇叭
+	// 给单人推送的消息
+	WarnInform = 21;		// 黄色警告提示
+	ErrorInform = 22;		// 红色错误提示
+	DialogInform = 23;		// 弹窗提示
+}
+// 江湖传闻类型
+enum ERumorType {
+	InformAddGen = 1;	// 获得英雄
+	InformAddItem = 2;	// 获得装备
+	InformEvoluItem = 3;// 装备进化
+	InformGenAdvUp = 4;	// 武将进阶
+}
+//信息推送
+message SCInformMsg {
+	option (msgid) = 1501;
+	optional EInformType type = 1;			//通告类型
+	//一种纯文字内容，一种特殊格式需转换：
+	//ParamManager.sysMsgMark|sysMsg.sn|参数1|...
+	optional string content = 2;			//内容，2种格式：详见上面注解
+	
+	optional int64 sendHumanId = 3;			//玩家ID
+	optional string sendHumanName = 4;		//玩家昵称
+	optional int32 snedVip = 5;                	//发送者的VIP
+	optional int32 snedLv = 6; // 发送者lv
+	
+	optional int64 receiveHumanId = 7;		//接受者ID
+	optional string receiveHumanName = 8;   //接受者名称
+	optional int32 receiveVip = 9;	//接收者VIp
+	optional int32 receiveLv = 10; // 接收者lv
+	
+  optional int64 time = 11;              	//存储私聊时间
+	optional int32 headId = 12 ;             //头像id
+	
+	optional int32 num = 13;				//显示次数（跑马灯用，默认一次）
+	optional int32 interval = 14;			//时间间隔（跑马灯用，默认一次）
+}
+
+//聊天信息
+message CSInformChat {
+	option (msgid) = 1502;	
+	optional EInformType type = 1;			//通告类型
+	optional string content = 2;			//内容
+	optional int64 targetKey = 3;           //目标ID（私聊对象玩家ID）
+	optional bool isVoice = 4;				//是否是语音信息
+	optional string receiveHumanName = 5;		//接收者名字
+}
+
+//功能提示
+message SCInformFuncPrompt {
+	option (msgid) = 1503;
+	optional string funcName = 1;					//模块名
+}
+
+//打包发送聊天消息
+message SCInformMsgAll {
+	option (msgid) = 1504;
+	repeated SCInformMsg informMsg = 1;		//聊天消息
+}
+
+//通用的系统提示消息
+message SCSysMsg {
+	option (msgid) = 1505;
+	required int32 sysMsgId = 1;		//系统消息ID
+	repeated float paramA = 2;		//参数A：float数值
+	repeated int32 paramB = 3;		//参数B：int32数值
+	repeated int32 paramC = 4;		//参数C：道具ID
+	repeated int32 paramD = 5;		//参数D：技能ID
+	repeated int32 paramE = 6;		//参数E：NPCID
+	repeated int32 paramF = 7;		//参数F：装备ID
+	repeated int32 paramG =8;		//参数G: 宠物SN
+}
+
+
+//弹幕消息格式内容
+message DInformCrossChat {
+	optional string name	= 1;			//发消息者名字
+	optional string content = 2;			//内容 
+	optional int32 serverId = 3;			//服务器id
+	optional int32 Icon		= 4;			//头像
+	optional int32 aptitude = 5;			//资质
+}
+//发送弹幕消息
+message CSInformCrossChat {
+	option (msgid) = 1506;
+	optional string content = 1;			//内容
+}
+//服务器推送的跨服数据
+message SCInformCrossMsgAll {
+	option (msgid) = 1507;
+	repeated DInformCrossChat informMsg = 1;		//聊天消息
+}

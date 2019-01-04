@@ -1,0 +1,161 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 01201_01300_stage.proto-----
+
+//客户端已准备好 进入地图
+message CSStageEnter {
+	option (msgid) = 1201;
+}
+
+//进入地图 返回结果
+message SCStageEnterResult {
+	option (msgid) = 1202;
+	repeated DStageObject obj = 1;
+}
+
+//切换地图
+message CSStageSwitch {
+	option (msgid) = 1203;
+	optional int32 type = 1;  //（无用字段）1普通地图，2副本地图，3竞技场
+	optional string areaSwitchKey = 2;		//目的地图SN，本地图传送点key
+}
+
+//切换地图
+message SCStageSwitch {
+	option (msgid) = 1204;
+	required DStage stage = 1;			//地图信息
+}
+
+message SCStageEnterEnd {
+	option (msgid) = 1205;
+	repeated int32 seek = 1; //随机种子(框架随机种子)
+	repeated DProduce produces = 2; //产出物品
+}
+
+//强制设定对象坐标
+message CSStageSetPos {
+	option (msgid) = 1208;
+	optional int64 objId = 1;			//对象ID
+	optional DVector3 pos = 2;		//坐标
+}
+
+//强制设定玩家坐标（群发） 接到这个消息后 玩家会变为静止状态
+message SCStageSetPos {
+	option (msgid) = 1209;
+	optional int64 humanId = 1;			//玩家ID
+	repeated DVector2 pos = 2;			//坐标
+}
+
+//转向广播（群发）
+message CSStageDirection {
+	option (msgid) = 1210;
+	optional int64 objId = 1;			//WorldObjectID
+	optional DVector3 direction = 2;	//向量
+}
+
+//开始移动
+message CSStageMove {
+	option (msgid) = 1211;
+	optional int64 objId = 1;			//WorldObjectID
+	optional DVector3 posBegin = 2;			//移动开始坐标
+	repeated DVector3 posEnd = 3;			//目标路径坐标
+	optional DVector3 dir = 4;			//移动完的最终方向
+}
+
+//开始移动广播（群发）
+message SCStageMove {
+	option (msgid) = 1212;
+	optional int64 objId = 1;			//WorldObjectID
+	optional DVector3 posBegin = 2;			//移动开始坐标
+	repeated DVector3 posEnd = 3;			//目标路径坐标
+	optional DVector3 dir = 4;			//移动完的最终方向
+}
+
+//停止移动
+message CSStageMoveStop {
+	option (msgid) = 1214;
+	optional int64 sendId = 1;				//谁停止
+	optional DVector2 posEnd = 2;		//停止坐标
+	optional DVector2 dirEnd = 3;		//停止朝向
+}
+
+//停止移动广播（群发）
+message SCStageMoveStop {
+	option (msgid) = 1215;
+	optional int64 objId = 1;
+	optional DVector2 posEnd = 2;		//停止坐标
+	optional DVector2 dirEnd = 3;		//停止朝向
+}
+
+//地图单位出现在视野范围（群发）
+message SCStageObjectAppear {
+	option (msgid) = 1216;
+	optional DStageObject objAppear = 1;		//obj信息
+	optional int32 type = 2;					//出现类型：1正常出现，2复活
+}
+
+//地图单位离开视野范围（群发）
+message SCStageObjectDisappear {
+	option (msgid) = 1217;
+	optional int64 objId = 1;					//WorldObjectId
+	optional int32 type = 2;					//消失类型：1正常消失，2死亡
+	optional string killerName = 3;				//击杀者姓名
+	optional int64 killerId = 4;				//击杀者id
+	optional int32 skillSn = 5;					//击杀者击杀技能sn，没有则不传
+	optional int32 killCount = 6;				//击杀者连杀个数
+}
+
+//瞬移移动广播（群发）
+message SCStageMoveTeleport {
+	option (msgid) = 1221;
+	optional int64		objId		= 1	;		//WorldObjectID
+	optional DVector2	posEnd		= 2	;		//瞬移结束坐标
+	optional string		type		= 3	;		//瞬移类型，前端用来播放特效
+}
+
+//在手机地图上移动（临时解决方案）
+message CSStageMove2 {
+	option (msgid) = 1222;
+	optional DVector2 posBegin = 1;			//移动开始坐标
+	optional DVector2 direction = 2;			//目标路径坐标
+}
+
+//切换到当前地图的某个坐标位置
+message SCStagePullTo {
+	option (msgid) = 1226;
+	optional DVector2 pos = 1;		//地图坐标
+}
+
+// shieldAll = 13;			//免伤盾
+message SCUnitobjStatusChange {
+	option (msgid) = 1227;
+	optional int64 type = 1;			//unitObj的战斗状态类型，详见UnitObjectStateType
+	optional int64 id = 2;				//unitobj id
+	optional int64 teamBundleID	= 3;	//老大和小弟一起群体标号
+	optional bool canMove		= 4;	//是否可以移动
+	optional bool canCastSkill  = 5;	//是否可以施法
+	optional bool canAttack		= 6;	//是否可以有各种动作
+}
+
+message SCAllDummy {//下发所有的假人信息
+	option (msgid) = 1280;
+	repeated DDummy dummy = 1;	//假人信息
+}
+
+message SCAddDummy {//下发增加的假人信息
+	option (msgid) = 1281;
+	repeated DDummy dummy = 1;	//假人信息
+}
+
+message SCOfflineDummy {//下发假人下线
+	option (msgid) = 1282;
+	required int64 id = 1;					//角色ID
+}
+
+message CSDelDummy {//请求删除假人，自动下发增加假人
+	option (msgid) = 1283;
+	required int64 id = 1;					//角色ID
+}
+
+

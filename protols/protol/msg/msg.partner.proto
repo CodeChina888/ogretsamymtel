@@ -1,0 +1,256 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 01900_02000_partner.proto-----
+
+//返回伙伴信息 
+message SCPartnerInfo {
+	option (msgid) = 1900;
+	repeated DPartnerInfo unit = 1;   //返回制定的武将
+	repeated DServantInfo servant = 2;   //返回护法数据
+}
+
+//请求，查询伙伴阵容
+message CSPartnerLineup {
+	option (msgid) = 1901;
+	required EPartnerLineup type = 1;			//伙伴上阵情况
+}
+
+//应答，返回伙伴阵容
+message SCPartnerLineup {
+	option (msgid) = 1902;
+	required DPartnerLineup lineup = 1;			//伙伴上阵情况
+}
+
+//请求，更换伙伴阵容
+message CSPartnerChangeLineup {
+	option (msgid) = 1905;
+	required DPartnerLineup lineup = 1;			//阵容类别
+	
+}
+
+//应答，返回更换伙伴阵容结果
+message SCPartnerChangeLineup {
+	option (msgid) = 1906;
+	required DPartnerLineup lineup = 1;  		//出战伙伴ID列表
+}
+
+//请求，伙伴招募(碎片招募)
+message CSPartnerRecruit {
+	option (msgid) = 1909;
+	required int32 sn = 1;				//伙伴SN
+}
+
+//应答，返回伙伴招募结果
+message SCPartnerRecruit {
+	option (msgid) = 1910;
+	required bool result = 1;
+	required DPartnerInfo partnerInfo = 2;
+}
+
+//请求，伙伴升星
+message CSPartnerAddStar {
+	option (msgid) = 1911;
+	required int64 partnerId = 1;		//伙伴ID
+}
+
+//应答，返回伙伴升星结果
+message SCPartnerAddStar {
+	option (msgid) = 1912;
+	optional bool result = 1;			//结果
+	required int64 partnerId = 2;		//伙伴ID
+	required int32 curStar = 3;			//星级（0,1,2,3,4,5）
+}
+
+//请求，伙伴进阶
+message CSPartnerAddCont {
+	option (msgid) = 1913;
+	required int64 partnerId = 1;		//伙伴ID
+	repeated int64 costPartnerId = 2;//消耗的伙伴id列表
+}
+
+//应答，伙伴进阶结果
+message SCPartnerAddCont {
+	option (msgid) = 1914;
+	optional bool result	 = 1;		//结果 true突破成功，false失败
+	optional int64 partnerId = 2;		//伙伴ID
+	optional int32 curCont   = 3;		//升阶后的品质
+}
+
+//请求，伙伴升级
+message CSPartnerAddLevel {
+	option (msgid) = 1915;
+	required int64 id = 1;				//伙伴唯一ID
+	required int32 mode = 2;          	//升级模式 1：代表升级 10：代表一次升10级
+	repeated int64 costPartnerId = 3;//消耗的伙伴id列表
+	repeated DItem items = 4;//消耗的道具列表
+}
+
+//应答，返回伙伴升级结果
+message SCPartnerAddLevel {
+	option (msgid) = 1916;
+	required bool result = 1;
+	required int64 partnerId = 2;		//伙伴ID
+	required int32 partnerLv = 3;       //伙伴等级
+	required int32 exp = 4;				//伙伴经验
+}
+
+//请求，随从修炼
+message CSPartnerPractice{
+	option (msgid) = 1917;
+	required int64 partnerID = 1;      	//伙伴ID
+	required int32 propId = 2;         	//修炼的属性ID
+	required int32 itemId = 3;          //使用的道具
+	required int32 itemNum = 4;         //使用的数量
+}
+
+//应答，随从修炼
+message SCPartnerPractice{
+	option (msgid) = 1918;
+	required bool result = 1;			
+	required int64 partnerID = 2;      	//伙伴ID
+	required int32 propId = 3;         	//修炼的属性ID
+	required int32 propValue = 4;       //修炼的属性总值
+}
+
+//通知，掉落获得一个新的伙伴
+message SCPartnerDrop{
+	option (msgid) = 1923;
+	required DPartnerInfo partnerInfo = 1;
+	optional EPartnerGetType type = 2; // 获取类型
+}
+
+//登录时下发所有图鉴信息
+message SCLoadPokedexInfo{
+	option (msgid) = 1941;
+	repeated int32 partnerSn = 1; 			//已点亮的图鉴英雄sn
+	repeated int32 pokedexGroupIdList = 2;  //已经获取过的集合奖励
+}
+
+//新增图鉴信息
+message SCAddPokedexInfo{
+	option (msgid) = 1942;
+	optional int32 partnerSn = 1; 			//英雄sn
+}
+
+//申请获取图鉴集合奖励
+message CSGetPokedexGroupReward{
+	option (msgid) = 1943;
+	optional int32 pokedexGroupId = 1;
+}
+
+//应答，获取图鉴集合奖励
+message SCGetPokedexGroupReward{
+	option (msgid) = 1944;
+	repeated DItem itemList = 1;
+	optional int32 pokedexGroupId = 2;
+}
+
+//上阵护法
+message CSAddServant{
+	option (msgid) = 1947;
+	required int64 partnerId = 1;  
+	required int64 servantId = 2;  //要添加的随从ID
+	required int32 index = 3;      //添加的位置
+}
+
+message SCAddServant{
+	option (msgid) = 1948;
+	required bool success = 1;      //是否成功true成功，false失败
+	required int64 partnerId = 2;  
+	required int64 servantId = 3;  //要添加的随从ID
+	required int32 index = 4;      //添加的位置 1 2 3，
+	required int32 power = 5;      //护法增加的战斗力
+	optional DProp addProp = 6;
+}
+
+//移除护法
+message CSRemoveServant{
+	option (msgid) = 1949;
+	required int64 partnerId = 1;
+	required int64 servantId = 2;  //要移除的随从ID
+	required int32 index = 3;
+}
+
+message SCRemoveServant{
+	option (msgid) = 1950;
+	required bool success = 1;//是否成功
+	required int64 partnerId = 2;
+	required int64 servantId = 3;   //要移除的随从ID
+	required int32 index = 4;
+	optional DProp addProp = 5;
+}
+
+//护法位置信息
+message SCServantClear{
+	option (msgid) = 1951;
+	optional bool success = 1;
+	optional int32 num = 2;//伙伴护法数量
+}
+
+//VIP解锁护法位
+message CSVipServantClear{
+	option (msgid) = 1952;
+}
+
+//请求，法宝升级
+message CSCimeliaAddLevel {
+	option (msgid) = 1954;
+	required int64 partnerId = 1;				//伙伴唯一ID[法宝和伙伴ID是一一对应的]
+	repeated DItem ditem =2;					//要下消耗的物品列表
+}
+
+//应答，返回法宝升级结果
+message SCCimeliaAddLevel {
+	option (msgid) = 1955;
+	optional bool success = 1;//是否成功
+	optional int64 partnerId = 2;		//法宝ID
+	optional int32 cimeliaLv = 3;       //法宝等级
+	optional int32 exp = 4;				//法宝经验
+}
+
+//请求，法宝升星
+message CSCimeliaAddStar {
+	option (msgid) = 1956;
+	required int64 partnerId = 1;		//伙伴ID
+}
+
+//应答，返回法宝升星结果
+message SCCimeliaAddStar {
+	option (msgid) = 1957;
+	optional bool result = 1;			//结果
+	required int64 partnerId = 2;		//伙伴ID
+	required int32 curStar = 3;			//星级（0,1,2,3,4,5）
+}
+
+//请求，法宝进阶
+message CSCimeliaAddCont {
+	option (msgid) = 1958;
+	required int64 partnerId = 1;		//伙伴ID
+	repeated DItem ditem = 2;//消耗的伙伴id列表
+}
+
+//应答，伙伴进阶结果
+message SCCimeliaAddCont {
+	option (msgid) = 1959;
+	optional bool result	 = 1;		//结果 true突破成功，false失败
+	optional int64 partnerId = 2;		//伙伴ID
+	optional int32 curCont   = 3;		//升阶后的品质
+}
+
+//请求，伙伴分解
+message CSNewDecomposeAll{
+	option (msgid) = 1960;
+	optional bool isDescompose =1;
+	repeated int64 partnerID = 2;
+	repeated DItem itemList  = 3;
+}
+
+message SCNewDecomposeAll{
+	option (msgid) = 1961;
+	repeated int64 partnerId = 2;//被删除的伙伴ID列表
+	optional bool isDescompose =1;
+	repeated DItem itemList  = 3;
+}
+
+

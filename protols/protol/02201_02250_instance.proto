@@ -1,0 +1,179 @@
+// -----------------------------------------
+// 单人副本相关
+// -----------------------------------------
+
+//副本类型
+enum EInstType {
+	Normal = 1;			//1普通副本
+	Hard = 2;			//2精英副本
+}
+//副本信息
+message DInstInfo {
+	optional int32 instSn = 1;			//副本sn
+	optional int32 star = 2;			//副本通关星数
+	optional int32 fightNumRemain = 3;	//副本剩余挑战次数
+	optional int32 resetNum = 4;		//副本已经重置次数
+}
+//章节信息
+message DChapInfo {
+	optional int32 chapSn = 1;			//章节sn
+	optional int32 starAll = 2;			//章节总通关星数
+	repeated EAwardType boxStatus = 3;	//章节箱子领取状态标记：0不能领，1可领取，2已领取
+	repeated DInstInfo instInfo = 4;	//多个副本信息
+}
+
+//副本星数验证条件
+message DStarCondition {
+	//根据需要增加星数验证条件，例如：阵亡人数等信息
+	optional int32 dieNum = 1;		//我方阵亡人数
+	optional int32 boutNum = 2;		//战斗回合数
+	optional float remainHp = 3;	//剩余血量
+}
+
+//获取所有副本章节信息
+message CSInstInfoAll {
+	option (msgid) = 2201;
+}
+//下发所有副本章节信息（上线会自动下发）
+message SCInstInfoAll {
+	option (msgid) = 2202;
+	repeated DChapInfo chapInfo = 1;	//副本章节信息
+}
+
+//进入副本
+message CSInstEnter {
+	option (msgid) = 2203;
+	required int32 instSn = 1;	//副本sn，用于判断副本类型
+	optional string param = 2;	//参数，用于进入副本时所需的特殊参数，比如爬塔副本的层数
+}
+
+//中途离开副本
+message CSInstLeave {
+	option (msgid) = 2205;
+}
+
+//正常结束副本
+message CSInstEnd {
+	option (msgid) = 2207;
+	//optional DStarCondition starCondition = 1;	// 副本星数限制条件
+	//optional bool isFail = 2;					// 是否失败：true失败，false胜利
+}
+message SCInstEnd {
+	option (msgid) = 2208;
+	optional DInstEnd instEnd = 1;				//副本结束奖励
+	optional int32 fightNumRemain = 2;			//副本剩余挑战次数
+	optional int32 star = 3;					//副本通关星数：0即失败，>0即胜利通关星数
+	optional int32 starAll = 4;					//章节总通关星数
+	repeated EAwardType boxStatus = 5;			//章节箱子领取状态标记：0不能领，1可领取，2已领取
+	optional string starStatus = 6;				//副本通关星数状态：1,1,1
+}
+
+//副本结算结构
+message DInstEnd {
+	optional int32 instSn = 1;			//副本sn
+	optional int32 index = 2;			//第几次副本产出：1即第一次
+	optional int32 useSec = 3;			//通关秒数
+	optional int32 level = 4;			//玩家当前等级(如大于原人物等级则升级了)
+	optional int32 exp = 5;				//获得经验
+	optional int32 coin = 6;			//获得铜币
+	repeated DProduce producesRand = 7;	//随机掉落奖励
+	repeated DProduce producesFirst = 8;//首次通关奖励
+}
+
+//副本扫荡
+message CSInstAuto {
+	option (msgid) = 2209;
+	required int32 instSn = 1;			//副本sn
+	required int32 num = 2;				//副本扫荡次数
+}
+message SCInstAuto {
+	option (msgid) = 2210;
+	required int32 instSn = 1;			//副本sn
+	repeated DInstEnd instEnd = 2;		//副本结束奖励
+	optional int32 fightNumRemain = 3;	//副本剩余挑战次数
+}
+
+//重置副本挑战次数
+message CSInstFightNumReset {
+	option (msgid) = 2211;
+	optional int32 instSn = 1;			//副本sn
+}
+message SCInstFightNumReset {
+	option (msgid) = 2212;
+	optional int32 instSn = 1;			//副本sn
+	optional int32 fightNumRemain = 2;	//副本剩余挑战次数
+	optional int32 resetNum = 3;		//副本已经重置次数
+}
+
+//领取章节通关宝箱
+message CSInstOpenBox {
+	option (msgid) = 2213;
+	optional int32 chapSn = 1;			//章节sn
+	optional int32 index = 2;			//章节箱子打开索引（发0,1,2代表第1,2,3个箱子）
+}
+message SCInstOpenBox {
+	option (msgid) = 2214;
+	optional int32 chapSn = 1;			//章节sn
+	repeated EAwardType boxStatus = 2;	//章节箱子领取状态标记：0不能领，1可领取，2已领取
+	repeated DProduce produces = 3;		//章节箱子物品
+}
+
+
+// -----------------------------------------
+// 资源副本相关 2241-2270
+// -----------------------------------------
+// 资源本结构
+message DInstResTypeInfo {
+	optional int32 resType = 1; // 资源本类型
+	optional int32 fightNumRemain = 2; // 该类型剩余次数
+}
+// 资源本结构
+message DInstResInfo {
+	optional int32 instResSn = 1; // 资源本sn
+	optional int32 star = 2; // 该副本sn
+}
+
+// 通知，登录下发资源本信息
+message SCLoadInstRes {
+	option (msgid) = 2241;
+	repeated DInstResTypeInfo resTypeInfos = 1; // 资源本类型详情
+	repeated DInstResInfo instResInfos = 2; // 资源本详情
+}
+
+// 请求，进入资源本
+message CSInstResEnter {
+	option (msgid) = 2242;
+	required int32 instResSn = 1;	//资源本sn（InstRes.sn），用于判断副本类型
+}
+
+// 请求，中途离开资源本
+message CSInstResLeave {
+	option (msgid) = 2243;
+}
+
+// 请求，资源本结算
+message CSInstResEnd {
+	option (msgid) = 2244;
+}
+// 应答，资源本结算
+message SCInstResEnd {
+	option (msgid) = 2245;
+	optional int32 instResSn = 1; 				//资源本sn
+	repeated DProduce produces = 7;				//掉落物品
+	optional DInstResTypeInfo resTypeInfo = 3;	//资源本类型信息
+	optional int32 star = 4;					//资源本通关星数
+	optional int32 damageRatio = 5;				//伤害万分比
+	optional bool isWin = 6;					//是否胜利
+}
+
+// 请求，资源本扫荡
+message CSInstResAuto {
+	option (msgid) = 2246;
+	required int32 instResSn = 1;			// 资源本sn
+}
+// 应答，资源本扫荡
+message SCInstResAuto {
+	option (msgid) = 2247;
+	optional DInstResTypeInfo resTypeInfo = 1;
+	repeated DProduce produces = 2;
+}

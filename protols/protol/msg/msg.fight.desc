@@ -1,0 +1,176 @@
+
+Ú
+msg.fight.protogame.msgoptions.protodefine.proto")
+CSReplayRecord
+recordId (:ˆÃÇ
+"ˆ
+SCRecordFightInfo
+result (
+	switchKey (	
+mapSn (,
+	fightType (2.game.msg.ECrossFightType
+token (	
+
+ip (	
+port (0
+leftInfo (2.game.msg.DRecordFightRoleInfo1
+	rightInfo	 (2.game.msg.DRecordFightRoleInfo:ˆÃÈ
+"
+CSReplayLeave:ˆÃÉ
+"
+CSNewbieFight:ˆÃÑ
+"Â
+SCNewbieFight
+areaSwitchKey (	
+instSn (,
+	fightType (2.game.msg.ECrossFightType
+token (	
+
+ip (	
+port (
+camp (
+tempId (
+result	 (:ˆÃÒ
+"ˆ
+
+CSFightAtk
+casterId (
+skillId (
+tarId (
+pos (2.game.msg.DVector2
+	atkerType (
+final (:ˆÃ•
+"=
+SCFightAtkResult
+
+resultCode (
+sendId (:ˆÃ–
+"Æ
+SCFightSkill
+castId (
+skillId (
+tarId (
+pos (2.game.msg.DVector2
+	atkerType (
+defId (%
+hpChg (2.game.msg.SCFightHpChg
+period (
+final	 (#
+backPos
+ (2.game.msg.DBackPos"
+attPos (2.game.msg.DVector2
+rage (#
+rageAdd (2.game.msg.DRageAdd
+skillShakePct (
+skillTeamGenId (
+
+mutilMagic (
+
+comboCount (
+missId (
+disMoveTime (:ˆÃ—
+"N
+SCFightHpChg&
+	dhpChgTar (2.game.msg.DHpChgTar
+skillSn (:ˆÃ˜
+"?
+SCFightAddArmorChg
+tarId (
+addArmorCur (:ˆÃ™
+"@
+SCFightComboIldexChg
+tarId (
+
+comboIldex (:ˆÃš
+"0
+SCFightMpChg
+
+id (
+mpCur (:ˆÃ›
+"_
+CSFightRevive#
+type (2.game.msg.EReviveType
+stageSn (
+	actInstSn (:ˆÃž
+"2
+SCFightRevive
+result (
+
+id (:ˆÃŸ
+"@
+SCFightStageChange
+humanId (
+
+inFighting (:ˆÃ 
+".
+DRageAdd
+
+id (
+rageAdd (:ˆÃ¢
+"u
+SCFightDotHpChg
+dotSn (%
+hpChg (2.game.msg.SCFightHpChg
+castId (
+intervalIndex (:ˆÃ£
+"d
+SCFightBulletHpChg
+bulletID (%
+hpChg (2.game.msg.SCFightHpChg
+castId (:ˆÃ¤
+"g
+SCFightBulletMove
+bulletID (
+bulletSN (
+unitOriginId (
+	unitTarId (:ˆÃ¥
+",
+CSSkillInterrupt
+	unitObjID (:ˆÃ¦
+"=
+SCSkillInterrupt
+	unitObjID (
+skillSn (:ˆÃ§
+"o
+CSSkillAddGeneral
+	generalSn (
+pos (2.game.msg.DVector2
+dir (2.game.msg.DVector2:ˆÃ¨
+"0
+CSSkillRemoveGeneral
+	unitObjID (:ˆÃ©
+"U
+CSSkillAddGeneralToUnion
+	unitObjID (
+pos (2.game.msg.DVector2:ˆÃª
+"
+CSUnionFightStart:ˆÃ«
+"
+CSUnionFightAIPause:ˆÃ¬
+"
+CSUnionFightAIUnpause:ˆÃ­
+",
+CSUnionFightSpecial
+castId (:ˆÃ®
+"'
+CSUnionFightAuto
+auto (:ˆÃ¯
+"
+SCFightSkillTeamCancel:ˆÃ°
+"Q
+SCSkillAddCooldown
+	unitObjID (
+skillSn (
+coolTime (:ˆÃ±
+"B
+SCSkillRemoveCooldown
+	unitObjID (
+skillSn (:ˆÃ²
+"`
+SCSkillShapeShiftingStart#
+obj (2.game.msg.DStageObject
+shapeShiftingID (:ˆÃ³
+"^
+SCSkillShapeShiftingEnd#
+obj (2.game.msg.DStageObject
+shapeShiftingID (:ˆÃ´

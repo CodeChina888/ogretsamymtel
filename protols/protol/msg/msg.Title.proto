@@ -1,0 +1,39 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 06301_06400_Title.proto-----
+
+// 通知，下发称号成就(登录)
+message SCLoginAchieveTitle {
+	option(msgid) = 6301;
+	repeated DAchieveTitle achieveTitles = 1; // 所有的称号成就
+	optional int32 curTitleSn = 2; // 当前使用的称号
+}
+
+// 通知，下发称号成就(获得，更新，称号时间到期)
+message SCUpdateAchieveTitle {
+	option(msgid) = 6302;
+	repeated DAchieveTitle achieveTitles = 1; // 所有的称号成就
+	optional int32 curTitleSn = 2; // 当前使用的称号
+}
+
+// 通知，获得称号
+message SCGainAchieveTitle {
+	option(msgid) = 6303;
+	repeated int32 titleSn = 1; // 获得的称号
+}
+
+// 请求，选择称号
+message CSSelectAchieveTitle {
+	option(msgid) = 6311;
+	optional int32 titleSn = 1; // 选择的称号
+}
+
+// 应答，选择称号
+message SCSelectAchieveTitle {
+	option(msgid) = 6312;
+	optional int32 titleSn = 1; // 选择的称号
+	optional int32 oldUseSn = 2; // 之前使用的称号sn(之前没使用，则为0)
+}
+
+

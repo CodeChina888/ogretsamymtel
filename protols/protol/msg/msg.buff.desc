@@ -1,0 +1,16 @@
+
+ö
+msg.buff.protogame.msgoptions.protodefine.proto"@
+	SCBuffAdd
+objId (
+buff (2.game.msg.DBuff:à√ä"C
+SCBuffUpdate
+objId (
+buff (2.game.msg.DBuff:à√ã"0
+SCBuffDispel
+objId (
+
+sn (:à√å"(
+CSBuffDispelByHuman
+
+sn (:à√ç

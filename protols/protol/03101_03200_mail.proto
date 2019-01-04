@@ -1,0 +1,100 @@
+// -----------------------------------------
+// 邮件系统相关
+// -----------------------------------------
+// 邮件公告类型枚举
+enum EMailType{
+	MailMaintainNotice 	    =	1; 	//	系统维护公告 系统将于{1}进行系统维护，维护时间：{1}，维护期间玩家无法登入服务器，感谢理解~
+	MailFriendVit 	   	    =	2;	//	好友赠送 {1}给您赠送了10点体力，正所谓礼尚往来，快去回赠他/她吧！
+	MailCompeteRankAward    =	3;	//	斗法排名奖励 竞技场 您在三界斗法的历史最高排名达到{0}，本次上升{1}位，获得{2}元宝奖励，再接再厉哦！
+	MailCompeteDailyAward   =	4;	//	三界斗法每日奖励 您在昨天的三界斗法排名中达到第{0}名，请领取您的奖励，再接再厉哦！
+	MailLooMapAward 	    =	5;	//	洞天福地结算领取 您在抢夺本中搜刮的东西都在这封邮件里，再接再厉哦！
+	MailWorldBossRankAward	=	6;	//	封印之地排名奖励 您在本次{0}BOSS活动中，伤害排名第{1}，请领取您的奖励，再接再厉哦！																																									
+	MailWorldBossKillAward	=	7;	//	封印之地击杀奖励 您大展雄威，击杀了{0}BOSS，特发此奖，再接再厉哦！																																									
+	MailLevelBossRankAward	=	8;	//	封印之地排名奖励 您在本次{0}活动中，伤害排名第{1}，请领取您的奖励，再接再厉哦！																																									
+	MailLevelBossKillAward	=	9;	//	封印之地击杀奖励 您大展雄威，击杀了{0}，特发此奖，再接再厉哦！																																									
+	MailMonthCard			=	10;	//	月卡到期提示 很遗憾，您的{0}已过期，无法再获得每日奖励！																																									
+	MailMaster				=	11;	//	城主公告 恭喜您成为{0}，赶紧去领取城主超值专属礼包吧
+	MailItemToRune			=	12; //  道具途径获取符文命格	
+	MailCaveDevelopment = 14;//开采完毕收益
+	MailCaveSnatch = 15;//抢夺仙府
+	MailGuildNewLeader = 18;//盟主已{0}天未登录，超过{0}天将自动转让至职务最高贡献最高的成员。
+	MailGuildKickout = 19;//仙盟请出通知
+	MailActCompetion = 21;//新服排行
+	MailCompeteRankDown = 22;//三界斗法排名下降
+}
+
+//邮件附件物品结构体
+message DMailItem {
+	optional int32 itemSn = 1;		//物品sn
+	optional int32 itemNum = 2;		//物品数量
+}
+//邮件结构体
+message DMail {
+	optional int64 id = 1;		//邮件id
+	optional int64 receiver = 2;		//接受者
+	optional int64 sender = 3;			//发送者
+	optional string senderName = 4;		//发送者名字
+	optional string title = 5;			//标题
+	optional string content = 6;		//内容
+	optional int64 acceptTimestamp = 7;	//接收时间戳
+	optional int64 deleteTimestamp = 8;	//删除时间戳
+	optional bool read = 9;				//是否已读
+	optional bool pickup = 10;			//是否已经领取物品
+	repeated DMailItem items = 11;		//物品列表
+}
+
+//请求，打开邮件列表
+message CSOpenMailList {
+	option (msgid) = 3101;
+//	required int32 type = 1;		//1是接受的邮件，2是发送的邮件
+}
+
+//应答，返回邮件信息
+message SCMailList {
+	option (msgid) = 3102;
+	repeated DMail mails = 1;
+}
+
+//请求，将邮件设置为已读
+message CSReadMail {
+	option (msgid) = 3103;
+	required int64 id = 1;			//阅读邮件后，将邮件设置为已读
+}
+
+//请求，将邮件设置为已读
+message SCReadMail {
+	option (msgid) = 3108;
+	required int64 id = 1;			//邮件ID
+	optional bool success = 2;			//是否成功
+}
+
+
+
+//通知，有新的邮件
+message SCMailNewRemind {
+	option (msgid) = 3104;
+	required DMail mail = 1;			//邮件,放在第一个
+}
+
+//请求，领取物品
+//返回的接口是：SCMailList
+message CSPickupMailItem {
+	option (msgid) = 3105;
+	required int64 id = 1;				//邮件ID，（如果是-1，代表领取全部邮件）
+}
+
+//领取物品结果
+message SCPickupItemMailResult {
+	option (msgid) = 3106;
+	//optional DMail mail = 1;		//邮件状态的变更
+	repeated int64 id = 1;				//成功领取邮件ID
+	required bool result = 2; // 成功 TRUE 失败 FALSE
+}
+
+//请求，发送邮件接口
+message CSSendMail {
+	option (msgid) = 3107;
+	optional string title = 1;
+	optional string detail = 2;
+	optional int64 humanId = 3; 
+}

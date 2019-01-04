@@ -1,0 +1,88 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 06401_06499_castellan.proto-----
+
+//登陆下发红包信息
+message SCLoginRedPacket{
+	option (msgid) = 6491;
+	repeated DNetRedPacket redpacket = 1;//红包信息
+}
+
+//请求，城主购买礼包
+message CS_BuyMasterPackageMsg{
+	option(msgid) = 6401;
+	required ECastellanType type =1;//城主类型
+	required int32 sn = 2; 		//礼包sn
+	required int32 buyNum = 3;   //购买数量
+}
+
+//城主礼包购买回执
+message SC_BuyMasterPackageMsg{
+	option(msgid) = 6402;
+	required ECastellanType type = 1;       //城主类型
+	repeated DItem item 	= 2; 	          	//得到的道具
+	optional int32 buyNum = 3;      //礼包购买次数
+}
+
+//服务端推送红包信息
+message SC_RedPacketMsg{
+	option(msgid) = 6403;
+	required DNetRedPacket redpacket = 1;//红包信息
+}
+
+//抢红包
+message CS_RobRedPacketMsg{
+	option(msgid) = 6404;
+	required int64 id = 1;            //红包唯一ID
+}
+
+//抢红包详情
+message SC_GetRedPacket{
+	option(msgid) = 6405;
+	required int64 humanId = 1;       //抢到的玩家ID 
+	repeated DItem item = 2;       //获得的物品
+	required bool success = 3;		//是否成功
+	optional DNetRedPacket redpacket = 4;
+}
+
+//成为城主消息
+message SC_BecomeCastellan{
+	option(msgid) = 6406;
+	repeated DCastellanInfo info=1;//城主信息
+}
+
+//登录下发的城主信息
+message SCLoginCastellanInfo{
+	option(msgid) = 6407;
+	repeated DCastellanInfo info=1;//城主信息
+}
+
+//请求，发送魔法表情
+message CSSendWinks {
+	option(msgid) = 6441;
+	optional int64 receiverId = 1; // 对方的humanId
+	optional string recieverName = 2; // 对方的名称
+	optional int32 winksSn = 3; // 魔法表情sn
+	optional EWinksSendType sendType = 4;// 发送类型
+}
+
+//应答，发送魔法表情
+message SCSendWinks {
+	option(msgid) = 6442;
+	optional int32 canFreeNum = 1; // 今日魔法表情可用次数 
+	optional int32 buyNum =2 ; // 购买发送次数
+	optional string recieverName = 3; // 对方的名称
+	optional int32 winksSn = 4; // 魔法表情sn
+}
+
+//通知，发送魔法表情
+message SCNTFSendWinks {
+	option(msgid) = 6443;
+	optional int64 senderId = 1; // 发送表情的玩家humanId
+	optional string senderName = 2; // 发送表情的玩家名称
+	optional int32 winksSn = 3; // 接收到的魔法表情
+	optional EWinksSendType sendType = 4; // 发送类型
+}
+
+

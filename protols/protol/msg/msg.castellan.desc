@@ -1,0 +1,46 @@
+
+Ω
+msg.castellan.protogame.msgoptions.protodefine.proto"E
+SCLoginRedPacket*
+	redpacket (2.game.msg.DNetRedPacket:à√€2"c
+CS_BuyMasterPackageMsg&
+type (2.game.msg.ECastellanType
+
+sn (
+buyNum (:à√Å2"v
+SC_BuyMasterPackageMsg&
+type (2.game.msg.ECastellanType
+item (2.game.msg.DItem
+buyNum (:à√Ç2"D
+SC_RedPacketMsg*
+	redpacket (2.game.msg.DNetRedPacket:à√É2"'
+CS_RobRedPacketMsg
+
+id (:à√Ñ2"Ö
+SC_GetRedPacket
+humanId (
+item (2.game.msg.DItem
+success (*
+	redpacket (2.game.msg.DNetRedPacket:à√Ö2"C
+SC_BecomeCastellan&
+info (2.game.msg.DCastellanInfo:à√Ü2"E
+SCLoginCastellanInfo&
+info (2.game.msg.DCastellanInfo:à√á2"{
+CSSendWinks
+
+receiverId (
+recieverName (	
+winksSn (*
+sendType (2.game.msg.EWinksSendType:à√©2"_
+SCSendWinks
+
+canFreeNum (
+buyNum (
+recieverName (	
+winksSn (:à√™2"z
+SCNTFSendWinks
+senderId (
+
+senderName (	
+winksSn (*
+sendType (2.game.msg.EWinksSendType:à√´2

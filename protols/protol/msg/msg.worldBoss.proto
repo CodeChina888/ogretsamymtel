@@ -1,0 +1,202 @@
+import "options.proto";
+import "define.proto";
+package game.msg;
+// -----auto generate from 05801_05900_worldBoss.proto-----
+
+//进入世界BOSS地图
+message CSWorldBossEnter {
+	option (msgid) = 5801;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//离开世界BOSS地图
+message CSWorldBossLeave {
+	option (msgid) = 5803;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//进入世界BOSS战斗
+message CSWorldBossEnterFight {
+	option (msgid) = 5805;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回进入世界BOSS战斗结果
+message SCWorldBossEnterFight {
+	option (msgid) = 5806;
+	required int32 actInstSn = 1;	//活动副本SN
+	required int32 resultCode = 2;	//0成功；非0失败（参见SysMsg.xlsx：）
+	optional bool isReborn = 4;// 是否涅槃重生（true是，false否）
+}
+
+//离开世界BOSS战斗
+message CSWorldBossLeaveFight {
+	option (msgid) = 5807;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//请求世界BOSS副本SN
+message CSWorldBossInstSn {
+	option (msgid) = 5809;
+}
+
+//返回世界BOSS副本SN
+message SCWorldBossInstSn {
+	option (msgid) = 5810;
+	required int32 actInstSn = 1;	//活动副本SN
+	required bool isOpen = 2;		//活动副本是否开启中
+	required int32 bossInstSn = 3;	//boss副本SN
+}
+
+//请求世界BOSS信息
+message CSWorldBossInfo {
+	option (msgid) = 5811;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回世界BOSS信息
+message SCWorldBossInfo {
+	option (msgid) = 5812;
+	required int32 actInstSn = 1;	//活动副本SN
+	required int32 bossInstSn = 2;	//boss副本SN
+	optional int32 lv = 3;			//等级
+	optional int32 hpMax = 4;		//最大血量
+	optional int32 hpCur = 5;		//当前血量，0即boss死亡
+}
+
+//请求世界BOSS伤害排行前几名
+message CSWorldBossRank {
+	option (msgid) = 5813;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回世界BOSS伤害排行前几名
+message SCWorldBossRank {
+	option (msgid) = 5814;
+	required int32 actInstSn = 1;		//活动副本SN
+	repeated DPVEHarm dPVEHarm = 2;		//PVE结算伤害（顺序：第一名,第二名...）
+	optional int32 harmSelf = 3;		//自己的输出伤害值
+	optional int32 rankSelf = 4;		//自己的输出排名（如果排名>param.worldBossTopRankNum，则为0）
+}
+
+//结算一次世界BOSS伤害
+message CSWorldBossHarm {
+	option (msgid) = 5815;
+	required int32 actInstSn = 1;	//活动副本SN
+	required int32 harmSelf = 2;	//自己的输出伤害值
+}
+
+//返回结算一次世界BOSS伤害
+message SCWorldBossHarm {
+	option (msgid) = 5816;
+	required int32 actInstSn = 1;			//活动副本SN
+	optional int32 harmSelf = 2;			//自己的输出伤害值
+	optional int32 coinAward = 3;			//获得铜币奖励
+	optional int32 bossHpCur = 4;			//boss当前血量，0即boss死亡
+	optional DWBKillInfo dWBKillInfo = 5;	//世界BOSS被击杀信息
+}
+
+//广播世界BOSS活动结束，如果BOSS被击杀则附带被击杀信息
+message SCWorldBossEnd {
+	option (msgid) = 5818;
+	required int32 actInstSn = 1;			//活动副本SN
+	required int32 bossHpCur = 2;			//boss当前血量，0即boss死亡
+	optional DWBKillInfo dWBKillInfo = 3;	//世界BOSS被击杀信息
+}
+
+//请求世界BOSS立即复活
+message CSWorldBossRevive {
+	option (msgid) = 5821;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回世界BOSS立即复活结果
+message SCWorldBossRevive {
+	option (msgid) = 5822;
+	required int32 actInstSn = 1;	//活动副本SN
+	required int32 resultCode = 2;	//0成功；非0失败（参见SysMsg.xlsx：）
+}
+
+//请求世界BOSS涅槃重生
+message CSWorldBossReborn {
+	option (msgid) = 5823;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回世界BOSS涅槃重生结果
+message SCWorldBossReborn {
+	option (msgid) = 5824;
+	required int32 actInstSn = 1;	//活动副本SN
+	required int32 resultCode = 2;	//0成功；非0失败（参见SysMsg.xlsx：）
+	optional int32 numReborn = 3;	//已经涅槃重生次数
+}
+
+//请求世界BOSS清除鼓舞CD
+message CSWorldBossInspireCDClean {
+	option (msgid) = 5825;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回世界BOSS清除鼓舞CD结果
+message SCWorldBossInspireCDClean {
+	option (msgid) = 5826;
+	required int32 actInstSn = 1;		//活动副本SN
+	required int32 resultCode = 2;		//0成功；非0失败（参见SysMsg.xlsx：）
+	optional int64 tmNextInspire = 3;	//玩家下次鼓舞时间戳
+	optional int32 numInspire = 4;		//已经鼓舞次数
+	optional int32 maxInspire = 5;		//最大鼓舞次数
+}
+
+//返回世界BOSS挑战信息（进入副本时下发通知）
+message SCWorldBossFightInfo {
+	option (msgid) = 5828;
+	required int32 actInstSn = 1;		//活动副本SN
+	required int64 tmNextFight = 2;		//玩家下次挑战时间戳
+	required int64 tmNextInspire = 3;	//玩家下次鼓舞时间戳
+	optional int32 numInspire = 4;		//已经鼓舞次数
+	optional int32 maxInspire = 5;		//最大鼓舞次数
+	optional int32 numReborn = 6;		//已经涅槃重生次数
+}
+
+//请求世界BOSS其他玩家信息
+message CSWorldBossOtherHuman {
+	option (msgid) = 5829;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回世界BOSS其他玩家信息
+message SCWorldBossOtherHuman {
+	option (msgid) = 5830;
+	required int32 actInstSn = 1;	//活动副本SN
+	repeated DHumanInfo dHumanInfoList = 2;	//其他玩家信息列表
+}
+
+//请求最终世界BOSS伤害排行前几名
+message CSWorldBossRankFinal {
+	option (msgid) = 5831;
+	required int32 actInstSn = 1;	//活动副本SN
+}
+
+//返回最终世界BOSS伤害排行前几名
+message SCWorldBossRankFinal {
+	option (msgid) = 5832;
+	required int32 actInstSn = 1;		//活动副本SN
+	repeated DPVEHarm dPVEHarm = 2;		//PVE结算伤害（顺序：第一名,第二名...）
+	optional int32 harmSelf = 3;		//自己的输出伤害值
+	optional int32 rankSelf = 4;		//自己的输出排名（如果排名>param.worldBossTopRankNum，则为0）
+}
+
+// 请求，上次伤害前三的玩家昵称，和击杀boss的玩家昵称
+message CSWorldBossUponTop {
+	option (msgid) = 5833;
+	required int32 actInstSn = 1; 	// 活动副本sn
+}
+
+// 应答，上次伤害前三的玩家昵称，和击杀boss的玩家昵称
+message SCWorldBossUponTop {
+	option (msgid) = 5834;
+	repeated string harmTop3Names = 1; // 伤害前3的玩家昵称
+	optional string killBossName = 2; // 击杀世界boss的玩家昵称
+}
+
+
