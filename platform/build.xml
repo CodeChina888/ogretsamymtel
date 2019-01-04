@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="platform" default="all" basedir=".">
+	<echo message="==============build platform=============="></echo>
+	<property environment="env" />
+	<property name="build" value="build" />
+	<property name="dist" value="../libs" />
+	<property name="plantform-src" value="src;gen" />
+	<property name="version" value="1.0" />
+	<property name="publish-dir" value="../../release/server/libs" />
+	<property name="name" value="game-platform.jar" />
+	<path id="classpath">
+		<fileset dir="../libs">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	
+	<target name="all" depends="startClean,init,make-all,endClean,publish" />
+
+	<target name="startClean">
+		<delete dir="${build}" />
+		<delete dir="${dist}/${name}" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+
+		<uptodate property="game.uptodate" targetfile="${dist}/lz-${version}.jar">
+			<srcfiles dir="${plantform-src};" includes="*" />
+		</uptodate>		
+	</target>
+
+	<target name="make-all" unless="game.uptodate">
+		<echo message="javac game"></echo>
+		<javac destdir="${build}" debug="true" fork="true" memorymaximumsize="1024M" encoding="UTF-8">
+			<src path="${plantform-src}"/>
+			<classpath refid="classpath" />
+		</javac>		
+		<echo message="javac finished"></echo>
+		<jar jarfile="${dist}/${name}" basedir="${build}">
+			<include name="**/*" />
+		</jar>
+		<echo message="jar all game finished"></echo>
+	</target>
+	
+	<target name="endClean">
+		<delete dir="${build}" />
+		<echo message="build finished"></echo>
+	</target>
+	
+	<target name="publish">
+		<echo message="copy jar"></echo>
+		<copy todir="${publish-dir}/">
+			<fileset dir="${dist}">
+				<include name="${name}" />
+			</fileset>
+		</copy>			
+		<echo message="copy finished"></echo>		
+	</target>	
+</project>
